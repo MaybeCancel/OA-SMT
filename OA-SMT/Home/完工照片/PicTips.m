@@ -1,0 +1,32 @@
+//
+//  PicTips.m
+//  OA-SMT
+//
+//  Created by Slark on 2018/1/12.
+//  Copyright © 2018年 Slark. All rights reserved.
+//
+
+#import "PicTips.h"
+
+@implementation PicTips
+
++ (instancetype)shareShootPic{
+    return [[[NSBundle mainBundle] loadNibNamed:@"PicTips" owner:nil options:nil] lastObject];
+}
+- (void)loadInfoFromModel:(SiteInfoModel *)model{
+    self.objectName.text = model.objectName;
+    self.siteName.text = model.siteName;
+    self.siteNumber.text = model.siteNumber;
+    self.steering.text = @"123123";
+    self.longtitude.text = model.longitude;
+    self.latitude.text = model.latitude;
+    self.picPosition.text = model.PicPosition;
+    self.currentTime.text = model.shootingTime;
+}
+
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    self.backgroundColor = [UIColor clearColor];
+}
+
+@end

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="DeleteBtnView">
+            <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add" translatesAutoresizingMaskIntoConstraints="NO" id="j2f-Kn-VSS">
+                    <rect key="frame" x="12" y="11" width="34" height="35"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btr-XL-VpY">
+                    <rect key="frame" x="36" y="0.0" width="22" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="22" id="KH2-w9-NBO"/>
+                        <constraint firstAttribute="height" constant="22" id="XUA-Y8-Lvi"/>
+                    </constraints>
+                    <state key="normal" image="btn_delete"/>
+                    <connections>
+                        <action selector="DeleteClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="V89-Yp-pPy"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="j2f-Kn-VSS" secondAttribute="trailing" constant="12" id="1VI-f9-IS6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="j2f-Kn-VSS" secondAttribute="bottom" constant="12" id="IHa-uQ-V8L"/>
+                <constraint firstItem="j2f-Kn-VSS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="11" id="JVN-qP-gti"/>
+                <constraint firstItem="btr-XL-VpY" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Lbc-2S-uYW"/>
+                <constraint firstItem="j2f-Kn-VSS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="cIC-y3-YkP"/>
+                <constraint firstAttribute="trailing" secondItem="btr-XL-VpY" secondAttribute="trailing" id="iWt-Ua-hkV"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="contenImageView" destination="j2f-Kn-VSS" id="ulI-9b-S2J"/>
+                <outlet property="deleteBtn" destination="btr-XL-VpY" id="Ae6-2p-9ru"/>
+            </connections>
+            <point key="canvasLocation" x="-902" y="-193"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="add" width="28" height="28"/>
+        <image name="btn_delete" width="22" height="22"/>
+    </resources>
+</document>

@@ -1,0 +1,8 @@
+platform :ios, '8.0'
+target "OA-SMT" do
+pod 'AFNetworking'
+pod 'SDWebImage'
+pod 'MJExtension'
+pod 'MJRefresh'
+pod 'SDAutoLayout'
+end

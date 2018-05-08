@@ -1,0 +1,49 @@
+//
+//  SMT-PCH.pch
+//  OA-SMT
+//
+//  Created by Slark on 2017/12/26.
+//  Copyright © 2017年 Slark. All rights reserved.
+//
+#import "UIView+Tap.h"
+#import "UIView+Frame.h"
+#import "UIView+Layer.h"
+#import "UIColor+Hex.h"
+#import "UIImage+morePro.h"
+#import "NSMutableArray+Blank.h"
+#import "NSString+FontWithSize.h"
+#import "UIFont+IPhoneFont.h"
+#import <AVFoundation/AVFoundation.h>
+#import <UIKit/UIKit.h>
+#import "LoadingView.h"
+#import "AFNetworking.h"
+#import "MJExtension.h"
+#import "MJRefresh.h"
+#import "BaseViewController.h"
+#import "BaseTableView.h"
+#import "BaseTableViewCell.h"
+#import "BaseTableViewController.h"
+#import "BaseRequest.h"
+#import "BaseModel.h"
+#import "MyRequest.h"
+#import "CCString.h"
+#import "TimeTools.h"
+#import "UIImage+Tools.h"
+#import "SDAutoLayout.h"
+#ifndef SMT_PCH_pch
+#define SMT_PCH_pch
+#define RGBColor(r,g,b) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:1.0]
+#define RR(x,y,k,g) CGRectMake(x, y, k, g)
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+#define CCWidth(a) a / 375.0 * ScreenWidth
+#define CCHeight(a) a / 667.0 * ScreenHeight
+#define Default [NSUserDefaults standardUserDefaults]
+#define IPHONE5WIDTH 320
+#define IPHONE5HEIGHT 568
+#define IPHONE6WIDTH 375
+#define IPHONE6HEIGHT 667
+#define IPHONE6PWIDTH 414
+#define IPHONE6PHEIGHT 736
+
+#endif /* SMT_PCH_pch */
