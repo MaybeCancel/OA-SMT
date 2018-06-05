@@ -10,5 +10,4 @@
 
 @interface CCString : NSObject
 + (NSString*)getHeaderUrl:(NSString*)string;
-//+ (NSString*)getImageFromUrl:(NSString*)string;
 @end

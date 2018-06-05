@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>1、电缆走线应横平竖直，齐整规范统一，没有冗余部分盘缠在机顶或他处</string>
+		<key>list</key>
+		<array>
+			<string>1.1 所有布线要求走线横平竖直，齐整美观；</string>
+			<string>1.2 所有室内跳线使用馈线卡反向固定;</string>
+			<string>1.3 所有线捆扎是必须呈方形布放；</string>
+			<string>1.4 传输线与地线、告警线可一起布线</string>
+			<string>1.5 垂直电缆走线应与地面保持垂直，无倾斜现象，垂直偏差应小于2毫米</string>
+			<string>1.6 直流BBU和RRU的电源线屏蔽层外翻，然后用电源线接口处螺帽拧紧</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>2、室内线缆固定牢靠</string>
+		<key>list</key>
+		<array>
+			<string>2.1  所有室内走线必须每隔30-40cm用扎带固定</string>
+			<string>2.2 1/2馈线建议用2合1馈线卡子固定（如没有馈线卡可以使用扎带）</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>3、电缆外皮应无损伤、顺直、弯曲事均匀圆滑</string>
+		<key>list</key>
+		<array>
+			<string>弯弧以外应保持竖直，电缆弯曲的最小曲率弯曲半径应该根据线缆直径来定；</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>4、OVP盒安装接线正确，可靠接地</string>
+		<key>list</key>
+		<array>
+			<string>OVP安装接线正确，可靠接地,2M线的接地</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>5、电源线与传输线应分别布线且有隔离度（10-15cm）</string>
+		<key>list</key>
+		<array>
+			<string>地线、传输线、告警线可一起走线，但不得互相缠绕，要平行走线，齐整。交直流电源线不能交叉。电源线，与传输线，地线，告警线，馈线不得交叉，应水平竖直布放</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>6、电源应接到设备要求的电源熔丝（或空开），且是一次下电处</string>
+		<key>list</key>
+		<array>
+			<string>电源应接到设备要求的电源熔丝（或空开），且是一次下电处</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>7、防静电手镯应完好</string>
+		<key>list</key>
+		<array>
+			<string>防静电手镯应完好，同时插在机柜保护地</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>8、扎线带修剪应齐平</string>
+		<key>list</key>
+		<array>
+			<string>不扎手，修剪齐平</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>9、防静电手镯应完好</string>
+		<key>list</key>
+		<array>
+			<string>机柜顶的同底座的螺栓上到位，水平尺测试机柜，水平度达到要求</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>10、各板卡螺丝都已紧固</string>
+		<key>list</key>
+		<array>
+			<string>完成所有板卡安装后立即进行全面细致的检查，避免螺丝拧断及个别螺丝没有拧紧</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>11、铜鼻子是否绝缘及防锈处理，不存在裸铜</string>
+		<key>list</key>
+		<array>
+			<string>11.1 接地铜鼻子应用绝缘胶布绝缘处理，不能有裸铜</string>
+			<string>11.2 接地后可使用喷漆防锈处理（如果不是镀锌铜鼻子）</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>12、地线长度足够</string>
+		<key>list</key>
+		<array>
+			<string>12.1不够长情况下可使用黄绿地线或电源线加长,但必须使用C型卡子连接加长部分,所有与地排或接地联结点都必须使用铜鼻子固定,如果使用电源线加长时应在两端用黄绿胶带标示</string>
+			<string>12.2 加长部分接口处不能存在裸铜，应绝缘处理</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>13、设备地线所接入的小地排正确接入室内主地排</string>
+		<key>list</key>
+		<array>
+			<string>如现场有小地排同时爱立信基站所有设备接地均接在该地排上，则小地排必须有一根地线与客户机房地排连接</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>14、馈线卡螺丝紧固</string>
+		<key>list</key>
+		<array>
+			<string>保证所有馈线卡螺丝紧固 在实施过程中及完成馈线固定后进行仔细检查，如果发现未紧固立即要求返工</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>15、馈线固定应规范</string>
+		<key>list</key>
+		<array>
+			<string>15.1所有馈线应使用馈线卡固定，如果没有位置固定馈线卡，应作好记录；
+15.1所有馈线应使用馈线卡固定，如果没有位置固定馈线卡，应作好记录；</string>
+			<string>15.2馈线卡距离是否符合规范要求（垂直馈线800-1000mm，水平馈线600-800mm）</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>16、馈线弯曲度符合规范要求</string>
+		<key>list</key>
+		<array>
+			<string>16.1 1/2”跳线最小弯曲半径要求大于150mm</string>
+			<string>16.2 7/8&apos;&apos;馈线的弯曲半径：单次弯曲大于120mm，连续弯曲应大于360mm；1/2&apos;&apos;馈线弯曲半径：单次弯曲大于70mm，连续弯曲大于210mm</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>17、天馈线连接正确，不接反接错</string>
+		<key>list</key>
+		<array>
+			<string>17.1 馈线到天线端的小区连接正确,避免接错情况发生</string>
+			<string>17.2 跳线安装完毕之后应立即检查小区方向角和俯仰角是否与设计文件一致</string>
+			<string>17.3 设备端口功能（TX/RX）与相应功能天线的跳线连接正确</string>
+			<string>17.4 开通时必须根据拨打测试流程进行全面测试</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>18、所有馈线连接头是否已经紧固（CDU，机顶，避雷器）</string>
+		<key>list</key>
+		<array>
+			<string>馈线头连接完成后应仔细检查每个连接点是否都已紧固</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>19、进行驻波比测量（如项目包括天馈施工）</string>
+		<key>list</key>
+		<array>
+			<string>19.1 在基站天馈安装结束一定要进行驻波比检测,并做好检测记录</string>
+			<string>19.2 要求在相应频带下驻波比＜＝1.3</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>20、线缆标签检查</string>
+		<key>list</key>
+		<array>
+			<string>20.1线缆标签包括：跳线，传输线，告警线和电源线</string>
+			<string>20.2标签粘贴规范：标签读取方向是从设备接头处向尾端</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>21、机房卫生</string>
+		<key>list</key>
+		<array>
+			<string>完工后要求施工队打扫清理，不能留任何安装材料在现场；如果硬件安装时没有电源，再次前往开基站时应再次检查机房是否整洁，必要时再次对机房内外杂物进行清理，保持机房环境条件良好</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>22、机柜内卫生</string>
+		<key>list</key>
+		<array>
+			<string>不能有任何安装材料留在机柜内</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>23、记录基站信息并保存</string>
+		<key>list</key>
+		<array>
+			<string>将基站信息汇总在基站报告中，每天交给基站负责人汇总</string>
+		</array>
+	</dict>
+</array>
+</plist>

@@ -25,6 +25,18 @@
     return request;
 }
 
++(void)UploadImageWithUrl:(NSString *)url image:(UIImage *)image fielName:(NSString *)fileName completion:(CCAPICompletion)completion{
+    [MyRequest POSTImageUrl:url withParams:nil Images:image imageName:fileName success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (completion) {
+            completion(jsonDic);
+        }
+    } failure:^(NSError *error) {
+        [LoadingView showAlertHUD:@"网络有问题,请稍后重试" duration:1];
+        NSLog(@"请求失败");
+        return ;
+    }];
+}
+
 #pragma mark 发送请求
 - (void)cc_senRequest{
     [self cc_sendRequstWith:nil];
@@ -77,5 +89,7 @@
 //        return ;
 //    }
 }
+
+
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-@interface BaseModel : NSObject
+
+@interface BaseModel : JSONModel
 + (id)ModelWithDic:(NSDictionary*)dic;
 
 @end

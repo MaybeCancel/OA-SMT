@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MyRequest.h"
 @interface BaseRequest : NSObject
+
 typedef void(^CCAPICompletion) (NSDictionary * jsonDic);
 
 + (instancetype)cc_request;
@@ -17,13 +18,15 @@ typedef void(^CCAPICompletion) (NSDictionary * jsonDic);
 
 - (void)cc_sendRequstWith:(CCAPICompletion)completion;
 - (void)cc_senRequest;
+
 @property (nonatomic,copy)NSString* cc_url;
+@property (nonatomic,strong)UIImage* imageFile;
 @property (nonatomic,strong)NSDictionary * cc_params;
 @property (nonatomic,assign)BOOL isPost;
 
 //+(NSString*)postImageWithUrl:(NSString *)url postParams:(NSDictionary *)params imageData:(NSData *)data picPath:(NSString *)picPath;
 
-//- (void)UploadImageWithUrl:(NSString*)url image:(UIImage*)image completion:(CCImageCompletion)completion;
++ (void)UploadImageWithUrl:(NSString*)url image:(UIImage*)image fielName:(NSString *)fileName completion:(CCAPICompletion)completion;
 
 
 @end

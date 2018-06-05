@@ -23,6 +23,7 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         [self initUI];
     }
     return self;
@@ -30,13 +31,17 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    _headView.frame = RR(0, 0, ScreenWidth, 44);
-    _topTitle.frame = RR(12, 12, 180, 20);
-    _foldImage.frame = RR(ScreenWidth - 15 -12 , 18, 12, 7);
-    _topLine.frame = RR(0, 43, ScreenWidth, 1);
-    if (!self.isFold) {
-          _tableView.frame = RR(0, CGRectGetMaxY(_headView.frame), ScreenWidth, self.leftArray.count * 44);
-    }
+    _headView.frame = CGRM(0, 0, SCREEN_WIDTH, 44);
+    _topTitle.frame = CGRM(12, 12, 180, 20);
+    _foldImage.frame = CGRM(SCREEN_WIDTH - 15 -12 , 18, 12, 7);
+    _topLine.frame = CGRM(0, 43, SCREEN_WIDTH, 1);
+    kWeakSelf(weakSelf);
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_headView.mas_bottom);
+        make.left.mas_equalTo(weakSelf.mas_left);
+        make.right.mas_equalTo(weakSelf.mas_right);
+        make.bottom.mas_equalTo(weakSelf.mas_bottom);
+    }];
 }
 
 
@@ -47,14 +52,10 @@
     [_headView addTapActionWithBlock:^{
         weakSel.isFold = !weakSel.isFold;
         [weakSel roatAnimationWithView:weakSel.foldImage];
-        if (weakSel.isFold) {
-            [UIView animateWithDuration:0.3 animations:^{
-                weakSel.tableView.height = 0;
-            }];
-        }else{
-            [UIView animateWithDuration:0.3 animations:^{
-                weakSel.tableView.height = self.leftArray.count*44;
-            }];
+        CGFloat diffHeight = self.leftArray.count*44;
+        weakSel.height = weakSel.height + (weakSel.isFold ? -diffHeight : diffHeight);
+        if (weakSel.foldActionBlock) {
+            weakSel.foldActionBlock(weakSel.isFold ? -diffHeight : diffHeight);
         }
     }];
 
@@ -82,8 +83,14 @@
     _topTitleString = topTitleString;
     _topTitle.text = _topTitleString;
 }
+
 - (void)setLeftArray:(NSArray *)leftArray{
     _leftArray = leftArray;
+    [self.tableView reloadData];
+}
+
+-(void)setRightArray:(NSArray *)rightArray{
+    _rightArray = rightArray;
     [self.tableView reloadData];
 }
 
@@ -93,15 +100,9 @@
 }
 
 #pragma mark tableView - delegate
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    BaseCellPe* cell = [BaseCellPe nibCellWithTableView:tableView];
-    if (self.leftArray) {
-        cell.leftLabel.text = self.leftArray[indexPath.row];
-    }
-    if (self.righArray&&self.righArray.count == self.leftArray.count) {
-        cell.leftLabel.text = self.righArray[indexPath.row];
-    }
-    return cell;
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -109,6 +110,18 @@
 }
 
 #pragma mark tableView - dataSource
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    BaseCellPe* cell = [BaseCellPe nibCellWithTableView:tableView];
+    if (self.leftArray) {
+        cell.leftLabel.text = self.leftArray[indexPath.row];
+    }
+    if (self.rightArray&&self.rightArray.count == self.leftArray.count) {
+        cell.rightLabel.text = self.rightArray[indexPath.row];
+    }
+    return cell;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.leftArray.count;
 }

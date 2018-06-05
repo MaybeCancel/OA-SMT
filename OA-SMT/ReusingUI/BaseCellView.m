@@ -51,10 +51,10 @@
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
-    _leftLabel.frame = CGRectMake(15, 16, 120, 13);
-    _rightLabel.frame = CGRectMake(self.width - CCWidth(36) - 100, 13, 100, 20);
-    _arrowImageView.frame = CGRectMake(self.width-15-8, 16, 7, 12);
-    _lineView.frame = RR(12, self.height-1, self.width, 1);
+    _leftLabel.frame = CGRM(15, 16, 120, 13);
+    _rightLabel.frame = CGRM(self.width - AutoScaleWidth(36) - 100, 13, 100, 20);
+    _arrowImageView.frame = CGRM(self.width-15-8, 16, 7, 12);
+    _lineView.frame = CGRM(12, self.height-1, self.width, 1);
     _rightLabel.numberOfLines = 0;
 }
 - (void)setLeftString:(NSString *)leftString{

@@ -9,6 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (FontWithSize)
-+ (CGSize)stringSize:(NSString*)string AndFont:(NSInteger)font;
-+ (CGSize)stringWidthAndHeightWith:(NSString*)string Font:(NSInteger)font;
+- (CGFloat)realHeightFromWidth:(CGFloat)width Font:(NSInteger)font;
 @end

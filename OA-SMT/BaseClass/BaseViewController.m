@@ -20,9 +20,15 @@
     self.navigationController.navigationBar.translucent = NO;
     self.extendedLayoutIncludesOpaqueBars = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor =RGBColor(241, 241, 241);
+    self.view.backgroundColor = RGBColor(241, 241, 241);
     self.barColor = RGBColor(251, 251, 251);
     self.arrowColor = RGBColor(83, 83, 83);
+    [self setupSubviews];
+    NSLog(@">>>class name:%@",NSStringFromClass([self class]));
+}
+
+-(void)dealloc{
+    NSLog(@">>>dealloc class name:%@",NSStringFromClass([self class]));
 }
 
 - (void)setRightItemTitle:(NSString *)rightItemTitle{
@@ -107,6 +113,10 @@
 
 /** 加载数据*/
 - (void)loadData{
+    
+}
+
+-(void)setupSubviews{
     
 }
 
@@ -276,5 +286,9 @@
     _pic.allowsEditing = YES;//允许用户缩放拖动
     _pic.delegate = self;
     [self presentViewController:_pic animated:YES completion:nil];
+}
+
+-(void)showToast:(NSTimeInterval)duration withMessage:(NSString *)message{
+    [self.view makeToast:message duration:duration position:CSToastPositionCenter];
 }
 @end

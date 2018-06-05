@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,13 +34,13 @@
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未收货" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TP2-KY-1qW">
-                                <rect key="frame" x="300" y="13" width="60" height="20"/>
+                                <rect key="frame" x="290" y="13.5" width="70" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="4Gd-9W-ClQ"/>
-                                    <constraint firstAttribute="height" constant="20" id="ZEb-lc-U0p"/>
+                                    <constraint firstAttribute="width" constant="70" id="4Gd-9W-ClQ"/>
+                                    <constraint firstAttribute="height" constant="24" id="ZEb-lc-U0p"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内部订单号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nse-Kk-PiF">
@@ -134,7 +134,7 @@
                             <constraint firstItem="owY-SO-WAW" firstAttribute="top" secondItem="ToP-vA-pYS" secondAttribute="top" constant="18" id="cS5-7v-URN"/>
                             <constraint firstItem="rnr-AA-WBp" firstAttribute="centerY" secondItem="bnz-Jg-5s6" secondAttribute="centerY" id="cgS-7f-9UJ"/>
                             <constraint firstItem="mhL-7e-OfT" firstAttribute="centerY" secondItem="Nse-Kk-PiF" secondAttribute="centerY" id="jJ5-dK-BDH"/>
-                            <constraint firstItem="TP2-KY-1qW" firstAttribute="top" secondItem="ToP-vA-pYS" secondAttribute="top" constant="13" id="kmw-Zu-iYg"/>
+                            <constraint firstItem="TP2-KY-1qW" firstAttribute="centerY" secondItem="owY-SO-WAW" secondAttribute="centerY" id="oNR-OX-lHX"/>
                             <constraint firstItem="Nse-Kk-PiF" firstAttribute="leading" secondItem="ToP-vA-pYS" secondAttribute="leading" constant="15" id="oyh-jv-efe"/>
                             <constraint firstItem="7rf-xc-GLa" firstAttribute="centerY" secondItem="CJh-Vi-ntH" secondAttribute="centerY" id="uxN-Vy-L4q"/>
                         </constraints>

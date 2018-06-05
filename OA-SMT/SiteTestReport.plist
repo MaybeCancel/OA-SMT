@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>1、硬件状态检查</string>
+		<key>list</key>
+		<array>
+			<string>1.1确认电源的类型，是直流电还是交流电，电压正常</string>
+			<string>1.2站型和设计文件一致，扇区的配置和设计一致</string>
+			<string>1.3确认传输类型和设计文件一致，传输线安装完成，跟客户确认传输已连通</string>
+			<string>1.4完成所有板卡安装后立即进行全面细致的检查，避免螺丝拧断及个别螺丝没有拧紧,调测结束后重新确认所有螺丝均已上紧</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>2、加电</string>
+		<key>list</key>
+		<array>
+			<string>检查电源线连接准确无误，推上合适的熔丝，在机柜系统电压测试点测得电压正常后，再依次给电扇及板件加电</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>3、本调</string>
+		<key>list</key>
+		<array>
+			<string>3.1 基站软件版本满足本次工程需要</string>
+			<string>3.2 有最新的基站信息，包括：站名，站号，O&amp;M的IP地址，基站经纬度，硬件类型</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>4、联调</string>
+		<key>list</key>
+		<array>
+			<string>4.1 基站硬件正常，没有告警</string>
+			<string>4.2 所有小区信道全部正常</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>5、与RNC工程师确认基站状态</string>
+		<key>list</key>
+		<array>
+			<string>5.1 RNC能正常登录基站</string>
+			<string>5.2 RNC侧检查基站小区正常并且没有异常告警</string>
+			<string>5.3 RNC工程师通知可以离开基站</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>6、离开前通知客户机房</string>
+		<key>list</key>
+		<array>
+			<string>打扫基站卫生，关灯，通知客户机房离开该站</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>7、记录基站信息并保存</string>
+		<key>list</key>
+		<array>
+			<string>将基站信息汇总在基站报告中，每天交给基站负责人汇总</string>
+		</array>
+	</dict>
+</array>
+</plist>

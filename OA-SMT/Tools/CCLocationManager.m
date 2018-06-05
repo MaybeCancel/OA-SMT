@@ -66,7 +66,7 @@ static CCLocationManager* _singleLocation = nil;
     NSLog(@"当前位置的纬度%f,当前位置的经度%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
     if (_locationHandle) {
         [self.locationManager stopUpdatingLocation];
-        _locationHandle(currentLocation,[NSString stringWithFormat:@"%.2f",currentLocation.coordinate.latitude],[NSString stringWithFormat:@"%.2f",currentLocation.coordinate.longitude]);
+        _locationHandle(currentLocation,[NSString stringWithFormat:@"%.6f",currentLocation.coordinate.latitude],[NSString stringWithFormat:@"%.6f",currentLocation.coordinate.longitude]);
             //地理反编码 - - 可以根据地理坐标(经纬度)确定位置信息(街道门牌)
 //            CLGeocoder* geoCoder = [[CLGeocoder alloc]init];
 //            [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {

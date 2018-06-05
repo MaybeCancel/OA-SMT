@@ -81,7 +81,7 @@
         [_statueBtn setImage:[UIImage imageNamed:@"btn_upload"] forState:UIControlStateNormal];
         [_statueBtn setImage:[UIImage imageNamed:@"btn_download"] forState:UIControlStateSelected];
         _statueBtn.backgroundColor = [UIColor redColor];
-        _statueBtn.frame = RR(0, 0, 34, 34);
+        _statueBtn.frame = CGRM(0, 0, 34, 34);
         _statueBtn.center =  CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2);
     }
     return _statueBtn;

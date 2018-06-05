@@ -52,9 +52,9 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    _topLabel.frame = RR(15, 15, 200, 15);
-    _textView.frame = RR(15, CGRectGetMaxY(_topLabel.frame)+15, ScreenWidth - 24, 90);
-    _lineView.frame = RR(15, CGRectGetMaxY(_textView.frame) + 5, ScreenWidth - 12, 1);
+    _topLabel.frame = CGRM(15, 15, 200, 15);
+    _textView.frame = CGRM(15, CGRectGetMaxY(_topLabel.frame)+15, SCREEN_WIDTH - 24, 90);
+    _lineView.frame = CGRM(15, CGRectGetMaxY(_textView.frame) + 5, SCREEN_WIDTH - 12, 1);
 }
 
 @end

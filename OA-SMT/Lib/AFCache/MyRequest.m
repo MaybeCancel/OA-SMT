@@ -87,10 +87,11 @@
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
     manager.requestSerializer.timeoutInterval = 30.f;
     [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
-    manager.responseSerializer=[AFHTTPResponseSerializer serializer];//声明返回的数据是json
-    manager.requestSerializer =[AFJSONRequestSerializer serializer];//声明请求的数据是json
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];//声明返回的数据是json
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];//声明请求的数据是json
     //设置请求头
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     if ([cache hasCacheForKey:url]) {
         NSData *responseObject = [cache dataForKey:url];
@@ -99,20 +100,23 @@
         return;
     }
     
+    NSLog(@"请求url：%@\n请求参数：%@",url,params);
+
     [manager POST:url parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
-        BOOL succe = NO;
+        BOOL succe = YES;
+//        NSLog(@"回参:%@",dict);
         success(responseObject,succe,dict);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"报错:%@",error);
         failure(error);
     }];
-    
 }
-+ (void)POSTImageUrl:(NSString *)url withParams:(NSDictionary *)params Images:(UIImage *)image imageName:(NSString*)imageName{
+
++ (void)POSTImageUrl:(NSString *)url withParams:(NSDictionary *)params Images:(UIImage *)image imageName:(NSString *)imageName success:(SuccessCallBack)success failure:(FailureCallBack)failure{
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     // 设置超时时间
@@ -126,13 +130,23 @@
     
     
     [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        // 设置时间格式
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *name = [formatter stringFromDate:[NSDate date]];
+        
         //上传操作
-        NSData* data =UIImagePNGRepresentation(image);
-        [formData appendPartWithFileData:data name:[NSString stringWithFormat:@"@SMT"] fileName:imageName mimeType:@"image/png"];
+        NSData* data = UIImageJPEGRepresentation(image, 0.5);
+        [formData appendPartWithFileData:data name:[NSString stringWithFormat:@"%@_SMT",name] fileName:imageName mimeType:@"image/jpeg"];
     } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"上传成功了啊啊啊");
+        NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        BOOL succe = YES;
+         success(responseObject,succe,dict);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"失败了");
+        failure(error);
     }];
     /*
      1、name:多文件上传时,name不能重复，不能重复，不能重复，重要的事情说三遍，我就是在这里卡住了，当时我的接口文档中让我传的参数是“photos[]”,结果我真的傻乎乎的只传了一个“photos[]”,其结果就是只有一张图片上传成功，这也体现了交流的重要性，至于具体怎么传，接口文档一般都有说明，如不清楚，请与后台人员沟通，这是服务器用于接收你所上传文件的参数名，十分重要。

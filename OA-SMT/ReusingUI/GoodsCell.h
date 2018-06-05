@@ -10,8 +10,6 @@
 #import "GoodListModel.h"
 @interface GoodsCell : BaseTableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *TipColor;
-
-
 /** 客户PO号*/
 @property (strong, nonatomic) IBOutlet UILabel *PONumber;
 /** 收货状态*/
@@ -24,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *HuoNumber;
 /** 箱数*/
 @property (strong, nonatomic) IBOutlet UILabel *BoxNumber;
-- (void)loadDataFromModel:(GoodListModel*)model;
+
+-(void)setModelData:(GoodListModel *)model isReceive:(BOOL)isReceive;
 
 @end

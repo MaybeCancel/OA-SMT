@@ -15,6 +15,8 @@
 @property (nonatomic,copy)NSString* rightItemImageName;
 //点击item回调
 @property (nonatomic,copy)void (^rightItemHandle)(void);
+//返回刷新页面的block
+@property (nonatomic,copy)void (^refreshBlock)(void);
 //返回箭头颜色
 @property (nonatomic,strong)UIColor* arrowColor;
 //title颜色
@@ -34,8 +36,12 @@
 
 /** 加载数据交给子类实现*/
 - (void)loadData;
+- (void)setupSubviews;
 - (void)OpenAlbumAlert;
 - (void)openAlbum;
 - (void)openCamera;
 - (NSString *)updateTimeForTimeInterval:(NSInteger)timeInterval;
+
+//toast
+- (void)showToast:(NSTimeInterval)duration withMessage:(NSString *)message;
 @end

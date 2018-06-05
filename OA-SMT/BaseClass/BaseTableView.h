@@ -10,8 +10,4 @@
 
 @interface BaseTableView : UITableView
 
-
-
-
-
 @end

@@ -31,7 +31,7 @@ typedef void (^FailureCallBack)     (NSError *error);
 
 + (void)POST:(NSString *)url withParameters:(NSDictionary *)parmas CacheTime:(NSInteger )CacheTime isLoadingView:(NSString *)loadString success:(SuccessCallBack)success failure:(FailureCallBack)failure;
 
-+ (void)POSTImageUrl:(NSString*)url withParams:(NSDictionary*)params Images:(UIImage*)image imageName:(NSString*)imageName;
++ (void)POSTImageUrl:(NSString*)url withParams:(NSDictionary*)params Images:(UIImage*)image imageName:(NSString*)imageName success:(SuccessCallBack)success failure:(FailureCallBack)failure;
 
 
 //网络判断

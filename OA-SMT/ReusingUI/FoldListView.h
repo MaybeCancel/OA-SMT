@@ -17,9 +17,10 @@
 /**
  * rightLabel数据源
  */
-@property (nonatomic,strong)NSMutableArray* righArray;
+@property (nonatomic,strong)NSArray* rightArray;
 
 @property (nonatomic,copy)NSString* topTitleString;
 
+@property (nonatomic,copy) void (^foldActionBlock)(CGFloat diffHeight);
 
 @end

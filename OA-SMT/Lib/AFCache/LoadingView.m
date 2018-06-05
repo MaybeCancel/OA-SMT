@@ -27,7 +27,6 @@ UIWindow *mainWindow() {
 }
 
 #import "LoadingView.h"
-#import "MBProgressHUD.h"
 
 static MBProgressHUD  *s_progressHUD = nil;
 

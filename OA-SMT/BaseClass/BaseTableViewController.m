@@ -13,4 +13,11 @@
     [super viewDidLoad];
 }
 
+-(NSMutableArray *)dataArray{
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray new];
+    }
+    return _dataArray;
+}
+
 @end

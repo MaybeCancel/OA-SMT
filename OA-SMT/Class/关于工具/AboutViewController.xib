@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutViewController">
+            <connections>
+                <outlet property="appVersionLab" destination="1pp-TE-k2c" id="wbm-BT-mzI"/>
+                <outlet property="backView" destination="70L-N7-200" id="RyV-oH-05u"/>
+                <outlet property="companyInfoLab" destination="T6F-9G-wTF" id="IAp-2d-QLZ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70L-N7-200">
+                    <rect key="frame" x="0.0" y="20" width="375" height="450"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="450" id="tbI-Wh-4L3"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="爱立信站点辅助管理系统" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oa1-TQ-xYZ">
+                    <rect key="frame" x="0.0" y="80" width="375" height="24"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ESMT Ver1.0.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pp-TE-k2c">
+                    <rect key="frame" x="0.0" y="114" width="375" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="功能介绍：爱立信站点辅助管理系统（以下统一简称ESMT）是一个由爱立信工程香满园管理层针对爱立信在工程交付全管理要求，而定制开发的综合平台式工程项目管理系统。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6F-9G-wTF">
+                    <rect key="frame" x="20" y="165" width="335" height="72"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Do1-pU-b9h">
+                    <rect key="frame" x="0.0" y="597.5" width="375" height="39.5"/>
+                    <string key="text">版权所有@爱立信(中国)有限公司2017，2018
+Copyright©2017-2018 Telefonaktiebolaget L.M.Ericsson
+All Rights Reservsd</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="Do1-pU-b9h" secondAttribute="bottom" constant="30" id="539-eb-sSr"/>
+                <constraint firstItem="oa1-TQ-xYZ" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="60" id="AMp-D7-Ett"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="70L-N7-200" secondAttribute="trailing" id="E3i-vR-0Z0"/>
+                <constraint firstItem="70L-N7-200" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="FhZ-F6-NQb"/>
+                <constraint firstItem="T6F-9G-wTF" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="KYa-Wl-GCW"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="oa1-TQ-xYZ" secondAttribute="trailing" id="Omf-RO-AQC"/>
+                <constraint firstItem="oa1-TQ-xYZ" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="TIO-zn-8bq"/>
+                <constraint firstItem="1pp-TE-k2c" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Y8F-i6-buu"/>
+                <constraint firstItem="T6F-9G-wTF" firstAttribute="top" secondItem="1pp-TE-k2c" secondAttribute="bottom" constant="30" id="Yq5-i5-9PM"/>
+                <constraint firstItem="Do1-pU-b9h" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="b4B-su-Gcd"/>
+                <constraint firstAttribute="trailing" secondItem="T6F-9G-wTF" secondAttribute="trailing" constant="20" id="bCk-Ak-V12"/>
+                <constraint firstItem="70L-N7-200" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="eVv-OM-JVQ"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="1pp-TE-k2c" secondAttribute="trailing" id="har-bP-iGi"/>
+                <constraint firstItem="1pp-TE-k2c" firstAttribute="top" secondItem="oa1-TQ-xYZ" secondAttribute="bottom" constant="10" id="nQg-QV-ywo"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Do1-pU-b9h" secondAttribute="trailing" id="qie-gO-Ltx"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
+        </view>
+    </objects>
+</document>

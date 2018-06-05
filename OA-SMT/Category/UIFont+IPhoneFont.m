@@ -10,34 +10,20 @@
 
 @implementation UIFont (IPhoneFont)
 + (UIFont*)systemWithScreen:(NSInteger)fontNumber{
-    int SWidth  = ScreenWidth;
-    switch (SWidth) {
-        case IPHONE5WIDTH:
-            fontNumber = fontNumber-2;
-            break;
-        case IPHONE6WIDTH:
-            break;
-        case IPHONE6PWIDTH:
-            fontNumber = fontNumber+1;
-            break;
-        default:
-            break;
+    if (is_iPHONE5) {
+        fontNumber = fontNumber-2;
+    }
+    else if (is_iPHONE6P) {
+        fontNumber = fontNumber+1;
     }
     return [UIFont systemFontOfSize:fontNumber];
 }
 + (UIFont*)boldWithScreen:(NSInteger)fontNumber{
-    int SWidth  = ScreenWidth;
-    switch (SWidth) {
-        case IPHONE5WIDTH:
-            fontNumber = fontNumber-1;
-            break;
-        case IPHONE6WIDTH:
-            break;
-        case IPHONE6PWIDTH:
-            fontNumber = fontNumber+1;
-            break;
-        default:
-            break;
+    if (is_iPHONE5) {
+        fontNumber = fontNumber-1;
+    }
+    else if (is_iPHONE6P) {
+        fontNumber = fontNumber+1;
     }
     return [UIFont boldSystemFontOfSize:fontNumber];
 }
