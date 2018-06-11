@@ -59,7 +59,7 @@
     [self.view addSubview:_tips];
    
     self.littleTip = [[UILabel alloc]initWithFrame:CGRM(0,SCREEN_HEIGHT - 15 - 20, SCREEN_WIDTH-15, 15)];
-    self.littleTip.text = @"照片采用SMT移动APP拍摄";
+    self.littleTip.text = @"照片采用ESMT移动APP拍摄";
     self.littleTip.textAlignment = NSTextAlignmentRight;
     self.littleTip.font = [UIFont systemFontOfSize:11];
     self.littleTip.textColor = RGBColor(230, 230, 230);
@@ -189,7 +189,7 @@
 #pragma - 保存至相册
 - (void)saveImageToPhotoAlbum:(UIImage*)savedImage
 {
-//    UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
 // 指定回调方法
 - (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo

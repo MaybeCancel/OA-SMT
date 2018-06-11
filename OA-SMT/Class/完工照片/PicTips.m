@@ -17,10 +17,10 @@
     self.objectName.text = model.objectName;
     self.siteName.text = model.siteName;
     self.siteNumber.text = model.siteNumber;
-    self.steering.text = @"123123";
+    self.steering.text = model.steering;
     self.longtitude.text = model.longitude;
     self.latitude.text = model.latitude;
-    self.picPosition.text = model.PicPosition;
+    self.picPosition.text = [NSString stringWithFormat:@"%@[%@]",model.PicPosition,model.detaiPart];
     self.currentTime.text = model.shootingTime;
 }
 

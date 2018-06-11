@@ -11,16 +11,22 @@
 #import "BaseCellView.h"
 #import "ProjectInfoCell.h"
 #import "LMJDropdownMenu.h"
+#import "ProjectInfoModel.h"
+#import "ProjectStationModel.h"
 
 @interface ProjectInfoViewController ()<LMJDropdownMenuDelegate>
 @property (nonatomic, strong) NHCustomSegmentView *segmentView;
+@property (nonatomic, strong) ProjectInfoModel *projectInfoModel;
 @property (nonatomic, strong) BaseCellView *customerCell;
 @property (nonatomic, strong) BaseCellView *projectCell;
 @property (nonatomic, strong) LMJDropdownMenu *customerMenu;
 @property (nonatomic, strong) LMJDropdownMenu *projectMenu;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSArray *tableItems;
+@property (nonatomic, strong) NSMutableArray *stationDataSource;
 @property (nonatomic, assign) BOOL isLandscap;
+@property (nonatomic, copy) NSString *isFinish;
+@property (nonatomic, copy) NSString *projectId;
 @end
 
 @implementation ProjectInfoViewController
@@ -40,7 +46,7 @@
         }
         weakSelf.isLandscap = !weakSelf.isLandscap;
     };
-    
+
     [self setupUI];
     [self makeConstraints];
     [self loadData];
@@ -48,21 +54,60 @@
 }
 
 -(void)loadData{
-    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetProjectInfo]
+    kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
+    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetProjectList]
                                                    isPost:YES
                                                    Params:@{@"userId":[UserDef objectForKey:@"userId"]}];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSArray* result = jsonDic[@"result"];
+        NSMutableArray *clientMArr = [NSMutableArray new];
+        NSMutableArray *projectMArr = [NSMutableArray new];
         for (NSDictionary* dic in result) {
-//            BackLogListModel* model = [BackLogListModel ModelWithDic:dic];
-//            [self.dataArray addObject:model];
+            ProjectInfoModel* model = [[ProjectInfoModel alloc]initWithDictionary:dic error:nil];
+            [clientMArr addObject:model.clientName];
+            [weakSelf.dataArray addObject:model];
         }
-        [self.tableView reloadData];
+        if (weakSelf.dataArray.count != 0) {
+            ProjectInfoModel *infoModel = weakSelf.dataArray[0];
+            weakSelf.projectInfoModel = infoModel;
+            for (ProjectListModel *model in infoModel.projectList) {
+                [projectMArr addObject:model.projectName];
+            }
+            weakSelf.customerCell.rightString = infoModel.clientName;
+            if (infoModel.projectList && infoModel.projectList.count != 0) {
+                _projectId = [infoModel.projectList[0] projectId];
+                weakSelf.projectCell.rightString = [infoModel.projectList[0] projectName];
+            }
+        }
+        [self.customerMenu setMenuTitles:clientMArr rowHeight:44];
+        [weakSelf.projectMenu setMenuTitles:projectMArr rowHeight:44];
+        [weakSelf loadStationData];
+    }];
+}
+
+-(void)loadStationData{
+    kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
+    NSMutableDictionary *para = [NSMutableDictionary new];
+    [para setObject:self.isFinish forKey:@"isFinish"];
+    [para setObject:self.projectId forKey:@"projectId"];
+    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetStationInfo]
+                                                   isPost:YES
+                                                   Params:para];
+    [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
+        NSArray* result = jsonDic[@"result"];
+        [weakSelf.stationDataSource removeAllObjects];
+        for (NSDictionary *dict in result) {
+            ProjectStationModel *model = [ProjectStationModel ModelWithDic:dict];
+            [weakSelf.stationDataSource addObject:model];
+        }
+        [weakSelf.tableView reloadData];
     }];
 }
 
 -(void)setupUI{
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(dismissBack)];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"SafariForward"] style:(UIBarButtonItemStylePlain) target:self action:@selector(dismissBack)];
     self.navigationItem.leftBarButtonItem = leftItem;
     
     self.navigationItem.titleView = self.segmentView;
@@ -163,10 +208,18 @@
 - (void)dropdownMenu:(LMJDropdownMenu *)menu selectedCellNumber:(NSInteger)number{
     NSLog(@"你选择了：%ld",number);
     if (self.customerMenu == menu) {
-        
+        ProjectInfoModel *infoModel = self.dataArray[number];
+        self.projectInfoModel = infoModel;
+        NSMutableArray *projectMArr = [NSMutableArray new];
+        for (ProjectListModel *model in infoModel.projectList) {
+            [projectMArr addObject:model.projectName];
+        }
+        [self.projectMenu setMenuTitles:projectMArr rowHeight:44];
     }
     else{
-        
+        ProjectListModel *listModel = self.projectInfoModel.projectList[number];
+        self.projectId = listModel.projectId;
+        [self loadStationData];
     }
 }
 
@@ -174,8 +227,7 @@
 #pragma mark -- UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return self.dataArray.count;
-    return 10;
+    return self.stationDataSource.count+1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -188,6 +240,20 @@
     }
     if (indexPath.row == 0) {
         cell.rowDatas = self.tableItems;
+    }
+    else{
+        ProjectStationModel *model = self.stationDataSource[indexPath.row-1];
+        NSMutableArray *rowDatas = [NSMutableArray new];
+        [rowDatas addObject:model.stationCode];
+        [rowDatas addObject:model.stationName];
+        [rowDatas addObject:model.receiveDate];
+        [rowDatas addObject:model.checkoutDate];
+        [rowDatas addObject:model.installDate];
+        [rowDatas addObject:model.testDate];
+        [rowDatas addObject:model.inspectDate];
+        [rowDatas addObject:model.rectifyDate];
+        [rowDatas addObject:model.acceptDate];
+        cell.rowDatas = rowDatas;
     }
     return cell;
 }
@@ -208,8 +274,10 @@
         _segmentView = [[NHCustomSegmentView alloc] initWithItemTitles:@[@"未完成", @"已完成"]];
         _segmentView.frame = CGRectMake(0, 0, 175, 35);
         [_segmentView clickDefault];
+        kWeakSelf(weakSelf);
         _segmentView.NHCustomSegmentViewBtnClickHandle = ^(NHCustomSegmentView *segment, NSString *title, NSInteger currentIndex) {
-            
+            weakSelf.isFinish = [NSString stringWithFormat:@"%d",(int)currentIndex];
+            [weakSelf loadStationData];
         };
     }
     return _segmentView;
@@ -219,7 +287,7 @@
     if (!_customerCell) {
         _customerCell = [[BaseCellView alloc]init];
         _customerCell.leftString = @"客户";
-        _customerCell.rightString = @"JSCMCC";
+        _customerCell.rightString = @"";
         _customerCell.arrowHidden = YES;
     }
     return _customerCell;
@@ -229,7 +297,7 @@
     if (!_projectCell) {
         _projectCell = [[BaseCellView alloc]init];
         _projectCell.leftString = @"项目";
-        _projectCell.rightString = @"SCMY17";
+        _projectCell.rightString = @"";
         _projectCell.arrowHidden = YES;
     }
     return _projectCell;
@@ -241,7 +309,6 @@
         [_customerMenu.mainBtn setTitleColor:[UIColor clearColor] forState:(UIControlStateNormal)];
         _customerMenu.mainBtn.backgroundColor = [UIColor clearColor];
         _customerMenu.mainBtn.layer.borderWidth = 0;
-        [_customerMenu setMenuTitles:@[@"选项一",@"选项二",@"选项三",@"选项四"] rowHeight:30];
         _customerMenu.delegate = self;
     }
     return _customerMenu;
@@ -253,7 +320,6 @@
         [_projectMenu.mainBtn setTitleColor:[UIColor clearColor] forState:(UIControlStateNormal)];
         _projectMenu.mainBtn.backgroundColor = [UIColor clearColor];
         _projectMenu.mainBtn.layer.borderWidth = 0;
-        [_projectMenu setMenuTitles:@[@"选项一",@"选项二",@"选项三",@"选项四"] rowHeight:30];
         _projectMenu.delegate = self;
     }
     return _projectMenu;
@@ -275,6 +341,34 @@
         _tableItems = @[@"站号",@"站名",@"收货",@"开箱",@"安装",@"调测",@"质检",@"整改",@"验收"];
     }
     return _tableItems;
+}
+
+-(NSMutableArray *)stationDataSource{
+    if(!_stationDataSource){
+        _stationDataSource = [NSMutableArray new];
+    }
+    return _stationDataSource;
+}
+
+-(ProjectInfoModel *)projectInfoModel{
+    if (!_projectInfoModel) {
+        _projectInfoModel = [ProjectInfoModel new];
+    }
+    return _projectInfoModel;
+}
+
+-(NSString *)isFinish{
+    if (!_isFinish) {
+        _isFinish  = @"0";
+    }
+    return _isFinish;
+}
+
+-(NSString *)projectId{
+    if (!_projectId) {
+        _projectId = @"";
+    }
+    return _projectId;
 }
 
 - (void)didReceiveMemoryWarning {

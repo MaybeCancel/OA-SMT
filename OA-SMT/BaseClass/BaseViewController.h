@@ -40,6 +40,7 @@
 - (void)OpenAlbumAlert;
 - (void)openAlbum;
 - (void)openCamera;
+- (void)saveImageToPhotoAlbum:(UIImage*)savedImage;
 - (NSString *)updateTimeForTimeInterval:(NSInteger)timeInterval;
 
 //toast

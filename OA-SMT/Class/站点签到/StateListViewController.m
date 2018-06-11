@@ -19,7 +19,7 @@
     [self loadData];
 }
 - (void)loadData{
-    self.dataArray = [NSMutableArray new];
+    [LoadingView showProgressHUD:@""];
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:StationsList] isPost:YES Params:@{@"userId":[UserDef objectForKey:@"userId"]}];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSArray* array = jsonDic[@"result"];

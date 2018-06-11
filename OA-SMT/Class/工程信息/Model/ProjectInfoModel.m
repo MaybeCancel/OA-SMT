@@ -8,7 +8,19 @@
 
 #import "ProjectInfoModel.h"
 
+@implementation ProjectListModel
+
++(BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
+
+@end
+
 @implementation ProjectInfoModel
+
++(BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
 
 @end
 

@@ -25,9 +25,11 @@
 
 - (void)loadData{
     kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:TestInfoList] isPost:YES Params:@{@"userId":[UserDef objectForKey:@"userId"]}];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSArray* array = jsonDic[@"result"];
+        [self.dataArray removeAllObjects];
         for (NSDictionary* dic in array) {
             InstallSiteModel* model = [InstallSiteModel ModelWithDic:dic];
             [self.dataArray addObject:model];

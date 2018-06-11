@@ -51,7 +51,6 @@
     }
     UIImage* image = self.shootedArray[indexPath.row];
     cell.uploadImage = image;
-    NSLog(@"照片部位:~~~~%@",image.devicePicPart);
     cell.nameLabel.text = [NSString stringWithFormat:@"%@_%@_%@",image.siteNumber,image.siteName,image.devicePicPart];
     if (self.isClick) {
         [cell postImage];

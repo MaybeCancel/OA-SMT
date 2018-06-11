@@ -29,7 +29,7 @@
     self.nameLabel.textAlignment = NSTextAlignmentLeft;
     self.nameLabel.textColor = RGBColor(26, 26, 26);
     self.nameLabel.text = @"A001_江宁大学城基站_基站全景[全景01]";
-    self.nameLabel.font = [UIFont systemWithScreen:17];
+    self.nameLabel.font = [UIFont systemWithScreen:14];
     [self.contentView addSubview:self.nameLabel];
     
     
@@ -37,7 +37,7 @@
     self.picSize.textAlignment = NSTextAlignmentLeft;
     self.picSize.textColor = RGBColor(148, 148, 148);
     self.picSize.text = @"106K/300K";
-    self.picSize.font = [UIFont systemWithScreen:14];
+    self.picSize.font = [UIFont systemWithScreen:12];
     [self.contentView addSubview:self.picSize];
  
 
@@ -45,7 +45,7 @@
     self.networkSpeed.textAlignment = NSTextAlignmentRight;
     self.networkSpeed.textColor = RGBColor(148, 148, 148);
     self.networkSpeed.text = @"102K/S";
-    self.networkSpeed.font = [UIFont systemWithScreen:14];
+    self.networkSpeed.font = [UIFont systemWithScreen:12];
     [self.contentView addSubview:self.networkSpeed];
  
     
@@ -121,8 +121,9 @@
         NSData* data = UIImageJPEGRepresentation(image, 1.0);
         //图片现在名字为image  命名规则 站号_站名_设备及照片部位  exp:A001_江宁大学城基站_基站全景[机房和塔建]
         NSString *fileName = [NSString stringWithFormat:@"%@_%@_%@.jpg",image.siteNumber,image.siteName,image.devicePicPart];
-        NSString *name = [fileName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [formData appendPartWithFileData:data name:@"1213" fileName:name mimeType:@"image/jpeg"];
+//        NSString *name = [fileName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        NSString *nameStr = [fileName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]];
+        [formData appendPartWithFileData:data name:@"1213" fileName:fileName mimeType:@"image/jpeg"];
             
         } progress:^(NSProgress * _Nonnull uploadProgress) {
             //进度条数值更新  如果不成功则需要使用 KVO
@@ -137,7 +138,7 @@
                 });
             });
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            //上传成功 要做什么
+            //上传成功
             NSMutableDictionary *dictttt = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             if([dictttt[@"message"] isEqualToString:@"OK"]){
                 NSLog(@"~~~~~~~~~~上传成功");

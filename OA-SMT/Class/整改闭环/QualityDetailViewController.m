@@ -73,6 +73,7 @@
 
 -(void)loadData{
     kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:RectificationInfo]
                                                    isPost:YES
                                                    Params:@{@"id":self.qualityId}];
@@ -121,6 +122,7 @@
 //提交告警处理报告
 -(void)submitReceiveGoodsInfoReport:(NSString *)imgs{
     kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
     NSMutableDictionary *para = [NSMutableDictionary new];
     [para setObject:self.qualityId forKey:@"id"];
     [para setObject:self.boxView.firstText forKey:@"isFinish"];
@@ -172,6 +174,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    [self saveImageToPhotoAlbum:image];
     [self.imageMArr addObject:image];
     self.addImageView.images = self.imageMArr;
     [self dismiss];

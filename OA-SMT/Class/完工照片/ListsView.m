@@ -106,6 +106,12 @@
     DeviceModel* model = _dataArray.firstObject;
     self.devicePart = model.photoDevice;
     self.deviceId = model.id;
+    [self.data2Array removeAllObjects];
+    [self.satationIdArray removeAllObjects];
+    for (NSDictionary* dic in model.photoPositions) {
+        [self.data2Array addObject:dic[@"photoPosition"]];
+        [self.satationIdArray addObject:dic[@"id"]];
+    }
  
     NSArray* array = model.photoPositions;
     NSMutableArray* array2 = [NSMutableArray new];
@@ -166,9 +172,9 @@
     _imageView.frame = CGRM(self.width - 15 - 12 , 18, 12, 8);
     _backView.frame = CGRM(0, 108, self.width, SCREEN_HEIGHT - 108);
     
-    NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:17]};
-    CGSize size=[_rightString sizeWithAttributes:attrs];
-    _rightLabel.frame = CGRM(self.width - size.width - 15-12-2, 12, size.width, 20);
+//    NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:17]};
+//    CGSize size= [_rightString sizeWithAttributes:attrs];
+    _rightLabel.frame = CGRM(150, 12, self.width-150-25, 20);
 }
 //set
 - (void)setRightString:(NSString *)rightString{
@@ -183,13 +189,12 @@
         self.deviceId = model.id;
         self.devicePart = model.photoDevice;
         NSArray* array = model.photoPositions;
-        NSMutableArray* array2 = [NSMutableArray new];
-        self.satationIdArray = [NSMutableArray new];
+        [self.data2Array removeAllObjects];
+        [self.satationIdArray removeAllObjects];
         for (NSDictionary* dic in array) {
-            [array2 addObject:dic[@"photoPosition"]];
+            [self.data2Array addObject:dic[@"photoPosition"]];
             [self.satationIdArray addObject:dic[@"id"]];
         }
-        _data2Array = array2;
         [_tableView1 reloadData];
     }else if (tableView == _tableView1){
         self.detailPart = self.data2Array[indexPath.row];
@@ -200,5 +205,18 @@
     }
 }
 
+-(NSMutableArray *)data2Array{
+    if (!_data2Array) {
+        _data2Array = [NSMutableArray new];
+    }
+    return _data2Array;
+}
+
+-(NSMutableArray *)satationIdArray{
+    if (!_satationIdArray) {
+        _satationIdArray = [NSMutableArray new];
+    }
+    return _satationIdArray;
+}
 
 @end

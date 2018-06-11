@@ -15,5 +15,6 @@
 @property (nonatomic, copy) NSString *stationName;
 @property (nonatomic, copy) NSString *constructionteam;
 @property (nonatomic, copy) NSString *optDate;
+//0：未开始 1：进行中 2：已完成
 @property (nonatomic, strong) NSNumber *status;
 @end

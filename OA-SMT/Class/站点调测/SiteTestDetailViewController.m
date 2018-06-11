@@ -76,6 +76,7 @@
 
 -(void)uploadReport{
     kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
     NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
     [para setObject:[UserDef objectForKey:@"userId"] forKey:@"userId"];
     [para setObject:self.model.projectId forKey:@"projectId"];

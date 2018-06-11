@@ -273,7 +273,7 @@
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     ipc.mediaTypes =  [[NSArray alloc] initWithObjects: (NSString *) kUTTypeImage, nil];//用户可以随意移动以及缩放图像
-    ipc.allowsEditing = YES;//允许用户缩放拖动
+    ipc.allowsEditing = NO;//允许用户缩放拖动
     ipc.delegate = self;
     [self presentViewController:ipc animated:YES completion:nil];
 }
@@ -283,9 +283,27 @@
     _pic = [[UIImagePickerController alloc] init];
     _pic.sourceType = UIImagePickerControllerSourceTypeCamera;//图像来源
     //用户可以随意移动以及缩放图像
-    _pic.allowsEditing = YES;//允许用户缩放拖动
+    _pic.allowsEditing = NO;//允许用户缩放拖动
     _pic.delegate = self;
     [self presentViewController:_pic animated:YES completion:nil];
+}
+
+#pragma - 保存至相册
+- (void)saveImageToPhotoAlbum:(UIImage*)savedImage
+{
+    UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+}
+// 指定回调方法
+- (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo
+
+{
+    NSString *msg = nil ;
+    if(error != NULL){
+        msg = @"保存图片失败" ;
+    }else{
+        msg = @"保存图片成功" ;
+    }
+    [LoadingView showAlertHUD:msg duration:1];
 }
 
 -(void)showToast:(NSTimeInterval)duration withMessage:(NSString *)message{

@@ -43,24 +43,23 @@
     /*拍摄成功数组初始化*/
     self.shootedArray = [NSMutableArray new];
     self.title = @"完工照片";
-    self.rightItemTitle = @"拍摄情况";
     [self setUpUI];
     [self adminData];
     [self loadData];
     [self loadDevicePic];
   
     kWeakSelf(weakSelf);
-    self.rightItemHandle = ^{
-        ShootDawnViewController* dawn = [[ShootDawnViewController alloc]init];
-        weakSelf.Hidden_BackTile = YES;
-        [weakSelf pushVC:dawn];
-    };
-    
-  
+//    self.rightItemTitle = @"拍摄情况";
+//    self.rightItemHandle = ^{
+//        ShootDawnViewController* dawn = [[ShootDawnViewController alloc]init];
+//        weakSelf.Hidden_BackTile = YES;
+//        [weakSelf pushVC:dawn];
+//    };
 }
 /** 设备以及照片部位*/
 - (void)loadDevicePic{
     self.deviceArray = [NSMutableArray new];
+    [LoadingView showProgressHUD:@""];
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetPhotoDevices] isPost:YES Params:@{@"stationId":@"0"}];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSArray* array = jsonDic[@"result"];
@@ -73,6 +72,7 @@
 }
 
 - (void)loadData{
+    [LoadingView showProgressHUD:@""];
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetStationData] isPost:YES Params:@{@"userId":[UserDef objectForKey:@"userId"]}];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSArray* jsonArray = jsonDic[@"result"];
@@ -80,6 +80,7 @@
         self.siteModel.objectName =  resultDic[@"projectName"];
         self.siteModel.stationInfoArray = resultDic[@"stations"];
         self.siteModel.projectId = resultDic[@"projectId"];
+        self.siteModel.steering = [UserDef objectForKey:@"userName"];
         [self.tableView reloadData];
     }];
 }
@@ -88,8 +89,10 @@
 - (void)adminData{
     [self getLocationInfo];
 }
+
 //获取定位信息
 - (void)getLocationInfo{
+    kWeakSelf(weakSelf);
     self.siteModel.shootingTime = [TimeTools getCurrentTimesWithFormat:@"YYYY-MM-dd HH:mm:ss"];
     CCLocationManager* manager = [CCLocationManager shareManager];
     [manager starUpDataLocation];
@@ -98,14 +101,13 @@
         [geoCoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
             if(placemarks.count>0){
                 CLPlacemark* placeMark = placemarks[0];
-                self.siteModel.longitude = newLongitude;
-                self.siteModel.latitude = newLatitude;
-                self.siteModel.myLocation = [NSString stringWithFormat:@"%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.thoroughfare];
-                [UserDef setObject:self.siteModel.myLocation forKey:@"myLocation"];
+                weakSelf.siteModel.longitude = newLongitude;
+                weakSelf.siteModel.latitude = newLatitude;
+                weakSelf.siteModel.myLocation = [NSString stringWithFormat:@"%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.thoroughfare];
+                [UserDef setObject:weakSelf.siteModel.myLocation forKey:@"myLocation"];
                 [LoadingView showAlertHUD:@"定位成功" duration:1];
-                self.isLocation = YES;
-                NSLog(@"~~~~~~~%@",self.siteModel.myLocation);
-                [self.tableView reloadData];
+                weakSelf.isLocation = YES;
+                [weakSelf.tableView reloadData];
             }
         }];
     }];
@@ -170,27 +172,27 @@
          5.站号,站点信息
          6.当前时间
          */
-        if (!self.isLocation||!self.siteModel.PicPosition||!self.siteModel.objectType||!self.siteModel.siteName||!self.siteModel.siteNumber||!self.siteModel.objectName) {
+        if (!weakSelf.isLocation||!weakSelf.siteModel.PicPosition||!weakSelf.siteModel.objectType||!weakSelf.siteModel.siteName||!weakSelf.siteModel.siteNumber||!weakSelf.siteModel.objectName) {
             [LoadingView showAlertHUD:@"请完善信息!!" duration:1];
             return ;
         }
         ShootPicViewController* shoot = [[ShootPicViewController alloc]init];
-        shoot.siteModel = self.siteModel;
-        [self presentToVC:shoot];
+        shoot.siteModel = weakSelf.siteModel;
+        [weakSelf presentToVC:shoot];
         shoot.shootPicHandle = ^(UIImage *image) {
             NSLog(@"照片部位:~~~~%@",image.devicePicPart);
-            [self.shootedArray addObject:image];
+            [weakSelf.shootedArray addObject:image];
         };
     };
     bottomView.rightBottombtnHandle = ^{
-        if (self.shootedArray.count == 0) {
+        if (weakSelf.shootedArray.count == 0) {
             [LoadingView showAlertHUD:@"请您先拍照" duration:1];
             return ;
         }
         PostListViewController* list = [[PostListViewController alloc]init];
-        self.Hidden_BackTile = YES;
-        list.shootedArray = self.shootedArray;
-        [self pushVC:list];
+        weakSelf.Hidden_BackTile = YES;
+        list.shootedArray = weakSelf.shootedArray;
+        [weakSelf pushVC:list];
     };
     
     
@@ -222,7 +224,7 @@
             cell.rightString.text = self.siteModel.siteName;
             break;
         case 3:  //督导
-            cell.rightString.text = self.siteModel.siteName;
+            cell.rightString.text = self.siteModel.steering;
             break;
         case 4:  //经度
             cell.rightString.text = self.siteModel.longitude;

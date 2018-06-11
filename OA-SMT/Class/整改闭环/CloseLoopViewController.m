@@ -24,14 +24,18 @@
 }
 
 -(void)loadData{
+    [LoadingView showProgressHUD:@""];
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:RectificationList] isPost:YES Params:@{@"userId":[UserDef objectForKey:@"userId"]}];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSArray* result = jsonDic[@"result"];
-        for (NSDictionary* dic in result) {
-            QualityModel* model = [QualityModel ModelWithDic:dic];
-            [self.dataArray addObject:model];
+        [self.dataArray removeAllObjects];
+        if ([result isKindOfClass:[NSArray class]]) {
+            for (NSDictionary* dic in result) {
+                QualityModel* model = [QualityModel ModelWithDic:dic];
+                [self.dataArray addObject:model];
+            }
+            [self.tableView reloadData];
         }
-        [self.tableView reloadData];
     }];
 }
 

@@ -18,6 +18,7 @@
 #import "NSString+FontWithSize.h"
 #import "NSDate+DateFormat.h"
 #import "UIFont+IPhoneFont.h"
+#import "NSString+MD5Addition.h"
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"

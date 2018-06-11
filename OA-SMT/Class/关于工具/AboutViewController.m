@@ -8,6 +8,7 @@
 
 #import "AboutViewController.h"
 #import "BaseCell.h"
+#import "ResetPasswordViewController.h"
 
 @interface AboutViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *appVersionLab;
@@ -43,7 +44,7 @@
         make.bottom.mas_equalTo(weakSelf.backView.mas_bottom);
         make.left.mas_equalTo(weakSelf.backView.mas_left);
         make.right.mas_equalTo(weakSelf.backView.mas_right);
-        make.height.mas_equalTo(44*3);
+        make.height.mas_equalTo(44*weakSelf.dataSource.count);
     }];
     
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,6 +77,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        ResetPasswordViewController *vc = [ResetPasswordViewController new];
+        [self pushVC:vc];
+    }
+    else{
+        [self showToast:1.5 withMessage:@"此功能暂未开放"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,7 +96,7 @@
 
 -(NSArray *)dataSource{
     if (!_dataSource) {
-        _dataSource = @[@"修改密码",@"公共信息",@"检查新版本"];
+        _dataSource = @[@"修改密码",@"检查新版本"];
     }
     return _dataSource;
 }

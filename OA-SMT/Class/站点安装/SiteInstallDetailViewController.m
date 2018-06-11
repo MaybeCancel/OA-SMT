@@ -22,15 +22,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"2G&3G安装检查报告";
-    self.rightItemTitle = @"保存";
+    
+    
     kWeakSelf(weakSelf);
-    self.rightItemHandle = ^{
-        [weakSelf uploadReport];
-    };
-    [self setupUI];
-    [self loadData];
+    if ([self.model.status isEqual:@0]) {   //未开始
+        self.rightItemTitle = @"保存";
+        self.rightItemHandle = ^{
+            [weakSelf uploadReport];
+        };
+        [self setupUI];
+        [self makeData];
+    }
+    else if ([self.model.status isEqual:@1]){   //进行中
+        self.rightItemTitle = @"保存";
+        self.rightItemHandle = ^{
+            [weakSelf uploadReport];
+        };
+        [self setupUI];
+        [self loadData];
+    }
+    else{   //已完成
+        [self setupUI];
+        [self loadData];
+    }
 }
 
 -(void)setupUI{
@@ -42,6 +57,7 @@
 
 -(void)loadData{
     kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
     NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
     [para setObject:[UserDef objectForKey:@"userId"] forKey:@"userId"];
     [para setObject:self.model.projectId forKey:@"projectId"];
@@ -49,8 +65,10 @@
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetInstallInfo] isPost:YES Params:para];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSLog(@"result:%@",jsonDic);
-        weakSelf.installInfoDic = jsonDic[@"result"];
-        [weakSelf makeData];
+        if ([jsonDic[@"result"] isKindOfClass:[NSDictionary class]]) {
+            weakSelf.installInfoDic = jsonDic[@"result"];
+            [weakSelf makeData];
+        }
     }];
 }
 
@@ -71,7 +89,8 @@
             CellStateModel *model = [[CellStateModel alloc]init];
             NSString *installKey = [NSString stringWithFormat:@"isInstall%d_%d",(int)idx+1,i+1];
             NSString *noteKey = [NSString stringWithFormat:@"note%d_%d",(int)idx+1,i+1];
-            if (weakSelf.installInfoDic[installKey] == nil ||
+            if ([weakSelf.model.status isEqual:@0] ||
+                weakSelf.installInfoDic[installKey] == nil ||
                 [weakSelf.installInfoDic[installKey] isKindOfClass:[NSNull class]] ||
                 [weakSelf.installInfoDic[installKey] isEqual:@0]) {
                 model.state = NO;
@@ -79,7 +98,7 @@
             else{
                 model.state = YES;
             }
-            if (weakSelf.installInfoDic[noteKey]) {
+            if (![weakSelf.model.status isEqual:@0] && weakSelf.installInfoDic[noteKey]) {
                 model.problem = weakSelf.installInfoDic[noteKey];
             }
             else{
@@ -99,7 +118,7 @@
     for (int i = 0; i < self.reportMArr.count; i++) {
         NSArray *arr = self.reportMArr[i];
         [arr enumerateObjectsUsingBlock:^(CellStateModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (model.problem.length) {
+            if ([model.problem isKindOfClass:[NSString class]] && model.problem.length) {
                 [weakSelf.problemMArr addObject:[NSString stringWithFormat:@"%d.%d %@",i+1,(int)idx+1,model.problem]];
             }
         }];
@@ -109,11 +128,12 @@
 
 -(void)uploadReport{
     kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
     NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
     [para setObject:[UserDef objectForKey:@"userId"] forKey:@"userId"];
     [para setObject:self.model.projectId forKey:@"projectId"];
     [para setObject:self.model.stationId forKey:@"stationId"];
-    NSString __block *status = @"1";
+    NSString __block *status = @"2";
     for (int index = 0; index < self.reportMArr.count; index++) {
         NSArray *arr = self.reportMArr[index];
         [arr enumerateObjectsUsingBlock:^(CellStateModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -121,12 +141,12 @@
             NSString *noteKey = [NSString stringWithFormat:@"note%d_%d",index+1,(int)idx+1];
             [para setObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithBool:model.state]] forKey:installKey];
             if (!model.state) {
-                status = @"0";
+                status = @"1";
             }
             [para setObject:model.problem forKey:noteKey];
         }];
     }
-    [para setObject:status forKey:@"status"];// 0：未完成 1：已完成
+    [para setObject:status forKey:@"status"];// 1：进行中 2：已完成
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:AddInstallInfo] isPost:YES Params:para];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSLog(@"%@",jsonDic);
@@ -186,6 +206,11 @@
             };
             [weakSelf pushVC:vc];
         };
+        
+        //如果是已完成，则报告静态展示即可
+        if ([weakSelf.model.status isEqual:@2]) {
+            cell.userInteractionEnabled = NO;
+        }
         return cell;
     }
     else{

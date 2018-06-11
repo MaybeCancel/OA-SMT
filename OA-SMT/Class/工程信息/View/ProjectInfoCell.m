@@ -9,7 +9,7 @@
 #import "ProjectInfoCell.h"
 
 @interface ProjectInfoCell()
-@property (nonatomic, strong)NSMutableArray *labelMArr;
+
 @end
 
 @implementation ProjectInfoCell
@@ -26,18 +26,13 @@
         label.text = rowDatas[i];
         label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont systemFontOfSize:14];
+        label.numberOfLines = 0;
         label.layer.borderWidth = 0.5;
         label.layer.borderColor = [UIColor blackColor].CGColor;
         [self.contentView addSubview:label];
     }
 }
 
--(NSMutableArray *)labelMArr{
-    if (!_labelMArr) {
-        _labelMArr = [NSMutableArray new];
-    }
-    return _labelMArr;
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

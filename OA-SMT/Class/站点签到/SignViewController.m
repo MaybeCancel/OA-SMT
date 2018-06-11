@@ -48,27 +48,29 @@
     SignBtnView* signBtn = [SignBtnView shareSignBtnView];
     signBtn.frame = CGRM(0, CGRectGetMaxY(self.tableView.frame) + 32, SCREEN_WIDTH, 170);
     [self.view addSubview:signBtn];
+    
+    kWeakSelf(weakSelf);
     signBtn.signHandle = ^{
-        if(self.model.stationName == nil){
+        if(weakSelf.model.stationName == nil){
             [LoadingView showAlertHUD:@"请选择站名" duration:1];
             return ;
         }
-        else if(self.model.latitude == nil){
+        else if(weakSelf.model.latitude == nil){
             [LoadingView showAlertHUD:@"位置信息错误,请重新定位" duration:1];
             return ;
         }
-        else if(self.model.stationId == nil){
+        else if(weakSelf.model.stationId == nil){
             [LoadingView showAlertHUD:@"请选择施工类型" duration:1];
             return ;
         }
-
-        NSDictionary* dic = @{@"stationId":self.model.stationId,
+        [LoadingView showProgressHUD:@""];
+        NSDictionary* dic = @{@"stationId":weakSelf.model.stationId,
                               @"userId":[UserDef objectForKey:@"userId"],
-                              @"optType":self.model.stationType,
-                              @"longitude":self.model.longitude,
-                              @"latitude":self.model.latitude,
-                              @"address":self.model.currentLocation,
-                              @"signinDate":self.model.currentTime
+                              @"optType":weakSelf.model.stationType,
+                              @"longitude":weakSelf.model.longitude,
+                              @"latitude":weakSelf.model.latitude,
+                              @"address":weakSelf.model.currentLocation,
+                              @"signinDate":weakSelf.model.currentTime
                               };
         BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:SignIn] isPost:YES Params:dic];
         [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
@@ -80,8 +82,9 @@
             }
         }];
     };
+    
     signBtn.reloacationHandle = ^{
-        [self getCurrentInfo];
+        [weakSelf getCurrentInfo];
     };
 }
 

@@ -16,7 +16,8 @@
 #define Login @"/account/login"
 
 /*-----------------工程信息---------------*/
-#define GetProjectInfo @"/project/getProjectInfo"
+#define GetProjectList @"/project/getProjectList"
+#define GetStationInfo @"/project/getStationInfo"
 
 /*-----------------完工照片---------------*/
 #define GetPhotoDevices @"/project/getPhotoDevices"

@@ -9,6 +9,7 @@
 #import "SiteInstallCell.h"
 
 @interface SiteInstallCell()
+@property (weak, nonatomic) IBOutlet UILabel *tipColor;
 @property (strong, nonatomic) IBOutlet UILabel *stateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *siteNameLab;
@@ -31,18 +32,23 @@
     self.dateLab.text = model.optDate;
     if ([model.status isEqual:@0]) {
         self.stateLabel.text = @"未开始";
+        self.stateLabel.backgroundColor = RGBColor(74, 142, 233);
     }
     else if ([model.status isEqual:@1]){
-        self.stateLabel.text = @"已完成";
+        self.stateLabel.text = @"进行中";
+        self.stateLabel.backgroundColor = RGBColor(87, 203, 197);
     }
     else if ([model.status isEqual:@2]){
-        self.stateLabel.text = @"进行中";
+        self.stateLabel.text = @"已完成";
+        self.stateLabel.backgroundColor = RGBColor(204, 204, 204);
     }
+    self.tipColor.backgroundColor = self.stateLabel.backgroundColor;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    self.stateLabel.layerCornerRadius = 12;
+    self.tipColor.layerCornerRadius = 2;
 }
 
 

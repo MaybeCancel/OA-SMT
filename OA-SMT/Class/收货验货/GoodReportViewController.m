@@ -108,6 +108,7 @@
 
 - (void)loadData{
     kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:ReceiveGoodsInfo]
                                                    isPost:YES
                                                    Params:@{@"goodsId":self.goodsId}];
@@ -194,6 +195,7 @@
 //提交收货报告
 -(void)submitReceiveGoodsInfoReport:(NSString *)imgs{
     kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
     NSMutableDictionary *para = [NSMutableDictionary new];
     [para setObject:self.goodsId forKey:@"goodsId"];
     [para setObject:self.boxView.firstText forKey:@"optDate"];
@@ -253,6 +255,7 @@
 
 -(void)closeTransportProblem{
     kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
     NSMutableDictionary *para = [NSMutableDictionary new];
     [para setObject:self.goodsId forKey:@"goodsId"];
     if (self.isReceive) {
@@ -283,6 +286,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    [self saveImageToPhotoAlbum:image];
     [self.imageMArr addObject:image];
     self.addImageView.images = self.imageMArr;
     [self dismiss];

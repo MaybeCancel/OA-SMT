@@ -39,6 +39,7 @@
 }
 
 - (IBAction)LoginClick:(UIButton *)sender {
+    [LoadingView showProgressHUD:@""];
     //测试账号：2121 密码：123456
     NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
     if (0) {
@@ -46,8 +47,9 @@
         [para setObject:@"123456789" forKey:@"password"];
     }
     else{
+        NSString *password = [self.passwordText.text md5HexDigest];
         [para setObject:self.userNameText.text forKey:@"phone"];
-        [para setObject:self.passwordText.text forKey:@"password"];
+        [para setObject:password forKey:@"password"];
     }
 
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:Login] isPost:YES Params:para];

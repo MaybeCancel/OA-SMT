@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,13 +34,13 @@
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未收货" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ssn-Nl-NOw">
-                                <rect key="frame" x="300" y="13" width="60" height="20"/>
+                                <rect key="frame" x="300" y="13.5" width="60" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="cQh-60-1fw"/>
+                                    <constraint firstAttribute="height" constant="24" id="cQh-60-1fw"/>
                                     <constraint firstAttribute="width" constant="60" id="oND-N9-1wH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="站名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58Y-M9-KdR">
@@ -89,7 +89,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客户PO号:5011284" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpf-xF-EgW">
-                                <rect key="frame" x="26" y="18" width="259" height="15"/>
+                                <rect key="frame" x="26" y="18" width="130.5" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="Krg-Wl-G6W"/>
                                 </constraints>
@@ -117,8 +117,7 @@
                             <constraint firstItem="bXo-5Q-iZU" firstAttribute="centerY" secondItem="yIZ-qe-hEo" secondAttribute="centerY" id="q4q-Yp-cNo"/>
                             <constraint firstItem="Jpf-xF-EgW" firstAttribute="top" secondItem="Fbu-3w-OKy" secondAttribute="top" constant="18" id="qov-7S-cxF"/>
                             <constraint firstItem="rpI-UY-72a" firstAttribute="leading" secondItem="Fbu-3w-OKy" secondAttribute="leading" constant="15" id="r60-Po-rgH"/>
-                            <constraint firstItem="Ssn-Nl-NOw" firstAttribute="top" secondItem="Fbu-3w-OKy" secondAttribute="top" constant="13" id="yhG-Hx-oMM"/>
-                            <constraint firstItem="Ssn-Nl-NOw" firstAttribute="leading" secondItem="Jpf-xF-EgW" secondAttribute="trailing" constant="15" id="zrM-ga-Irg"/>
+                            <constraint firstItem="Ssn-Nl-NOw" firstAttribute="centerY" secondItem="Jpf-xF-EgW" secondAttribute="centerY" id="sgw-hQ-Y9q"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -137,6 +136,7 @@
                 <outlet property="dateLab" destination="fIX-5G-Pg8" id="UQE-G8-7WI"/>
                 <outlet property="siteNameLab" destination="q5u-8b-u3V" id="2p2-uw-LTH"/>
                 <outlet property="stateLabel" destination="Ssn-Nl-NOw" id="AW2-5V-AHh"/>
+                <outlet property="tipColor" destination="uT0-4z-5LM" id="r1e-EV-PQt"/>
                 <outlet property="titleLabel" destination="Jpf-xF-EgW" id="EJG-dt-z4e"/>
             </connections>
             <point key="canvasLocation" x="-2282" y="-77"/>

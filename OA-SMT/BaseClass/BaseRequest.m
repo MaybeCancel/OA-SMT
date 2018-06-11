@@ -53,41 +53,29 @@
     if (self.isPost) {
         // 处理耗时操作的代码块...
         [MyRequest POST:urlStr withParameters:dic CacheTime:0 isLoadingView:nil success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-             [self handleJsonDic:jsonDic completion:completion];
-          
+            [LoadingView hideProgressHUD];
+            [self handleJsonDic:jsonDic completion:completion];
         } failure:^(NSError *error) {
+            [LoadingView hideProgressHUD];
             [LoadingView showAlertHUD:@"网络有问题,请稍后重试" duration:1];
             NSLog(@"请求失败");
             return ;
         }];
     }else{
         [MyRequest GET:urlStr WithParameters:dic CacheTime:0 isLoadingView:nil success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-             [self handleJsonDic:jsonDic completion:completion];
-//            if([jsonDic[@"resultCode"] isEqualToString:@"100"]){
-//
-//                NSLog(@"请求成功处理json");
-//            }else if(![jsonDic[@"resultCode"] isEqualToString:@"100"]&&![jsonDic[@"resultCode"] isEqualToString:@"200"]){
-//                [LoadingView showAlertHUD:@"网络错误或服务器异常" duration:1];
-//                return ;
-//            }
+            [LoadingView hideProgressHUD];
+            [self handleJsonDic:jsonDic completion:completion];
         } failure:^(NSError *error) {
             NSLog(@"请求失败");
+            [LoadingView hideProgressHUD];
             return ;
         }];
     }
 }
 - (void)handleJsonDic:(NSDictionary*)jsonDic completion:(CCAPICompletion)completion{
-    [LoadingView hideProgressHUD];
     if (completion) {
         completion(jsonDic);
     }
-//    if([jsonDic[@"resultCode"] isEqualToString:@"100"]){
-//
-//        NSLog(@"请求成功处理json");
-//    }else if(![jsonDic[@"resultCode"] isEqualToString:@"100"]&&![jsonDic[@"resultCode"] isEqualToString:@"200"]){
-//        [LoadingView showAlertHUD:@"网络错误或服务器异常" duration:1];
-//        return ;
-//    }
 }
 
 

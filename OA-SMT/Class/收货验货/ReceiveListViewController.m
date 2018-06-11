@@ -29,16 +29,19 @@
     [self.view addSubview:self.tableView];
 }
 - (void)loadData{
+    [LoadingView showProgressHUD:@""];
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:ReceiveGoodsList] isPost:YES Params:@{@"userId":[UserDef objectForKey:@"userId"]}];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
-        NSLog(@"jsonIdc:%@",jsonDic);
         if ([jsonDic[@"resultCode"] isEqualToString:@"100"]) {
             NSArray* goods = jsonDic[@"result"];
-            for (NSDictionary* dic in goods) {
-                GoodListModel* model = [GoodListModel ModelWithDic:dic];
-                [self.dataArray addObject:model];
+            [self.dataArray removeAllObjects];
+            if ([goods isKindOfClass:[NSArray class]]) {
+                for (NSDictionary* dic in goods) {
+                    GoodListModel* model = [GoodListModel ModelWithDic:dic];
+                    [self.dataArray addObject:model];
+                }
+                [self.tableView reloadData];
             }
-            [self.tableView reloadData];
         }
         else{
             [LoadingView showAlertHUD:jsonDic[@"message"] duration:1.0];
@@ -73,7 +76,5 @@
     report.goodsId = model.goodsId;
     [self pushVC:report];
 }
-
-
 
 @end

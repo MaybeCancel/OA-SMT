@@ -28,12 +28,15 @@
     [self.view addSubview:self.tableView];
 }
 - (void)loadData{
+    [LoadingView showProgressHUD:@""];
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:SignInLog] isPost:YES Params:@{@"userId":[UserDef objectForKey:@"userId"]}];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
-        NSArray* array = jsonDic[@"result"];
-        for (NSDictionary*dic in array) {
-            SignRecodeModel* model = [SignRecodeModel ModelWithDic:dic];
-            [self.dataArray addObject:model];
+        NSArray* result = jsonDic[@"result"];
+        if ([result isKindOfClass:[NSArray class]]) {
+            for (NSDictionary*dic in result) {
+                SignRecodeModel* model = [SignRecodeModel ModelWithDic:dic];
+                [self.dataArray addObject:model];
+            }
             [self.tableView reloadData];
         }
     }];
@@ -47,6 +50,7 @@
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     signCell* cell = [signCell nibCellWithTableView:tableView];
+    cell.userInteractionEnabled = NO;
     SignRecodeModel* model = self.dataArray[indexPath.row];
     [cell loadDataFromModel:model];
     return cell;

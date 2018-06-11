@@ -34,8 +34,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSArray *itemTitles = @[@"工程信息",@"待办事项",@"收货验货",@"开箱验货",@"站点签到",@"站点安装",@"站点调测",@"告警排障",@"整改闭环",@"完工照片",@"变动申请",@"关于工具"];
-    NSArray *itemImages = @[@"btn_home_01",@"btn_home_02",@"btn_home_03",@"btn_home_04",@"btn_home_05",@"btn_home_06",@"btn_home_07",@"btn_home_08",@"btn_home_09",@"btn_home_10",@"btn_home_11",@"btn_home_12"];
+    NSArray *itemTitles = @[@"工程信息",@"待办事项",@"收货验货",@"开箱验货",@"站点签到",@"站点安装",@"站点调测",@"告警排障",@"整改闭环",@"完工照片",@"关于工具"];
+    NSArray *itemImages = @[@"btn_home_01",@"btn_home_02",@"btn_home_03",@"btn_home_04",@"btn_home_05",@"btn_home_06",@"btn_home_07",@"btn_home_08",@"btn_home_09",@"btn_home_10",@"btn_home_12"];
     HomeUIView* homeView = [[HomeUIView alloc] initWithTitles:itemTitles
                                                     AndImages:itemImages];
     homeView.frame = CGRM(12, 64, self.view.width - 24, self.view.height - 60);
@@ -101,10 +101,6 @@
                 [self pushVC:VC];
                 break;
             case 20:
-                [self showUndevelopedHint];
-                NSLog(@"变动申请");
-                break;
-            case 21:
                 VC = [[AboutViewController alloc]init];
                 [self pushVC:VC];
                 break;
