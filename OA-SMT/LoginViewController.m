@@ -40,7 +40,6 @@
 
 - (IBAction)LoginClick:(UIButton *)sender {
     [LoadingView showProgressHUD:@""];
-    //测试账号：2121 密码：123456
     NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
     if (0) {
         [para setObject:@"13921923093" forKey:@"phone"];
@@ -64,7 +63,7 @@
             [UserDef setObject:dic[@"email"] forKey:@"email"];
             MainViewController* main = [[MainViewController alloc]init];
             UINavigationController* navi = [[UINavigationController alloc]initWithRootViewController:main];
-            [self presentViewController:navi animated:YES completion:nil];
+            kWindow.rootViewController = navi;
         }
         else{
             [LoadingView showAlertHUD:jsonDic[@"message"] duration:1.0];

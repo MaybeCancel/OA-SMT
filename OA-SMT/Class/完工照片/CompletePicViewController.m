@@ -103,7 +103,8 @@
                 CLPlacemark* placeMark = placemarks[0];
                 weakSelf.siteModel.longitude = newLongitude;
                 weakSelf.siteModel.latitude = newLatitude;
-                weakSelf.siteModel.myLocation = [NSString stringWithFormat:@"%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.thoroughfare];
+                //省-市-区-街道-号牌
+                weakSelf.siteModel.myLocation = [NSString stringWithFormat:@"%@%@%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.subLocality,placeMark.thoroughfare,placeMark.subThoroughfare];
                 [UserDef setObject:weakSelf.siteModel.myLocation forKey:@"myLocation"];
                 [LoadingView showAlertHUD:@"定位成功" duration:1];
                 weakSelf.isLocation = YES;
@@ -194,13 +195,11 @@
         list.shootedArray = weakSelf.shootedArray;
         [weakSelf pushVC:list];
     };
-    
-    
+}
 
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44;
-}
+#pragma mark
+#pragma mark -- UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
@@ -233,6 +232,7 @@
             cell.rightString.text = self.siteModel.latitude;
             break;
         case 6:  //我的位置
+            cell.rightString.font = [UIFont systemFontOfSize:15];
             cell.rightString.text = self.siteModel.myLocation;
             break;
         case 7: //拍摄时间
@@ -241,10 +241,24 @@
         default:
             break;
     }
-    
-    
     return cell;
 }
+
+#pragma mark
+#pragma mark -- UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 44;
+}
+
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView* view = [[UIView alloc]init];
     view.backgroundColor = RGBColor(241, 241, 241);
@@ -256,6 +270,7 @@
     [view addSubview:label];
     return view;
 }
+
 - (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView* view = [[UIView alloc]init];
     view.backgroundColor = RGBColor(241, 241, 241);
@@ -277,12 +292,7 @@
 - (void)tapdown:(UIButton*)btn{
     [self getLocationInfo];
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 44;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 44;
-}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ChoseSiteViewController* site = [[ChoseSiteViewController alloc]init];

@@ -14,6 +14,7 @@
 
 /*-----------------登录---------------*/
 #define Login @"/account/login"
+#define ChangePassword @"/account/changePassword"
 
 /*-----------------工程信息---------------*/
 #define GetProjectList @"/project/getProjectList"
