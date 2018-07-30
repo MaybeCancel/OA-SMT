@@ -14,4 +14,9 @@
     CGSize titleSize = [self boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font]} context:nil].size;
     return titleSize.height;
 }
+
+-(CGFloat)realWidthFromHeight:(CGFloat)height Font:(NSInteger)font{
+    CGSize titleSize = [self boundingRectWithSize:CGSizeMake(MAXFLOAT, height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font]} context:nil].size;
+    return titleSize.width;
+}
 @end

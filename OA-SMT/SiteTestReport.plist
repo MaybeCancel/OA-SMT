@@ -18,7 +18,7 @@
 		<string>2、加电</string>
 		<key>list</key>
 		<array>
-			<string>检查电源线连接准确无误，推上合适的熔丝，在机柜系统电压测试点测得电压正常后，再依次给电扇及板件加电</string>
+			<string>2.1 检查电源线连接准确无误，推上合适的熔丝，在机柜系统电压测试点测得电压正常后，再依次给电扇及板件加电</string>
 		</array>
 	</dict>
 	<dict>
@@ -26,8 +26,9 @@
 		<string>3、本调</string>
 		<key>list</key>
 		<array>
-			<string>3.1 基站软件版本满足本次工程需要</string>
-			<string>3.2 有最新的基站信息，包括：站名，站号，O&amp;M的IP地址，基站经纬度，硬件类型</string>
+			<string>3.1 基站软件版本跟RAN TL提供软件一致
+</string>
+			<string>3.2 OMT的版本必须与基站所使用软件要求的OMT版本相一致，并注意根据设备型号配置相应的IDB（如V1,V2等）</string>
 		</array>
 	</dict>
 	<dict>
@@ -36,7 +37,7 @@
 		<key>list</key>
 		<array>
 			<string>4.1 基站硬件正常，没有告警</string>
-			<string>4.2 所有小区信道全部正常</string>
+			<string>4.2 使用锁频手机进行拨打测试，保证每个小区都能占用</string>
 		</array>
 	</dict>
 	<dict>
@@ -44,9 +45,8 @@
 		<string>5、与RNC工程师确认基站状态</string>
 		<key>list</key>
 		<array>
-			<string>5.1 RNC能正常登录基站</string>
-			<string>5.2 RNC侧检查基站小区正常并且没有异常告警</string>
-			<string>5.3 RNC工程师通知可以离开基站</string>
+			<string>5.1 BSC侧确认基站状态正常并且没有告警</string>
+			<string>5.2 BSC侧确认基站有用户占用并且得到BSC确认可以离开现场</string>
 		</array>
 	</dict>
 	<dict>
@@ -54,7 +54,7 @@
 		<string>6、离开前通知客户机房</string>
 		<key>list</key>
 		<array>
-			<string>打扫基站卫生，关灯，通知客户机房离开该站</string>
+			<string>6.1 打扫基站卫生，关灯，通知客户机房离开该站</string>
 		</array>
 	</dict>
 	<dict>
@@ -62,7 +62,7 @@
 		<string>7、记录基站信息并保存</string>
 		<key>list</key>
 		<array>
-			<string>将基站信息汇总在基站报告中，每天交给基站负责人汇总</string>
+			<string>7.1 将基站信息汇总在基站报告中，每天交给基站负责人汇总</string>
 		</array>
 	</dict>
 </array>

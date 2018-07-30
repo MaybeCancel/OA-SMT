@@ -39,6 +39,9 @@
 //NSUserDefaults
 #define UserDef [NSUserDefaults standardUserDefaults]
 
+//NSTimer
+#define IntervalTime 30
+
 //版本号
 #define AppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 

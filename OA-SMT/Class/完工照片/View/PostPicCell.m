@@ -70,6 +70,15 @@
     _lineView.sd_layout.leftSpaceToView(self.contentView, 15).widthIs(SCREEN_WIDTH - 15).heightIs(1).bottomSpaceToView(self.contentView, 0);
 }
 
+-(void)setHasUpload:(BOOL *)hasUpload{
+    _hasUpload = hasUpload;
+    self.nameLabel.numberOfLines = 2;
+    self.nameLabel.sd_layout.leftSpaceToView(self.picMiniImage, 10).topSpaceToView(self.contentView, 12).heightIs(36).widthIs(self.width-100);
+    self.picSize.hidden = YES;
+    self.networkSpeed.hidden = YES;
+    self.circleProgress.hidden = YES;
+}
+
 - (void)setIsPost:(BOOL)isPost{
     _isPost = isPost;
      self.circleProgress.statueBtn.selected = _isPost;
@@ -118,12 +127,12 @@
     NSString* urlstring = [CCString getHeaderUrl:UploadPhoto];
     [manager POST:urlstring parameters:requestDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         //上传操作
-        NSData* data = UIImageJPEGRepresentation(image, 1.0);
+        NSData *zipData = [image compressMaxDataSizeKBytes:300];
         //图片现在名字为image  命名规则 站号_站名_设备及照片部位  exp:A001_江宁大学城基站_基站全景[机房和塔建]
         NSString *fileName = [NSString stringWithFormat:@"%@_%@_%@.jpg",image.siteNumber,image.siteName,image.devicePicPart];
 //        NSString *name = [fileName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 //        NSString *nameStr = [fileName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]];
-        [formData appendPartWithFileData:data name:@"1213" fileName:fileName mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:zipData name:@"1213" fileName:fileName mimeType:@"image/jpeg"];
             
         } progress:^(NSProgress * _Nonnull uploadProgress) {
             //进度条数值更新  如果不成功则需要使用 KVO
@@ -143,7 +152,7 @@
             if([dictttt[@"message"] isEqualToString:@"OK"]){
                 NSLog(@"~~~~~~~~~~上传成功");
                 if (self.postFinishHandle) {
-                    self.postFinishHandle();
+                    self.postFinishHandle(image);
                 }
             }
            

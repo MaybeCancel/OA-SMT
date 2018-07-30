@@ -43,8 +43,14 @@
 		1D9183C720C261BA002D7EBD /* QualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9183C620C261BA002D7EBD /* QualityModel.m */; };
 		1D9183CA20C26944002D7EBD /* QualityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9183C920C26944002D7EBD /* QualityDetailViewController.m */; };
 		1D9183CD20C4D45F002D7EBD /* QualityReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9183CC20C4D45F002D7EBD /* QualityReportModel.m */; };
+		1DC8735620D0FCCA004F842C /* ReViewPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC8735420D0FCCA004F842C /* ReViewPhotoView.m */; };
+		1DC8735920D118DA004F842C /* HasUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC8735820D118DA004F842C /* HasUploadViewController.m */; };
+		1DC8735D20DC8F6D004F842C /* StateListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC8735B20DC8F6D004F842C /* StateListCell.m */; };
+		1DC8735E20DC8F6D004F842C /* StateListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DC8735C20DC8F6D004F842C /* StateListCell.xib */; };
 		1DCA086220B7B525001C64DB /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA086020B7B524001C64DB /* AboutViewController.m */; };
 		1DCA086320B7B525001C64DB /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DCA086120B7B524001C64DB /* AboutViewController.xib */; };
+		1DF6B4FD20E5DF2D004D6D66 /* UIImage+ZipSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6B4FC20E5DF2D004D6D66 /* UIImage+ZipSize.m */; };
+		1DF6B54120EC642D004D6D66 /* YFRollingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6B54020EC642D004D6D66 /* YFRollingLabel.m */; };
 		1DF6C8A120A99CA300A326D0 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6C89F20A99CA300A326D0 /* BaseModel.m */; };
 		5B1C68072008426700A64079 /* SiteInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C68062008426700A64079 /* SiteInfoModel.m */; };
 		5B1C680C2008457800A64079 /* CCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C680A2008457800A64079 /* CCLocationManager.m */; };
@@ -241,9 +247,20 @@
 		1D9183C920C26944002D7EBD /* QualityDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QualityDetailViewController.m; sourceTree = "<group>"; };
 		1D9183CB20C4D45F002D7EBD /* QualityReportModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QualityReportModel.h; sourceTree = "<group>"; };
 		1D9183CC20C4D45F002D7EBD /* QualityReportModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QualityReportModel.m; sourceTree = "<group>"; };
+		1DC8735420D0FCCA004F842C /* ReViewPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReViewPhotoView.m; sourceTree = "<group>"; };
+		1DC8735520D0FCCA004F842C /* ReViewPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReViewPhotoView.h; sourceTree = "<group>"; };
+		1DC8735720D118DA004F842C /* HasUploadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HasUploadViewController.h; sourceTree = "<group>"; };
+		1DC8735820D118DA004F842C /* HasUploadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HasUploadViewController.m; sourceTree = "<group>"; };
+		1DC8735A20DC8F6D004F842C /* StateListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StateListCell.h; sourceTree = "<group>"; };
+		1DC8735B20DC8F6D004F842C /* StateListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StateListCell.m; sourceTree = "<group>"; };
+		1DC8735C20DC8F6D004F842C /* StateListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StateListCell.xib; sourceTree = "<group>"; };
 		1DCA085F20B7B524001C64DB /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		1DCA086020B7B524001C64DB /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		1DCA086120B7B524001C64DB /* AboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		1DF6B4FB20E5DF2C004D6D66 /* UIImage+ZipSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ZipSize.h"; sourceTree = "<group>"; };
+		1DF6B4FC20E5DF2D004D6D66 /* UIImage+ZipSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ZipSize.m"; sourceTree = "<group>"; };
+		1DF6B53F20EC642D004D6D66 /* YFRollingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFRollingLabel.h; sourceTree = "<group>"; };
+		1DF6B54020EC642D004D6D66 /* YFRollingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFRollingLabel.m; sourceTree = "<group>"; };
 		1DF6C81B20A18E4100A326D0 /* UtilDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilDefine.h; sourceTree = "<group>"; };
 		1DF6C81C20A1AC0D00A326D0 /* UrlDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UrlDefine.h; sourceTree = "<group>"; };
 		1DF6C89F20A99CA300A326D0 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
@@ -568,6 +585,47 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		1DC8735220D0FC68004F842C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5B8F0321200DCFFF003D79FD /* PostInfoModel.h */,
+				5B8F0322200DCFFF003D79FD /* PostInfoModel.m */,
+				5B67B5D220185D8B00A8CF6E /* DeviceModel.h */,
+				5B67B5D320185D8B00A8CF6E /* DeviceModel.m */,
+				5B1C68052008426700A64079 /* SiteInfoModel.h */,
+				5B1C68062008426700A64079 /* SiteInfoModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1DC8735320D0FC86004F842C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1DC8735520D0FCCA004F842C /* ReViewPhotoView.h */,
+				1DC8735420D0FCCA004F842C /* ReViewPhotoView.m */,
+				5BCECAE02007433000169748 /* BottombtnView.h */,
+				5BCECAE12007433000169748 /* BottombtnView.m */,
+				5BCECAE32007438200169748 /* BottombtnView.xib */,
+				5B1C68152008881400A64079 /* PicTips.h */,
+				5B1C68162008881400A64079 /* PicTips.m */,
+				5B1C68182008882400A64079 /* PicTips.xib */,
+				5B1C6822200C7EBD00A64079 /* AddItemBtnView.h */,
+				5B1C6823200C7EBD00A64079 /* AddItemBtnView.m */,
+				5B1C6825200C7EC700A64079 /* AddItemBtnView.xib */,
+				5B1C6827200C837E00A64079 /* ShootDawnCell.h */,
+				5B1C6828200C837E00A64079 /* ShootDawnCell.m */,
+				5B1C6829200C837E00A64079 /* ShootDawnCell.xib */,
+				5B8F031B200D943B003D79FD /* PostPicCell.h */,
+				5B8F031C200D943B003D79FD /* PostPicCell.m */,
+				5BCECACF200703C300169748 /* ListsView.h */,
+				5BCECAD0200703C300169748 /* ListsView.m */,
+				5B67B5D52018655800A8CF6E /* DeviceHighCell.h */,
+				5B67B5D62018655800A8CF6E /* DeviceHighCell.m */,
+				5B67B5D72018655800A8CF6E /* DeviceHighCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1DCA086420B7E73F001C64DB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -835,6 +893,9 @@
 				5B67B5CD201827FE00A8CF6E /* signModel.m */,
 				5B67B5CF2018534300A8CF6E /* SignRecodeModel.h */,
 				5B67B5D02018534300A8CF6E /* SignRecodeModel.m */,
+				1DC8735A20DC8F6D004F842C /* StateListCell.h */,
+				1DC8735B20DC8F6D004F842C /* StateListCell.m */,
+				1DC8735C20DC8F6D004F842C /* StateListCell.xib */,
 			);
 			path = "站点签到";
 			sourceTree = "<group>";
@@ -896,6 +957,8 @@
 		5B94AFE51FF374EC00E5B026 /* 完工照片 */ = {
 			isa = PBXGroup;
 			children = (
+				1DC8735320D0FC86004F842C /* View */,
+				1DC8735220D0FC68004F842C /* Model */,
 				5B20251E1FF4C5FE0053D97D /* CompletePicViewController.h */,
 				5B20251F1FF4C5FE0053D97D /* CompletePicViewController.m */,
 				5BCECAE920074E2500169748 /* ChoseSiteViewController.h */,
@@ -906,28 +969,8 @@
 				5B1C6820200C79B200A64079 /* ShootDawnViewController.m */,
 				5B8F031E200D9AE4003D79FD /* PostListViewController.h */,
 				5B8F031F200D9AE4003D79FD /* PostListViewController.m */,
-				5B1C68152008881400A64079 /* PicTips.h */,
-				5B1C68162008881400A64079 /* PicTips.m */,
-				5B1C68182008882400A64079 /* PicTips.xib */,
-				5B1C6822200C7EBD00A64079 /* AddItemBtnView.h */,
-				5B1C6823200C7EBD00A64079 /* AddItemBtnView.m */,
-				5B1C6825200C7EC700A64079 /* AddItemBtnView.xib */,
-				5B1C6827200C837E00A64079 /* ShootDawnCell.h */,
-				5B1C6828200C837E00A64079 /* ShootDawnCell.m */,
-				5B1C6829200C837E00A64079 /* ShootDawnCell.xib */,
-				5B8F031B200D943B003D79FD /* PostPicCell.h */,
-				5B8F031C200D943B003D79FD /* PostPicCell.m */,
-				5B8F0321200DCFFF003D79FD /* PostInfoModel.h */,
-				5B8F0322200DCFFF003D79FD /* PostInfoModel.m */,
-				5BCECACF200703C300169748 /* ListsView.h */,
-				5BCECAD0200703C300169748 /* ListsView.m */,
-				5B67B5D52018655800A8CF6E /* DeviceHighCell.h */,
-				5B67B5D62018655800A8CF6E /* DeviceHighCell.m */,
-				5B67B5D72018655800A8CF6E /* DeviceHighCell.xib */,
-				5B67B5D220185D8B00A8CF6E /* DeviceModel.h */,
-				5B67B5D320185D8B00A8CF6E /* DeviceModel.m */,
-				5B1C68052008426700A64079 /* SiteInfoModel.h */,
-				5B1C68062008426700A64079 /* SiteInfoModel.m */,
+				1DC8735720D118DA004F842C /* HasUploadViewController.h */,
+				1DC8735820D118DA004F842C /* HasUploadViewController.m */,
 			);
 			path = "完工照片";
 			sourceTree = "<group>";
@@ -993,6 +1036,8 @@
 				5B94B0071FF3831300E5B026 /* MainViewController.m */,
 				5BCA5EB01FF221DC0057D517 /* HomeUIView.h */,
 				5BCA5EB11FF221DC0057D517 /* HomeUIView.m */,
+				1DF6B53F20EC642D004D6D66 /* YFRollingLabel.h */,
+				1DF6B54020EC642D004D6D66 /* YFRollingLabel.m */,
 				5BCA5EAD1FF1FF540057D517 /* HomeBtnView.h */,
 				5BCA5EAE1FF1FF540057D517 /* HomeBtnView.m */,
 			);
@@ -1013,9 +1058,6 @@
 				5B820C9A2045280400565147 /* BaseCellPe.h */,
 				5B820C9B2045280400565147 /* BaseCellPe.m */,
 				5B820C9C2045280400565147 /* BaseCellPe.xib */,
-				5BCECAE02007433000169748 /* BottombtnView.h */,
-				5BCECAE12007433000169748 /* BottombtnView.m */,
-				5BCECAE32007438200169748 /* BottombtnView.xib */,
 				5B820C932045029300565147 /* BaseListView.h */,
 				5B820C942045029300565147 /* BaseListView.m */,
 				5B820C98204502B100565147 /* BaseListView.xib */,
@@ -1038,6 +1080,8 @@
 		5BCA5EB41FF225760057D517 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				1DF6B4FB20E5DF2C004D6D66 /* UIImage+ZipSize.h */,
+				1DF6B4FC20E5DF2D004D6D66 /* UIImage+ZipSize.m */,
 				1D46366A20CA864800F81682 /* NSString+MD5Addition.h */,
 				1D46366B20CA864800F81682 /* NSString+MD5Addition.m */,
 				5BCECAD92007394100169748 /* UIFont+IPhoneFont.h */,
@@ -1219,6 +1263,7 @@
 				5BCECADF20073A3500169748 /* BaseCell.xib in Resources */,
 				5BC8F49F200356BB00C58C2E /* GoodsCell.xib in Resources */,
 				5B3A08FF1FF1F34A00C1D3D1 /* Assets.xcassets in Resources */,
+				1DC8735E20DC8F6D004F842C /* StateListCell.xib in Resources */,
 				5B8F031A200D93F5003D79FD /* demo.gif in Resources */,
 				1D9183C220C25F8F002D7EBD /* QualityCell.xib in Resources */,
 				5B832059205B575500147C6F /* TextViewCell.xib in Resources */,
@@ -1342,6 +1387,7 @@
 				5B1C68072008426700A64079 /* SiteInfoModel.m in Sources */,
 				5B8F0319200D93F5003D79FD /* ZXYBallProgress.m in Sources */,
 				5B8F0320200D9AE4003D79FD /* PostListViewController.m in Sources */,
+				1DC8735D20DC8F6D004F842C /* StateListCell.m in Sources */,
 				1D91836B20BFEFB6002D7EBD /* ProblemTypeCell.m in Sources */,
 				5BCECAE820074AF300169748 /* LLActionSheetView.m in Sources */,
 				5BC8F44F2003471400C58C2E /* BaseTableView.m in Sources */,
@@ -1377,10 +1423,12 @@
 				5B42F04F205A0115001D07B3 /* SiteInstallViewController.m in Sources */,
 				5B94B0011FF37AAA00E5B026 /* MBProgressHUD.m in Sources */,
 				1D9183CA20C26944002D7EBD /* QualityDetailViewController.m in Sources */,
+				1DC8735920D118DA004F842C /* HasUploadViewController.m in Sources */,
 				5B67B5D82018655800A8CF6E /* DeviceHighCell.m in Sources */,
 				5BC8F4542003497600C58C2E /* BaseTableViewCell.m in Sources */,
 				5B1C681E200C4FFC00A64079 /* UIImage+Tools.m in Sources */,
 				1D9183C720C261BA002D7EBD /* QualityModel.m in Sources */,
+				1DF6B4FD20E5DF2D004D6D66 /* UIImage+ZipSize.m in Sources */,
 				1D6CBC3720C4EE9E002B1513 /* ProjectInfoCell.m in Sources */,
 				1D91835F20BEA5E4002D7EBD /* WarningListModel.m in Sources */,
 				5B67B5C5201822D500A8CF6E /* StateListViewController.m in Sources */,
@@ -1389,6 +1437,7 @@
 				1D91835220BD5AC9002D7EBD /* NSDate+DateFormat.m in Sources */,
 				5B1C682A200C837E00A64079 /* ShootDawnCell.m in Sources */,
 				1D03781A20AEC81D00C22F60 /* InstallReportCell.m in Sources */,
+				1DC8735620D0FCCA004F842C /* ReViewPhotoView.m in Sources */,
 				1D46366820CA7C2400F81682 /* ResetPasswordViewController.m in Sources */,
 				1D91837220C0E10B002D7EBD /* BackLogListModel.m in Sources */,
 				5BCA5EB21FF221DC0057D517 /* HomeUIView.m in Sources */,
@@ -1419,6 +1468,7 @@
 				5B1C6824200C7EBD00A64079 /* AddItemBtnView.m in Sources */,
 				1D03781F20AFBABE00C22F60 /* ProblemViewController.m in Sources */,
 				5B42F067205A4633001D07B3 /* WarningDetailViewController.m in Sources */,
+				1DF6B54120EC642D004D6D66 /* YFRollingLabel.m in Sources */,
 				5B1C681120084BF400A64079 /* TimeTools.m in Sources */,
 				5B42F052205A013C001D07B3 /* CloseLoopViewController.m in Sources */,
 				5B820C922044FD6B00565147 /* GoodReportViewController.m in Sources */,

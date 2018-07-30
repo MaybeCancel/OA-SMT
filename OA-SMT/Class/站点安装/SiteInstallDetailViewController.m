@@ -12,6 +12,10 @@
 #import "CellStateModel.h"
 
 @interface SiteInstallDetailViewController ()
+{
+    NSTimer *_timer;
+    BOOL _isSelected;
+}
 @property (nonatomic,strong)NSMutableArray *flagArray;
 @property (nonatomic,strong)NSMutableArray *reportMArr;
 @property (nonatomic,strong)NSMutableArray *problemMArr;
@@ -24,6 +28,8 @@
     [super viewDidLoad];
     self.title = @"2G&3G安装检查报告";
     
+    _timer = [NSTimer scheduledTimerWithTimeInterval:IntervalTime target:self selector:@selector(changeSelectedTimer) userInfo:nil repeats:YES];
+    _isSelected = YES;
     
     kWeakSelf(weakSelf);
     if ([self.model.status isEqual:@0]) {   //未开始
@@ -140,10 +146,10 @@
             NSString *installKey = [NSString stringWithFormat:@"isInstall%d_%d",index+1,(int)idx+1];
             NSString *noteKey = [NSString stringWithFormat:@"note%d_%d",index+1,(int)idx+1];
             [para setObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithBool:model.state]] forKey:installKey];
+            [para setObject:model.problem forKey:noteKey];
             if (!model.state) {
                 status = @"1";
             }
-            [para setObject:model.problem forKey:noteKey];
         }];
     }
     [para setObject:status forKey:@"status"];// 1：进行中 2：已完成
@@ -162,6 +168,11 @@
         }
     }];
 }
+
+-(void)changeSelectedTimer{
+    _isSelected = YES;
+}
+
 
 #pragma mark -- UITableViewDataSource
 
@@ -226,7 +237,14 @@
     if (indexPath.section < self.reportMArr.count) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         CellStateModel *model = self.reportMArr[indexPath.section][indexPath.row];
-        model.state = !model.state;
+        if (model.state) {
+            model.state = !model.state;
+        }
+        else if (_isSelected){
+            model.state = !model.state;
+            _isSelected = NO;
+            _timer.fireDate = [NSDate dateWithTimeInterval:IntervalTime sinceDate:[NSDate date]];
+        }
     }
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
 }

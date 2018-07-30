@@ -64,6 +64,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BaseCell* cell = [BaseCell nibCellWithTableView:tableView];
+    cell.leftString.font = [UIFont systemFontOfSize:15];
     cell.leftString.text =self.dataSource[indexPath.row];
     return cell;
 }

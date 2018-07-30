@@ -7,7 +7,7 @@
 //
 
 #import "StateListViewController.h"
-#import "BaseCell.h"
+#import "StateListCell.h"
 @interface StateListViewController ()
 @end
 @implementation StateListViewController
@@ -34,7 +34,7 @@
     self.tableView = [[BaseTableView alloc]initWithFrame:CGRM(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
 }
 
@@ -47,10 +47,9 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    BaseCell* cell = [BaseCell nibCellWithTableView:tableView];
+    StateListCell* cell = [StateListCell nibCellWithTableView:tableView];
     StateModel* model = self.dataArray[indexPath.row];
-    cell.leftString.text = model.stationName;
-    cell.arrowHidden = YES;
+    cell.titleLab.text = model.stationName;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

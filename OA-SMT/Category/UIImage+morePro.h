@@ -33,6 +33,7 @@
 @property (nonatomic,copy)NSString* deviceId;
 /**照片部位ID */
 @property (nonatomic,copy)NSString* positionId;
+
 - (void)loadInfoFromModel:(SiteInfoModel*)model;
 
 @end

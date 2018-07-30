@@ -12,24 +12,52 @@
 #import "CellStateModel.h"
 
 @interface SiteTestDetailViewController ()
+{
+    NSTimer *_timer;
+    BOOL _isSelected;
+}
 @property (nonatomic,strong)NSMutableArray *flagArray;
 @property (nonatomic,strong)NSMutableArray *reportMArr;
 @property (nonatomic,strong)NSMutableArray *problemMArr;
+@property (nonatomic,strong)NSDictionary *testInfoDic;
 @end
 
 @implementation SiteTestDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"GSM调测检查报告";
-    self.rightItemTitle = @"保存";
+    _timer = [NSTimer scheduledTimerWithTimeInterval:IntervalTime target:self selector:@selector(changeSelectedTimer) userInfo:nil repeats:YES];
+    _isSelected = YES;
     kWeakSelf(weakSelf);
-    self.rightItemHandle = ^{
-        [weakSelf uploadReport];
-    };
-    [self setupUI];
-    [self makeData];
+    if ([self.model.status isEqual:@0]) {   //未开始
+        self.rightItemTitle = @"保存";
+        self.rightItemHandle = ^{
+            [weakSelf uploadReport];
+        };
+        [self setupUI];
+        [self makeData];
+    }
+    else if ([self.model.status isEqual:@1]){   //进行中
+        self.rightItemTitle = @"保存";
+        self.rightItemHandle = ^{
+            [weakSelf uploadReport];
+        };
+        [self setupUI];
+        [self loadData];
+    }
+    else{   //已完成
+        [self setupUI];
+        [self loadData];
+    }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if (_timer.isValid) {
+        [_timer invalidate];
+    }
+    _timer = nil;
 }
 
 -(void)setupUI{
@@ -37,6 +65,23 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
+}
+
+-(void)loadData{
+    kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
+    NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
+    [para setObject:[UserDef objectForKey:@"userId"] forKey:@"userId"];
+    [para setObject:self.model.projectId forKey:@"projectId"];
+    [para setObject:self.model.stationId forKey:@"stationId"];
+    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetTestInfo] isPost:YES Params:para];
+    [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
+        NSLog(@"result:%@",jsonDic);
+        if ([jsonDic[@"result"] isKindOfClass:[NSDictionary class]]) {
+            weakSelf.testInfoDic = jsonDic[@"result"];
+            [weakSelf makeData];
+        }
+    }];
 }
 
 - (void)makeData{
@@ -48,17 +93,35 @@
         [_flagArray addObject:@"0"];
     }
     
+    kWeakSelf(weakSelf);
     [self.dataArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSArray *rowArr = obj[@"list"];
         NSMutableArray *mArr = [[NSMutableArray alloc]init];
         for (int i = 0; i < rowArr.count; i++) {
             CellStateModel *model = [[CellStateModel alloc]init];
-            model.state = NO;
-            model.problem = @"";
+            NSString *installKey = [NSString stringWithFormat:@"isTest%d_%d",(int)idx+1,i+1];
+            NSString *noteKey = [NSString stringWithFormat:@"note%d_%d",(int)idx+1,i+1];
+            if ([weakSelf.model.status isEqual:@0] ||
+                weakSelf.testInfoDic[installKey] == nil ||
+                [weakSelf.testInfoDic[installKey] isKindOfClass:[NSNull class]] ||
+                [weakSelf.testInfoDic[installKey] isEqual:@0]) {
+                model.state = NO;
+            }
+            else{
+                model.state = YES;
+            }
+            if (![weakSelf.model.status isEqual:@0] && weakSelf.testInfoDic[noteKey]) {
+                model.problem = weakSelf.testInfoDic[noteKey];
+            }
+            else{
+                model.problem = @"";
+            }
             [mArr addObject:model];
         }
-        [self.reportMArr addObject:mArr];
+        [weakSelf.reportMArr addObject:mArr];
     }];
+    [self makeProblemData];
+    [self.tableView reloadData];
 }
 
 -(void)makeProblemData{
@@ -81,15 +144,20 @@
     [para setObject:[UserDef objectForKey:@"userId"] forKey:@"userId"];
     [para setObject:self.model.projectId forKey:@"projectId"];
     [para setObject:self.model.stationId forKey:@"stationId"];
+    NSString __block *status = @"2";
     for (int index = 0; index < self.reportMArr.count; index++) {
         NSArray *arr = self.reportMArr[index];
         [arr enumerateObjectsUsingBlock:^(CellStateModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSString *installKey = [NSString stringWithFormat:@"isTest%d_%d",index+1,(int)idx+1];
+            NSString *testKey = [NSString stringWithFormat:@"isTest%d_%d",index+1,(int)idx+1];
             NSString *noteKey = [NSString stringWithFormat:@"note%d_%d",index+1,(int)idx+1];
-            [para setObject:[NSNumber numberWithBool:model.state] forKey:installKey];
+            [para setObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithBool:model.state]] forKey:testKey];
             [para setObject:model.problem forKey:noteKey];
+            if (!model.state) {
+                status = @"1";
+            }
         }];
     }
+    [para setObject:status forKey:@"status"];// 1：进行中 2：已完成
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:AddTestInfo] isPost:YES Params:para];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSLog(@"%@",jsonDic);
@@ -104,6 +172,10 @@
             [LoadingView showAlertHUD:@"提交失败" duration:1.0];
         }
     }];
+}
+
+-(void)changeSelectedTimer{
+    _isSelected = YES;
 }
 
 #pragma mark -- UITableViewDataSource
@@ -164,7 +236,14 @@
     if (indexPath.section < self.reportMArr.count) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         CellStateModel *model = self.reportMArr[indexPath.section][indexPath.row];
-        model.state = !model.state;
+        if (model.state) {
+            model.state = !model.state;
+        }
+        else if (_isSelected){
+            model.state = !model.state;
+            _isSelected = NO;
+            _timer.fireDate = [NSDate dateWithTimeInterval:IntervalTime sinceDate:[NSDate date]];
+        }
     }
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
 }
@@ -243,6 +322,7 @@
     }
 }
 
+
 #pragma mark -- LazyLoad
 
 -(NSMutableArray *)flagArray{
@@ -265,6 +345,14 @@
     }
     return _problemMArr;
 }
+
+-(NSDictionary *)testInfoDic{
+    if (!_testInfoDic) {
+        _testInfoDic = [NSDictionary new];
+    }
+    return _testInfoDic;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

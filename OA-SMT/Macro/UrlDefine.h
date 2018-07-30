@@ -16,6 +16,9 @@
 #define Login @"/account/login"
 #define ChangePassword @"/account/changePassword"
 
+/*-----------------推送消息---------------*/
+#define GetMessage @"/project/getMessage"
+
 /*-----------------工程信息---------------*/
 #define GetProjectList @"/project/getProjectList"
 #define GetStationInfo @"/project/getStationInfo"
@@ -38,6 +41,7 @@
 /*-----------------站点调测---------------*/
 #define TestInfoList @"/project/testInfoList"
 #define AddTestInfo @"/project/addTestInfo"
+#define GetTestInfo @"/project/getTestInfo"
 
 /*-----------------收货验货---------------*/
 #define ReceiveGoodsList @"/project/receiveGoodsList"

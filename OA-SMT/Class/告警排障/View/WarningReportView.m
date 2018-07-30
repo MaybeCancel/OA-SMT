@@ -120,7 +120,7 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    }else{
+     }else{
         BaseCell* cell = [BaseCell nibCellWithTableView:tableView];
         cell.leftString.text = self.leftTitles[indexPath.row];
         if (indexPath.row == 0) {
@@ -133,6 +133,8 @@
         }
         else if (indexPath.row == 1){
             cell.rightString.text = self.secondText;
+            cell.rightString.font = [UIFont systemFontOfSize:13];
+            cell.leftString.font = [UIFont systemFontOfSize:13];
         }
         cell.arrowHidden = YES;
         return cell;

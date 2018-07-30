@@ -100,7 +100,7 @@
         [geoCoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
             if(placemarks.count>0){
                 CLPlacemark* placeMark = placemarks[0];
-                weakSelf.model.currentLocation = [NSString stringWithFormat:@"%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.thoroughfare];
+                weakSelf.model.currentLocation = [NSString stringWithFormat:@"%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.name];
             }
             [weakSelf.tableView reloadData];
         }];
@@ -158,6 +158,9 @@
             cell.arrowHidden = YES;
             cell.rightString.text = self.model.stationNumber;
         }else if (indexPath.row == 1){
+            if (self.model.stationName.length > 12) {
+                cell.rightString.font = [UIFont systemFontOfSize:15];
+            }
             cell.rightString.text = self.model.stationName;
         }else if (indexPath.row == 2){
             cell.rightString.text = self.model.stationTypeStr;
@@ -171,6 +174,9 @@
         }else if (indexPath.row == 1){
             cell.rightString.text = self.model.latitude;
         }else if (indexPath.row == 2){
+            if (self.model.currentLocation.length > 12) {
+                cell.rightString.font = [UIFont systemFontOfSize:15];
+            }
             cell.rightString.text = self.model.currentLocation;
         }else if (indexPath.row == 3){
             cell.rightString.text = self.model.currentTime;

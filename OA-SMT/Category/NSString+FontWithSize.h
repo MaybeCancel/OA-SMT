@@ -10,4 +10,5 @@
 
 @interface NSString (FontWithSize)
 - (CGFloat)realHeightFromWidth:(CGFloat)width Font:(NSInteger)font;
+- (CGFloat)realWidthFromHeight:(CGFloat)height Font:(NSInteger)font;
 @end

@@ -14,10 +14,10 @@
     [super awakeFromNib];
     
 }
+
 - (void)setArrowHidden:(BOOL)arrowHidden{
     _arrowHidden = arrowHidden;
     self.arrowImage.hidden = _arrowHidden;
 }
-
 
 @end

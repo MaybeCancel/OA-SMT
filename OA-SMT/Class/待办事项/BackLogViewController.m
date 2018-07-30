@@ -10,8 +10,11 @@
 #import "BackLogListModel.h"
 #import "WarningCell.h"
 #import "GoodsCell.h"
+#import "SiteInstallCell.h"
 #import "GoodReportViewController.h"
 #import "WarningDetailViewController.h"
+#import "SiteTestDetailViewController.h"
+#import "SiteInstallDetailViewController.h"
 
 @interface BackLogViewController ()
 
@@ -67,9 +70,19 @@
         [cell setModelData:model.logisticsInfo isReceive:NO];
         return cell;
     }
-    else{
+    else if (model.type == 3){
         WarningCell *cell = [WarningCell nibCellWithTableView:tableView];
         cell.model = model.alarmList;
+        return cell;
+    }
+    else if (model.type == 4){
+        SiteInstallCell *cell = [SiteInstallCell nibCellWithTableView:tableView];
+        cell.model = model.installInfo;
+        return cell;
+    }
+    else{
+        SiteInstallCell *cell = [SiteInstallCell nibCellWithTableView:tableView];
+        cell.model = model.installInfo;
         return cell;
     }
 }
@@ -108,13 +121,29 @@
         report.goodsId = model.logisticsInfo.goodsId;
         [self pushVC:report];
     }
-    else{
+    else if (model.type == 3){
         WarningDetailViewController* detail = [[WarningDetailViewController alloc]init];
         detail.refreshBlock = ^{
             [weakSelf loadData];
         };
         detail.alarmId = model.alarmList.alarmId;
         [self pushVC:detail];
+    }
+    else if (model.type == 4){
+        SiteInstallDetailViewController *detailVC = [[SiteInstallDetailViewController alloc]init];
+        detailVC.model = model.installInfo;
+        detailVC.refreshBlock = ^{
+            [weakSelf loadData];
+        };
+        [self pushVC:detailVC];
+    }
+    else if (model.type == 5){
+        SiteTestDetailViewController* detailVC = [[SiteTestDetailViewController alloc]init];
+        detailVC.model = model.installInfo;
+        detailVC.refreshBlock = ^{
+            [weakSelf loadData];
+        };
+        [self pushVC:detailVC];
     }
 }
 

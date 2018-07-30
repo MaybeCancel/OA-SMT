@@ -10,4 +10,5 @@
 
 @interface PostListViewController : BaseTableViewController
 @property (nonatomic,strong)NSMutableArray* shootedArray;
+@property (nonatomic,strong)NSMutableArray* hasUploadMArr;
 @end

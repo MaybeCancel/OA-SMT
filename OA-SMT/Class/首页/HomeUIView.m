@@ -8,11 +8,13 @@
 
 #import "HomeUIView.h"
 #import "HomeBtnView.h"
+#import "YFRollingLabel.h"
+
 @implementation HomeUIView{
     NSArray* _titles;
     NSArray*_images;
     UIImageView* _anounceImage;
-    UILabel* _contentLabel;
+    YFRollingLabel* _contentLabel;
 }
 
 - (instancetype)initWithTitles:(NSArray<NSString *> *)titles AndImages:(NSArray<NSString *> *)images{
@@ -31,12 +33,6 @@
     _anounceImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"公告"]];
     _anounceImage.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:_anounceImage];
-    
-    _contentLabel = [[UILabel alloc]init];
-    _contentLabel.textAlignment = NSTextAlignmentLeft;
-    _contentLabel.font = [UIFont systemFontOfSize:14];
-    _contentLabel.textColor = RGBColor(88, 88, 88);
-    [self addSubview:_contentLabel];
     
     
     if (_titles.count != _images.count||_titles.count < 1||_images.count < 1) {
@@ -58,14 +54,27 @@
         self.pageViewHandle(homeView.tag);
     }
 }
-- (void)setAcounceTitle:(NSString *)acounceTitle{
-    _acounceTitle = acounceTitle;
-    _contentLabel.text = _acounceTitle;
+
+-(void)setAcounceTitleArr:(NSArray *)acounceTitleArr{
+    _acounceTitleArr = acounceTitleArr;
+    
+    if (_contentLabel) {
+        [_contentLabel removeFromSuperview];
+        _contentLabel = nil;
+    }
+    _contentLabel = [[YFRollingLabel alloc]initWithFrame:CGRectMake(0, 0, 0, 0)
+                                               textArray:acounceTitleArr
+                                                    font:[UIFont systemFontOfSize:14]
+                                               textColor:RGBColor(88, 88, 88)];
+    _contentLabel.internalWidth = 60;
+    _contentLabel.speed = 0.5f;
+    [self addSubview:_contentLabel];
 }
+
 - (void)layoutSubviews{
     [super layoutSubviews];
     _anounceImage.frame = CGRM(12, 12, 27, 16);
-    _contentLabel.frame = CGRM(CGRectGetMaxX(_anounceImage.frame)+10, 12, 200, 16);
+    _contentLabel.frame = CGRM(CGRectGetMaxX(_anounceImage.frame)+10, 12, 300, 16);
     
     CGFloat btnWidth = (self.width - 2) / 3;
     CGFloat btnHeight = (self.height - 4-40) / 4;

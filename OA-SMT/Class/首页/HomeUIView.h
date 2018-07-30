@@ -13,7 +13,7 @@
 /* 公告点击回调**/
 @property (nonatomic,copy)void (^acounceHanle)(void);
 /* 公告内容**/
-@property (nonatomic,copy)NSString* acounceTitle;
+@property (nonatomic,strong)NSArray* acounceTitleArr;
 /* 一行多少个模块**/
 @property (nonatomic,assign)int rowNumber;
 

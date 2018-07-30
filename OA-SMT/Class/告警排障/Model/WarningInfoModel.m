@@ -31,6 +31,13 @@
     return _alarmDate;
 }
 
+-(NSString *)alarmNote{
+    if (!_alarmNote) {
+        _alarmNote = @"";
+    }
+    return @"";
+}
+
 -(int)alarmLevel{
     if (!_alarmLevel) {
         _alarmLevel = 0;

@@ -23,6 +23,8 @@
 @property (nonatomic,strong)ZXYCircleProgress* circleProgress;
 /** 上传的图片*/
 @property (nonatomic,strong)UIImage* uploadImage;
+/** 是否已上传*/
+@property (nonatomic,assign)BOOL hasUpload;
 
 
 @property (nonatomic,assign)BOOL isPost;
@@ -33,5 +35,5 @@
 
 - (void)postImage;
 
-@property (nonatomic,copy)void (^postFinishHandle)(void);
+@property (nonatomic,copy)void (^postFinishHandle)(UIImage *image);
 @end

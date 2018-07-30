@@ -21,6 +21,9 @@
 
 -(void)setRowDatas:(NSArray *)rowDatas{
     _rowDatas = rowDatas;
+    for (UIView *subview in self.contentView.subviews) {
+        [subview removeFromSuperview];
+    }
     for (int i = 0; i < rowDatas.count; i++) {
         UILabel *label = [[UILabel alloc]initWithFrame:CGRM(i*itemWidth, 0, itemWidth, itemHeight)];
         label.text = rowDatas[i];

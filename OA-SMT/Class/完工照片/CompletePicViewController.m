@@ -18,19 +18,25 @@
 #import "ShootPicViewController.h"
 #import "ShootDawnViewController.h"
 #import "PostListViewController.h"
+#import "HasUploadViewController.h"
 #import "DeviceModel.h"
+
 @interface CompletePicViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) NSMutableArray* dataArray;
 @property (nonatomic, strong) NSMutableArray* rightArray;
 @property (nonatomic, strong) SiteInfoModel* siteModel;
 @property (nonatomic, strong) ListsView* lists;
+@property (nonatomic, strong) BaseCellView * cellView;
+@property (nonatomic, strong) BottombtnView* bottomView;
 @property (nonatomic, assign) BOOL isLocation;
 
 /** 设备部位照片数组*/
 @property (nonatomic,strong)NSMutableArray* deviceArray;
-/** 拍摄成功照片数组*/
-@property (nonatomic,strong)NSMutableArray* shootedArray;
+/** 拍摄成功待上传照片数组*/
+@property (nonatomic,strong)NSMutableArray* uploadMArr;
+/** 已上传照片数组*/
+@property (nonatomic,strong)NSMutableArray* hasUploadMArr;
 @end
 
 @implementation CompletePicViewController
@@ -40,15 +46,13 @@
     /*站点Model初始化*/
     self.siteModel = [[SiteInfoModel alloc]init];
     self.siteModel.objectType = @"新建";
-    /*拍摄成功数组初始化*/
-    self.shootedArray = [NSMutableArray new];
     self.title = @"完工照片";
     [self setUpUI];
     [self adminData];
     [self loadData];
     [self loadDevicePic];
   
-    kWeakSelf(weakSelf);
+//    kWeakSelf(weakSelf);
 //    self.rightItemTitle = @"拍摄情况";
 //    self.rightItemHandle = ^{
 //        ShootDawnViewController* dawn = [[ShootDawnViewController alloc]init];
@@ -56,6 +60,12 @@
 //        [weakSelf pushVC:dawn];
 //    };
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.bottomView setUploadNum:(int)self.uploadMArr.count hasUploadNum:(int)self.hasUploadMArr.count];
+}
+
 /** 设备以及照片部位*/
 - (void)loadDevicePic{
     self.deviceArray = [NSMutableArray new];
@@ -104,7 +114,7 @@
                 weakSelf.siteModel.longitude = newLongitude;
                 weakSelf.siteModel.latitude = newLatitude;
                 //省-市-区-街道-号牌
-                weakSelf.siteModel.myLocation = [NSString stringWithFormat:@"%@%@%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.subLocality,placeMark.thoroughfare,placeMark.subThoroughfare];
+                weakSelf.siteModel.myLocation = [NSString stringWithFormat:@"%@%@%@",placeMark.administrativeArea,placeMark.locality,placeMark.name];
                 [UserDef setObject:weakSelf.siteModel.myLocation forKey:@"myLocation"];
                 [LoadingView showAlertHUD:@"定位成功" duration:1];
                 weakSelf.isLocation = YES;
@@ -120,81 +130,21 @@
 }
 
 - (void)setUpUI{
-    kWeakSelf(weakSelf);
-    self.lists = [[ListsView alloc]initWithTitle:@"设备及照片部位" imageName:@"btn_listD"];
-    self.lists.frame = CGRM(0, 64, SCREEN_WIDTH, 44);
+    
     [self.view addSubview:self.lists];
-    self.lists.picPositionAction = ^(NSString* devicePart,NSString *detaiPart,NSString* deviceId,NSString* position) {
-        weakSelf.siteModel.PicPosition = devicePart;
-        weakSelf.siteModel.detaiPart = detaiPart;
-        weakSelf.siteModel.deviceId = deviceId;
-        weakSelf.siteModel.positionId = position;;
-        weakSelf.lists.rightString = [NSString stringWithFormat:@"%@[%@]",devicePart,detaiPart];
-        [weakSelf.tableView reloadData];
-    };
     
     // 站号_站名_照片部位[具体角度]
-    BaseCellView * cellView = [[BaseCellView alloc]init];
-    cellView.frame = CGRM(0, CGRectGetMaxY(self.lists.frame)+15, self.view.width, 44);
-    cellView.leftString = @"工程类型";
-    cellView.rightString = self.siteModel.objectType;
-    [self.view addSubview:cellView];
+    [self.view addSubview:self.cellView];
     
-    cellView.TapHandle = ^{
-        LLActionSheetView* sheet = [[LLActionSheetView alloc]initWithTitleArray:@[@"新建",@"扩容"] andShowCancel:YES];
-        [sheet show];
-        sheet.ClickIndex = ^(NSInteger index) {
-            if (index == 2) {//扩容
-                weakSelf.siteModel.objectType = @"扩容";
-            }else if (index ==1){//新建
-                weakSelf.siteModel.objectType = @"新建";
-            }
-            [weakSelf.tableView reloadData];
-        };
-    };
+    [self.view addSubview:self.bottomView];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(cellView.frame), self.view.width, 10*44) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.cellView.frame), self.view.width, 10*40) style:UITableViewStylePlain];
     self.tableView.separatorStyle =UITableViewCellSelectionStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.bounces = NO;
     [self.view addSubview:self.tableView];
     self.dataArray = [[NSMutableArray alloc]initWithObjects:@"项目名称",@"站号",@"站名",@"督导",@"经度",@"纬度",@"我的位置",@"拍摄时间", nil];
-    
-    BottombtnView* bottomView = [BottombtnView shareBottomBtnView];
-    bottomView.frame = CGRM(0, self.view.height - 50, self.view.width, 50);
-    [self.view addSubview:bottomView];
-    bottomView.leftBottombtnHandle = ^{
-        /**
-         1.定位必须成功
-         2.照片部位
-         3.工程类型
-         4.项目名称
-         5.站号,站点信息
-         6.当前时间
-         */
-        if (!weakSelf.isLocation||!weakSelf.siteModel.PicPosition||!weakSelf.siteModel.objectType||!weakSelf.siteModel.siteName||!weakSelf.siteModel.siteNumber||!weakSelf.siteModel.objectName) {
-            [LoadingView showAlertHUD:@"请完善信息!!" duration:1];
-            return ;
-        }
-        ShootPicViewController* shoot = [[ShootPicViewController alloc]init];
-        shoot.siteModel = weakSelf.siteModel;
-        [weakSelf presentToVC:shoot];
-        shoot.shootPicHandle = ^(UIImage *image) {
-            NSLog(@"照片部位:~~~~%@",image.devicePicPart);
-            [weakSelf.shootedArray addObject:image];
-        };
-    };
-    bottomView.rightBottombtnHandle = ^{
-        if (weakSelf.shootedArray.count == 0) {
-            [LoadingView showAlertHUD:@"请您先拍照" duration:1];
-            return ;
-        }
-        PostListViewController* list = [[PostListViewController alloc]init];
-        weakSelf.Hidden_BackTile = YES;
-        list.shootedArray = weakSelf.shootedArray;
-        [weakSelf pushVC:list];
-    };
 }
 
 #pragma mark
@@ -248,15 +198,15 @@
 #pragma mark -- UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44;
+    return 40;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 44;
+    return 40;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 44;
+    return 40;
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -314,5 +264,117 @@
         [self pushVC:site];
     }
 }
+
+#pragma mark
+#pragma mark -- LazyLoad
+
+-(ListsView *)lists{
+    if (!_lists) {
+        _lists = [[ListsView alloc]initWithTitle:@"设备及照片部位" imageName:@"btn_listD"];
+        _lists.frame = CGRM(0, 64, SCREEN_WIDTH, 44);
+        kWeakSelf(weakSelf);
+        _lists.picPositionAction = ^(NSString* devicePart,NSString *detaiPart,NSString* deviceId,NSString* position) {
+            weakSelf.siteModel.PicPosition = devicePart;
+            weakSelf.siteModel.detaiPart = detaiPart;
+            weakSelf.siteModel.deviceId = deviceId;
+            weakSelf.siteModel.positionId = position;;
+            weakSelf.lists.rightString = [NSString stringWithFormat:@"%@[%@]",devicePart,detaiPart];
+            [weakSelf.tableView reloadData];
+        };
+    }
+    return _lists;
+}
+
+-(BaseCellView *)cellView{
+    if (!_cellView) {
+        _cellView = [[BaseCellView alloc]init];
+        _cellView.frame = CGRM(0, CGRectGetMaxY(self.lists.frame)+15, self.view.width, 44);
+        _cellView.leftString = @"工程类型";
+        _cellView.rightString = self.siteModel.objectType;
+        kWeakSelf(weakSelf);
+        _cellView.TapHandle = ^{
+            LLActionSheetView* sheet = [[LLActionSheetView alloc]initWithTitleArray:@[@"新建",@"扩容"] andShowCancel:YES];
+            [sheet show];
+            sheet.ClickIndex = ^(NSInteger index) {
+                if (index == 2) {//扩容
+                    weakSelf.siteModel.objectType = @"扩容";
+                }else if (index ==1){//新建
+                    weakSelf.siteModel.objectType = @"新建";
+                }
+                [weakSelf.tableView reloadData];
+            };
+        };
+    }
+    return _cellView;
+}
+
+-(BottombtnView *)bottomView{
+    if (!_bottomView) {
+        _bottomView = [BottombtnView shareBottomBtnView];
+        _bottomView.frame = CGRM(0, self.view.height - 90, self.view.width, 90);
+        kWeakSelf(weakSelf);
+        //开始拍照的回调
+        _bottomView.topBottombtnHandle = ^{
+            /**
+             1.定位必须成功
+             2.照片部位
+             3.工程类型
+             4.项目名称
+             5.站号,站点信息
+             6.当前时间
+             */
+            if (!weakSelf.isLocation||!weakSelf.siteModel.PicPosition||!weakSelf.siteModel.objectType||!weakSelf.siteModel.siteName||!weakSelf.siteModel.siteNumber||!weakSelf.siteModel.objectName) {
+                [LoadingView showAlertHUD:@"请完善信息!!" duration:1];
+                return ;
+            }
+            ShootPicViewController* shoot = [[ShootPicViewController alloc]init];
+            shoot.siteModel = weakSelf.siteModel;
+            [weakSelf presentToVC:shoot];
+            shoot.shootPicHandle = ^(UIImage *image) {
+                NSLog(@"照片部位:~~~~%@",image.devicePicPart);
+                [weakSelf.uploadMArr addObject:image];
+            };
+        };
+        
+        //待上传的回调
+        _bottomView.leftBottombtnHandle = ^{
+            if (weakSelf.uploadMArr.count == 0) {
+                [LoadingView showAlertHUD:@"请您先拍照" duration:1];
+                return ;
+            }
+            PostListViewController* listView = [[PostListViewController alloc]init];
+            listView.shootedArray = weakSelf.uploadMArr;
+            listView.hasUploadMArr = weakSelf.hasUploadMArr;
+            [weakSelf pushVC:listView];
+        };
+        
+        //已上传的回调
+        _bottomView.rightBottombtnHandle = ^{
+            if (weakSelf.hasUploadMArr.count == 0) {
+                [LoadingView showAlertHUD:@"暂无已上传照片" duration:1];
+                return ;
+            }
+            HasUploadViewController* listView = [[HasUploadViewController alloc]init];
+            listView.hasUploadMArr = weakSelf.hasUploadMArr;
+            [weakSelf pushVC:listView];
+        };
+    }
+    return _bottomView;
+}
+
+-(NSMutableArray *)uploadMArr{
+    if (!_uploadMArr) {
+        _uploadMArr = [NSMutableArray new];
+    }
+    return _uploadMArr;
+}
+
+-(NSMutableArray *)hasUploadMArr{
+    if (!_hasUploadMArr) {
+        _hasUploadMArr = [NSMutableArray new];
+    }
+    return _hasUploadMArr;
+}
+
 
 @end

@@ -40,10 +40,11 @@
 
 - (IBAction)LoginClick:(UIButton *)sender {
     [LoadingView showProgressHUD:@""];
+//    self.passwordText.text = @"123456789";
     NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
     if (0) {
         [para setObject:@"13921923093" forKey:@"phone"];
-        [para setObject:@"123456789" forKey:@"password"];
+        [para setObject:[@"123456789" md5HexDigest] forKey:@"password"];
     }
     else{
         NSString *password = [self.passwordText.text md5HexDigest];
