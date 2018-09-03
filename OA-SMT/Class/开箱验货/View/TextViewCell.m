@@ -14,7 +14,8 @@
     [super awakeFromNib];
     self.textView.delegate = self;
     self.textView.textColor = RGBColor(191, 191, 191);
-    
+    self.textView.layerBorderWidth = 1.0f;
+    self.textView.layerBorderColor = RGBColor(191, 191, 191);
 }
 
 - (void)setPlaceHolder:(NSString *)placeHolder{

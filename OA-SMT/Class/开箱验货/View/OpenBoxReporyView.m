@@ -18,46 +18,44 @@
 @end;
 
 @implementation OpenBoxReporyView{
-    UIView* _topView;
-    UILabel* _topTitle;
 }
-- (void)setHeaderString:(NSString *)headerString{
-    _headerString = headerString;
-    _topTitle.text = _headerString;
-}
+
 - (void)setLeftTitles:(NSMutableArray *)leftTitles{
     _leftTitles = leftTitles;
     [self initUI];
 }
+
 -(void)setFirstText:(NSString *)firstText{
     _firstText = firstText;
     [self.tableView reloadData];
 }
+
 -(void)setSecondText:(NSString *)secondText{
     _secondText = secondText;
     [self.tableView reloadData];
 }
+
+-(void)setThirdText:(NSString *)thirdText{
+    _thirdText = thirdText;
+    [self.tableView reloadData];
+}
+
 -(void)setNoteText:(NSString *)noteText{
     _noteText = noteText;
     [self.tableView reloadData];
 }
+
 - (void)setTopTextViewTitle:(NSString *)topTextViewTitle{
     _topTextViewTitle = topTextViewTitle;
     [self.tableView reloadData];
 }
+
 - (void)setTextPlaceHolder:(NSString *)textPlaceHolder{
     _textPlaceHolder = textPlaceHolder;
     [self.tableView reloadData];
 }
 
 - (void)initUI{
-    _topView = [[UIView alloc]init];
-    [self addSubview:_topView];
-    _topTitle = [[UILabel alloc]init];
-    _topTitle.textColor = RGBColor(132, 132, 132);
-    _topTitle.textAlignment = NSTextAlignmentLeft;
-    [self addSubview:_topTitle];
-    
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -67,9 +65,7 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    _topView.frame = CGRM(0, 0, SCREEN_WIDTH, 44);
-    _topTitle.frame = CGRM(15, 15, 200, 15);
-    _tableView.frame = CGRM(0, CGRectGetMaxY(_topView.frame), SCREEN_WIDTH, 44* self.leftTitles.count +130);
+    _tableView.frame = CGRM(0, 0, SCREEN_WIDTH, self.frame.size.height);
 }
 
 #pragma mark tableView - delegate
@@ -86,11 +82,16 @@
             self.secondClickBlock();
         }
     }
+    else if (indexPath.row == 2){
+        if (self.thirdClickBlock) {
+            self.thirdClickBlock();
+        }
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == self.leftTitles.count) {
-        return 130;
+        return 150;
     }else{
         return 44;
     }
@@ -119,10 +120,13 @@
         BaseCell* cell = [BaseCell nibCellWithTableView:tableView];
         cell.leftString.text = self.leftTitles[indexPath.row];
         if (indexPath.row == 0) {
-            cell.rightString.text = self.firstText;
+            cell.rightString.text = [self.firstText isEqualToString:@"0"] ? @"批量收货" : @"开箱收货";
         }
-        else if (indexPath.row == 1){
-            cell.rightString.text = [self.secondText isEqualToString:@"0"] ? @"否" : @"是";
+        else if (indexPath.row == 1) {
+            cell.rightString.text = self.secondText;
+        }
+        else if (indexPath.row == 2){
+            cell.rightString.text = [self.thirdText isEqualToString:@"0"] ? @"否" : @"是";
         }
         cell.arrowHidden = YES;
         return cell;

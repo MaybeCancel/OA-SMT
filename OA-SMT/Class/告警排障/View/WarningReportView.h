@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WarningReportView : UIView
-@property (nonatomic,copy)NSString* headerString;
 @property (nonatomic,strong)NSMutableArray* leftTitles;
 @property (nonatomic,copy)NSString* firstText;
 @property (nonatomic,copy)NSString* secondText;

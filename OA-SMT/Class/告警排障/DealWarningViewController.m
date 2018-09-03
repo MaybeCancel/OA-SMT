@@ -72,7 +72,6 @@
     detail.refreshBlock = ^{
         [weakSelf loadData];
     };
-    detail.alarmId = model.alarmId;
     [self pushVC:detail];
 }
 

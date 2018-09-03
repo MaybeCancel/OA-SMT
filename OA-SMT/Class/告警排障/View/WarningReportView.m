@@ -19,13 +19,8 @@
 @end;
 
 @implementation WarningReportView{
-    UIView* _topView;
-    UILabel* _topTitle;
 }
-- (void)setHeaderString:(NSString *)headerString{
-    _headerString = headerString;
-    _topTitle.text = _headerString;
-}
+
 - (void)setLeftTitles:(NSMutableArray *)leftTitles{
     _leftTitles = leftTitles;
     [self initUI];
@@ -55,14 +50,7 @@
     [self.tableView reloadData];
 }
 
-- (void)initUI{
-    _topView = [[UIView alloc]init];
-    [self addSubview:_topView];
-    _topTitle = [[UILabel alloc]init];
-    _topTitle.textColor = RGBColor(132, 132, 132);
-    _topTitle.textAlignment = NSTextAlignmentLeft;
-    [self addSubview:_topTitle];
-    
+- (void)initUI{    
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -72,9 +60,7 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    _topView.frame = CGRM(0, 0, SCREEN_WIDTH, 44);
-    _topTitle.frame = CGRM(15, 15, 200, 15);
-    _tableView.frame = CGRM(0, CGRectGetMaxY(_topView.frame), SCREEN_WIDTH, 44* self.leftTitles.count +130);
+    _tableView.frame = CGRM(0, 0, SCREEN_WIDTH, self.frame.size.height);
 }
 
 #pragma mark tableView - delegate

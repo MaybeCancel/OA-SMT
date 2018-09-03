@@ -7,9 +7,10 @@
 //
 
 #import "BaseTableViewController.h"
+#import "WorkOrderModel.h"
 
 @interface WarningDetailViewController : BaseTableViewController
 
-@property (nonatomic, copy) NSString *alarmId;
+@property (nonatomic, strong) WorkOrderModel *model;
 
 @end

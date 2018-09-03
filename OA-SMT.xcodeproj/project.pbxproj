@@ -17,6 +17,12 @@
 		1D03782A20AFF0B300C22F60 /* CellStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D03782920AFF0B300C22F60 /* CellStateModel.m */; };
 		1D03782C20B009C000C22F60 /* SiteTestReport.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D03782B20B009C000C22F60 /* SiteTestReport.plist */; };
 		1D03782F20B00C7200C22F60 /* SiteTestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D03782E20B00C7200C22F60 /* SiteTestDetailViewController.m */; };
+		1D0896D821363CC300533913 /* WorkOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0896D721363CC300533913 /* WorkOrderModel.m */; };
+		1D0896DD2137C97400533913 /* InstallTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0896DB2137C97400533913 /* InstallTestViewController.m */; };
+		1D0896DE2137C97400533913 /* InstallTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D0896DC2137C97400533913 /* InstallTestViewController.xib */; };
+		1D0896E62137D0DE00533913 /* NSArray+HYBUnicodeReadable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0896E02137D0DD00533913 /* NSArray+HYBUnicodeReadable.m */; };
+		1D0896E72137D0DE00533913 /* NSDictionary+HYBUnicodeReadable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0896E12137D0DD00533913 /* NSDictionary+HYBUnicodeReadable.m */; };
+		1D0896E82137D0DE00533913 /* NSSet+HYBUnicodeReadable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0896E22137D0DD00533913 /* NSSet+HYBUnicodeReadable.m */; };
 		1D46366820CA7C2400F81682 /* ResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D46366620CA7C2400F81682 /* ResetPasswordViewController.m */; };
 		1D46366920CA7C2400F81682 /* ResetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D46366720CA7C2400F81682 /* ResetPasswordViewController.xib */; };
 		1D46366C20CA864900F81682 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D46366B20CA864800F81682 /* NSString+MD5Addition.m */; };
@@ -25,6 +31,8 @@
 		1D6CBC3B20C513BA002B1513 /* LMJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6CBC3A20C513BA002B1513 /* LMJDropdownMenu.m */; };
 		1D6CBC3F20C53E05002B1513 /* ProjectInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6CBC3E20C53E05002B1513 /* ProjectInfoModel.m */; };
 		1D6CBC4220C5439C002B1513 /* ProjectStationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6CBC4120C5439C002B1513 /* ProjectStationModel.m */; };
+		1D8F57FD212ECAF400072469 /* WorkOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8F57FC212ECAF400072469 /* WorkOrderViewController.m */; };
+		1D8F5806212ECFA900072469 /* WorkOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8F5805212ECFA900072469 /* WorkOrderCell.m */; };
 		1D91835220BD5AC9002D7EBD /* NSDate+DateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D91835120BD5AC9002D7EBD /* NSDate+DateFormat.m */; };
 		1D91835520BE932A002D7EBD /* ImageShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D91835420BE932A002D7EBD /* ImageShowView.m */; };
 		1D91835920BE98C1002D7EBD /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D91835720BE98C1002D7EBD /* ImageCell.m */; };
@@ -52,6 +60,7 @@
 		1DF6B4FD20E5DF2D004D6D66 /* UIImage+ZipSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6B4FC20E5DF2D004D6D66 /* UIImage+ZipSize.m */; };
 		1DF6B54120EC642D004D6D66 /* YFRollingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6B54020EC642D004D6D66 /* YFRollingLabel.m */; };
 		1DF6C8A120A99CA300A326D0 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6C89F20A99CA300A326D0 /* BaseModel.m */; };
+		1DFE281E213D0D11007718E7 /* SubmitBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE281D213D0D11007718E7 /* SubmitBtnView.m */; };
 		5B1C68072008426700A64079 /* SiteInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C68062008426700A64079 /* SiteInfoModel.m */; };
 		5B1C680C2008457800A64079 /* CCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C680A2008457800A64079 /* CCLocationManager.m */; };
 		5B1C680D2008457800A64079 /* CCRefreshHeaderFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C680B2008457800A64079 /* CCRefreshHeaderFooter.m */; };
@@ -201,6 +210,17 @@
 		1D03782B20B009C000C22F60 /* SiteTestReport.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SiteTestReport.plist; sourceTree = "<group>"; };
 		1D03782D20B00C7200C22F60 /* SiteTestDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SiteTestDetailViewController.h; sourceTree = "<group>"; };
 		1D03782E20B00C7200C22F60 /* SiteTestDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SiteTestDetailViewController.m; sourceTree = "<group>"; };
+		1D0896D621363CC300533913 /* WorkOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrderModel.h; sourceTree = "<group>"; };
+		1D0896D721363CC300533913 /* WorkOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkOrderModel.m; sourceTree = "<group>"; };
+		1D0896DA2137C97400533913 /* InstallTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstallTestViewController.h; sourceTree = "<group>"; };
+		1D0896DB2137C97400533913 /* InstallTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstallTestViewController.m; sourceTree = "<group>"; };
+		1D0896DC2137C97400533913 /* InstallTestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstallTestViewController.xib; sourceTree = "<group>"; };
+		1D0896E02137D0DD00533913 /* NSArray+HYBUnicodeReadable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HYBUnicodeReadable.m"; sourceTree = "<group>"; };
+		1D0896E12137D0DD00533913 /* NSDictionary+HYBUnicodeReadable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HYBUnicodeReadable.m"; sourceTree = "<group>"; };
+		1D0896E22137D0DD00533913 /* NSSet+HYBUnicodeReadable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+HYBUnicodeReadable.m"; sourceTree = "<group>"; };
+		1D0896E32137D0DD00533913 /* NSArray+HYBUnicodeReadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HYBUnicodeReadable.h"; sourceTree = "<group>"; };
+		1D0896E42137D0DD00533913 /* NSDictionary+HYBUnicodeReadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HYBUnicodeReadable.h"; sourceTree = "<group>"; };
+		1D0896E52137D0DD00533913 /* NSSet+HYBUnicodeReadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HYBUnicodeReadable.h"; sourceTree = "<group>"; };
 		1D46366520CA7C2400F81682 /* ResetPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResetPasswordViewController.h; sourceTree = "<group>"; };
 		1D46366620CA7C2400F81682 /* ResetPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordViewController.m; sourceTree = "<group>"; };
 		1D46366720CA7C2400F81682 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResetPasswordViewController.xib; sourceTree = "<group>"; };
@@ -215,6 +235,10 @@
 		1D6CBC3E20C53E05002B1513 /* ProjectInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectInfoModel.m; sourceTree = "<group>"; };
 		1D6CBC4020C5439C002B1513 /* ProjectStationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectStationModel.h; sourceTree = "<group>"; };
 		1D6CBC4120C5439C002B1513 /* ProjectStationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectStationModel.m; sourceTree = "<group>"; };
+		1D8F57FB212ECAF400072469 /* WorkOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrderViewController.h; sourceTree = "<group>"; };
+		1D8F57FC212ECAF400072469 /* WorkOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkOrderViewController.m; sourceTree = "<group>"; };
+		1D8F5804212ECFA900072469 /* WorkOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrderCell.h; sourceTree = "<group>"; };
+		1D8F5805212ECFA900072469 /* WorkOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkOrderCell.m; sourceTree = "<group>"; };
 		1D91835020BD5AC9002D7EBD /* NSDate+DateFormat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateFormat.h"; sourceTree = "<group>"; };
 		1D91835120BD5AC9002D7EBD /* NSDate+DateFormat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateFormat.m"; sourceTree = "<group>"; };
 		1D91835320BE932A002D7EBD /* ImageShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageShowView.h; sourceTree = "<group>"; };
@@ -265,6 +289,8 @@
 		1DF6C81C20A1AC0D00A326D0 /* UrlDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UrlDefine.h; sourceTree = "<group>"; };
 		1DF6C89F20A99CA300A326D0 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
 		1DF6C8A020A99CA300A326D0 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		1DFE281C213D0D11007718E7 /* SubmitBtnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubmitBtnView.h; sourceTree = "<group>"; };
+		1DFE281D213D0D11007718E7 /* SubmitBtnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubmitBtnView.m; sourceTree = "<group>"; };
 		5B1C68052008426700A64079 /* SiteInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SiteInfoModel.h; sourceTree = "<group>"; };
 		5B1C68062008426700A64079 /* SiteInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SiteInfoModel.m; sourceTree = "<group>"; };
 		5B1C68082008457800A64079 /* CCLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLocationManager.h; sourceTree = "<group>"; };
@@ -513,6 +539,38 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		1D0896D521363C0B00533913 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1D0896D621363CC300533913 /* WorkOrderModel.h */,
+				1D0896D721363CC300533913 /* WorkOrderModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1D0896D92137C8C000533913 /* 安装施工 */ = {
+			isa = PBXGroup;
+			children = (
+				1D0896DA2137C97400533913 /* InstallTestViewController.h */,
+				1D0896DB2137C97400533913 /* InstallTestViewController.m */,
+				1D0896DC2137C97400533913 /* InstallTestViewController.xib */,
+			);
+			path = "安装施工";
+			sourceTree = "<group>";
+		};
+		1D0896DF2137D0DD00533913 /* HYBUnicodeReadable */ = {
+			isa = PBXGroup;
+			children = (
+				1D0896E02137D0DD00533913 /* NSArray+HYBUnicodeReadable.m */,
+				1D0896E12137D0DD00533913 /* NSDictionary+HYBUnicodeReadable.m */,
+				1D0896E22137D0DD00533913 /* NSSet+HYBUnicodeReadable.m */,
+				1D0896E32137D0DD00533913 /* NSArray+HYBUnicodeReadable.h */,
+				1D0896E42137D0DD00533913 /* NSDictionary+HYBUnicodeReadable.h */,
+				1D0896E52137D0DD00533913 /* NSSet+HYBUnicodeReadable.h */,
+			);
+			path = HYBUnicodeReadable;
+			sourceTree = "<group>";
+		};
 		1D6CBC3C20C53D54002B1513 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,6 +580,26 @@
 				1D6CBC4120C5439C002B1513 /* ProjectStationModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1D8F57FA212EC7BE00072469 /* 我的工单 */ = {
+			isa = PBXGroup;
+			children = (
+				1D0896D521363C0B00533913 /* Model */,
+				1D8F57FE212ECE2500072469 /* View */,
+				1D8F57FB212ECAF400072469 /* WorkOrderViewController.h */,
+				1D8F57FC212ECAF400072469 /* WorkOrderViewController.m */,
+			);
+			path = "我的工单";
+			sourceTree = "<group>";
+		};
+		1D8F57FE212ECE2500072469 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1D8F5804212ECFA900072469 /* WorkOrderCell.h */,
+				1D8F5805212ECFA900072469 /* WorkOrderCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1D91835B20BEA596002D7EBD /* View */ = {
@@ -676,6 +754,7 @@
 		5B1C680E20084BBD00A64079 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				1D0896DF2137D0DD00533913 /* HYBUnicodeReadable */,
 				5B1C68082008457800A64079 /* CCLocationManager.h */,
 				5B1C680A2008457800A64079 /* CCLocationManager.m */,
 				5B1C68092008457800A64079 /* CCRefreshHeaderFooter.h */,
@@ -810,6 +889,8 @@
 		5B94AFDA1FF3740700E5B026 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				1D0896D92137C8C000533913 /* 安装施工 */,
+				1D8F57FA212EC7BE00072469 /* 我的工单 */,
 				5B94B0051FF382F000E5B026 /* 首页 */,
 				5B94AFE71FF3750000E5B026 /* 关于工具 */,
 				5B94AFE51FF374EC00E5B026 /* 完工照片 */,
@@ -1073,6 +1154,8 @@
 				1D91835820BE98C1002D7EBD /* ImageCell.xib */,
 				1D91835320BE932A002D7EBD /* ImageShowView.h */,
 				1D91835420BE932A002D7EBD /* ImageShowView.m */,
+				1DFE281C213D0D11007718E7 /* SubmitBtnView.h */,
+				1DFE281D213D0D11007718E7 /* SubmitBtnView.m */,
 			);
 			path = ReusingUI;
 			sourceTree = "<group>";
@@ -1247,6 +1330,7 @@
 				5B67B5D92018655800A8CF6E /* DeviceHighCell.xib in Resources */,
 				5B1C6826200C7EC700A64079 /* AddItemBtnView.xib in Resources */,
 				5B1C68192008882400A64079 /* PicTips.xib in Resources */,
+				1D0896DE2137C97400533913 /* InstallTestViewController.xib in Resources */,
 				5BCECAE42007438200169748 /* BottombtnView.xib in Resources */,
 				1DCA086320B7B525001C64DB /* AboutViewController.xib in Resources */,
 				5B1C682B200C837E00A64079 /* ShootDawnCell.xib in Resources */,
@@ -1358,6 +1442,7 @@
 				5B67B5C020181FCD00A8CF6E /* SMControlView.m in Sources */,
 				5B1C68172008881500A64079 /* PicTips.m in Sources */,
 				5B1C680C2008457800A64079 /* CCLocationManager.m in Sources */,
+				1DFE281E213D0D11007718E7 /* SubmitBtnView.m in Sources */,
 				5BCA5EAF1FF1FF540057D517 /* HomeBtnView.m in Sources */,
 				5B820C952045029300565147 /* BaseListView.m in Sources */,
 				5B42F063205A1707001D07B3 /* WarningCell.m in Sources */,
@@ -1388,6 +1473,7 @@
 				5B8F0319200D93F5003D79FD /* ZXYBallProgress.m in Sources */,
 				5B8F0320200D9AE4003D79FD /* PostListViewController.m in Sources */,
 				1DC8735D20DC8F6D004F842C /* StateListCell.m in Sources */,
+				1D8F57FD212ECAF400072469 /* WorkOrderViewController.m in Sources */,
 				1D91836B20BFEFB6002D7EBD /* ProblemTypeCell.m in Sources */,
 				5BCECAE820074AF300169748 /* LLActionSheetView.m in Sources */,
 				5BC8F44F2003471400C58C2E /* BaseTableView.m in Sources */,
@@ -1408,10 +1494,12 @@
 				1D03782420AFC51000C22F60 /* InstallSiteModel.m in Sources */,
 				5B820C8F2044F8FC00565147 /* GoodListModel.m in Sources */,
 				5BC8F49E200356BB00C58C2E /* GoodsCell.m in Sources */,
+				1D0896D821363CC300533913 /* WorkOrderModel.m in Sources */,
 				5B1C6821200C79B200A64079 /* ShootDawnViewController.m in Sources */,
 				5B1C680D2008457800A64079 /* CCRefreshHeaderFooter.m in Sources */,
 				1D6CBC4220C5439C002B1513 /* ProjectStationModel.m in Sources */,
 				1D91836220BFD74D002D7EBD /* WarningInfoModel.m in Sources */,
+				1D0896E62137D0DE00533913 /* NSArray+HYBUnicodeReadable.m in Sources */,
 				5B832058205B575500147C6F /* TextViewCell.m in Sources */,
 				5BC8F44C2003450C00C58C2E /* OpenBoxViewController.m in Sources */,
 				5B4256F6204F93DA00908C00 /* ProjectInfoViewController.m in Sources */,
@@ -1422,6 +1510,7 @@
 				5B67B5CE201827FE00A8CF6E /* signModel.m in Sources */,
 				5B42F04F205A0115001D07B3 /* SiteInstallViewController.m in Sources */,
 				5B94B0011FF37AAA00E5B026 /* MBProgressHUD.m in Sources */,
+				1D0896E82137D0DE00533913 /* NSSet+HYBUnicodeReadable.m in Sources */,
 				1D9183CA20C26944002D7EBD /* QualityDetailViewController.m in Sources */,
 				1DC8735920D118DA004F842C /* HasUploadViewController.m in Sources */,
 				5B67B5D82018655800A8CF6E /* DeviceHighCell.m in Sources */,
@@ -1456,6 +1545,8 @@
 				1D91836F20BFF906002D7EBD /* WarningReportView.m in Sources */,
 				5B67B5C8201824BB00A8CF6E /* StateModel.m in Sources */,
 				5B6D13E720467F8A0011B299 /* BaseTextView.m in Sources */,
+				1D0896DD2137C97400533913 /* InstallTestViewController.m in Sources */,
+				1D0896E72137D0DE00533913 /* NSDictionary+HYBUnicodeReadable.m in Sources */,
 				5B6D13E420467B7D0011B299 /* OpenBoxReporyView.m in Sources */,
 				5B42F04C205A00F1001D07B3 /* SiteTestViewController.m in Sources */,
 				5BCA5EC01FF225760057D517 /* UIView+Tap.m in Sources */,
@@ -1475,6 +1566,7 @@
 				5B820C9D2045280400565147 /* BaseCellPe.m in Sources */,
 				5B42F05F205A163F001D07B3 /* DealWarningViewController.m in Sources */,
 				1DF6C8A120A99CA300A326D0 /* BaseModel.m in Sources */,
+				1D8F5806212ECFA900072469 /* WorkOrderCell.m in Sources */,
 				1D9183C320C25F8F002D7EBD /* QualityCell.m in Sources */,
 				5BCECAD42007335000169748 /* BaseCellView.m in Sources */,
 			);

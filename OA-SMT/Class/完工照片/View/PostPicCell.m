@@ -123,15 +123,13 @@
     manager.requestSerializer =[AFJSONRequestSerializer serializer];//声明请求的数据是json
     //设置请求头
     [manager.requestSerializer setValue:@"application/json;charset=utf8" forHTTPHeaderField:@"Content-Type"];
-//    NSString* urlstring = @"http://120.27.232.247:8088/EricssonApp/project/uploadPhoto";
+    
     NSString* urlstring = [CCString getHeaderUrl:UploadPhoto];
     [manager POST:urlstring parameters:requestDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         //上传操作
         NSData *zipData = [image compressMaxDataSizeKBytes:300];
         //图片现在名字为image  命名规则 站号_站名_设备及照片部位  exp:A001_江宁大学城基站_基站全景[机房和塔建]
         NSString *fileName = [NSString stringWithFormat:@"%@_%@_%@.jpg",image.siteNumber,image.siteName,image.devicePicPart];
-//        NSString *name = [fileName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//        NSString *nameStr = [fileName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]];
         [formData appendPartWithFileData:zipData name:@"1213" fileName:fileName mimeType:@"image/jpeg"];
             
         } progress:^(NSProgress * _Nonnull uploadProgress) {

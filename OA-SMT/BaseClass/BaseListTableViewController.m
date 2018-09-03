@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView = [[BaseTableView alloc]initWithFrame:CGRM(0, 64+15, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 15) style:UITableViewStylePlain];
+    self.tableView = [[BaseTableView alloc]initWithFrame:CGRM(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
     self.tableView.backgroundColor = RGBColor(237, 237, 237);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;

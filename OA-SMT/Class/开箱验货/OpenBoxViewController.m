@@ -63,8 +63,6 @@
     report.refreshBlock = ^{
         [weakSelf loadData];
     };
-    report.headTitle = @"开箱报告";
-    report.boxTitle = @"开箱时间";
     report.isReceive = NO;
     report.status = model.status;
     report.goodsId = model.goodsId;

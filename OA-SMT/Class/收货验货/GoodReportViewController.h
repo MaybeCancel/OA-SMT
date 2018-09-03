@@ -12,6 +12,4 @@
 @property (nonatomic,copy)NSString* goodsId;
 @property (nonatomic,assign)BOOL isReceive;
 @property (nonatomic,assign)int status;
-@property (nonatomic,copy)NSString* boxTitle;
-@property (nonatomic,copy)NSString* headTitle;
 @end

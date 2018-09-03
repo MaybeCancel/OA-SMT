@@ -10,11 +10,18 @@
 #define UrlDefine_h
 
 //服务器地址
-#define BASE_URL @"http://118.31.79.88:8080/EricssonApp"
+//#define BASE_URL @"http://118.31.79.88:8080/EricssonApp"
+#define BASE_URL @"http://119.23.19.199:8016/EricssonApp"
 
 /*-----------------登录---------------*/
 #define Login @"/account/login"
 #define ChangePassword @"/account/changePassword"
+
+/*-----------------工单列表---------------*/
+#define GetWorkOrderList @"/project/getWorkOrderList"
+
+/*-----------------更新工单数据---------------*/
+#define UpdateWorkOrder @"/project/updateWorkOrder"
 
 /*-----------------推送消息---------------*/
 #define GetMessage @"/project/getMessage"
@@ -56,6 +63,10 @@
 
 /*-----------------上传照片---------------*/
 #define UploadFile @"/account/uploadFile"
+
+/*-----------------上传工单附件---------------*/
+#define UploadWorkFile @"/project/uploadWorkOrderAttachment"
+
 
 /*-----------------告警排障---------------*/
 #define AlarmList @"/project/alarmList"

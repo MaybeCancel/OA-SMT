@@ -21,6 +21,6 @@
  * titles 标题名字数组
  * images 图片名字数组
  **/
-- (instancetype)initWithTitles:(NSArray<NSString*>*)titles AndImages:(NSArray<NSString*>*)images;
+- (instancetype)initWithTitles:(NSArray<NSString*>*)titles;
 
 @end

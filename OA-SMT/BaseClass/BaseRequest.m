@@ -25,8 +25,8 @@
     return request;
 }
 
-+(void)UploadImageWithUrl:(NSString *)url image:(UIImage *)image fielName:(NSString *)fileName completion:(CCAPICompletion)completion{
-    [MyRequest POSTImageUrl:url withParams:nil Images:image imageName:fileName success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
++(void)UploadImageWithUrl:(NSString *)url params:(NSDictionary *)params image:(UIImage *)image fielName:(NSString *)fileName completion:(CCAPICompletion)completion{
+    [MyRequest POSTImageUrl:url withParams:params Images:image imageName:fileName success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (completion) {
             completion(jsonDic);
         }
@@ -53,6 +53,7 @@
     if (self.isPost) {
         // 处理耗时操作的代码块...
         [MyRequest POST:urlStr withParameters:dic CacheTime:0 isLoadingView:nil success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            NSLog(@"%@",jsonDic);
             [LoadingView hideProgressHUD];
             [self handleJsonDic:jsonDic completion:completion];
         } failure:^(NSError *error) {

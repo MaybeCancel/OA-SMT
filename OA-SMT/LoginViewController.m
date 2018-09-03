@@ -40,7 +40,8 @@
 
 - (IBAction)LoginClick:(UIButton *)sender {
     [LoadingView showProgressHUD:@""];
-//    self.passwordText.text = @"123456789";
+    self.userNameText.text = @"18952030057";
+    self.passwordText.text = @"123456789";
     NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
     if (0) {
         [para setObject:@"13921923093" forKey:@"phone"];
@@ -55,6 +56,7 @@
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:Login] isPost:YES Params:para];
     
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
+        NSLog(@"%@",jsonDic);
         if([jsonDic[@"resultCode"] isEqualToString:@"100"]){
             //101 手机号不存在  102 密码错误
             NSDictionary* dic = jsonDic[@"result"];

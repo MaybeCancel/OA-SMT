@@ -96,55 +96,51 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     kWeakSelf(weakSelf);
-    BackLogListModel* model = self.dataArray[indexPath.row];
-    if (model.type == 1) {
-        GoodReportViewController* report = [[GoodReportViewController alloc]init];
-        report.refreshBlock = ^{
-            [weakSelf loadData];
-        };
-        report.boxTitle = @"实际到达日期";
-        report.headTitle = @"收货报告";
-        report.isReceive = YES;
-        report.status = model.logisticsInfo.status;
-        report.goodsId = model.logisticsInfo.goodsId;
-        [self pushVC:report];
-    }
-    else if (model.type == 2){
-        GoodReportViewController* report = [[GoodReportViewController alloc]init];
-        report.refreshBlock = ^{
-            [weakSelf loadData];
-        };
-        report.headTitle = @"开箱报告";
-        report.boxTitle = @"开箱时间";
-        report.isReceive = NO;
-        report.status = model.logisticsInfo.status;
-        report.goodsId = model.logisticsInfo.goodsId;
-        [self pushVC:report];
-    }
-    else if (model.type == 3){
-        WarningDetailViewController* detail = [[WarningDetailViewController alloc]init];
-        detail.refreshBlock = ^{
-            [weakSelf loadData];
-        };
-        detail.alarmId = model.alarmList.alarmId;
-        [self pushVC:detail];
-    }
-    else if (model.type == 4){
-        SiteInstallDetailViewController *detailVC = [[SiteInstallDetailViewController alloc]init];
-        detailVC.model = model.installInfo;
-        detailVC.refreshBlock = ^{
-            [weakSelf loadData];
-        };
-        [self pushVC:detailVC];
-    }
-    else if (model.type == 5){
-        SiteTestDetailViewController* detailVC = [[SiteTestDetailViewController alloc]init];
-        detailVC.model = model.installInfo;
-        detailVC.refreshBlock = ^{
-            [weakSelf loadData];
-        };
-        [self pushVC:detailVC];
-    }
+//    BackLogListModel* model = self.dataArray[indexPath.row];
+//    if (model.type == 1) {
+//        GoodReportViewController* report = [[GoodReportViewController alloc]init];
+//        report.refreshBlock = ^{
+//            [weakSelf loadData];
+//        };
+//        report.isReceive = YES;
+//        report.status = model.logisticsInfo.status;
+//        report.goodsId = model.logisticsInfo.goodsId;
+//        [self pushVC:report];
+//    }
+//    else if (model.type == 2){
+//        GoodReportViewController* report = [[GoodReportViewController alloc]init];
+//        report.refreshBlock = ^{
+//            [weakSelf loadData];
+//        };
+//        report.isReceive = NO;
+//        report.status = model.logisticsInfo.status;
+//        report.goodsId = model.logisticsInfo.goodsId;
+//        [self pushVC:report];
+//    }
+//    else if (model.type == 3){
+//        WarningDetailViewController* detail = [[WarningDetailViewController alloc]init];
+//        detail.refreshBlock = ^{
+//            [weakSelf loadData];
+//        };
+//        detail.alarmId = model.alarmList.alarmId;
+//        [self pushVC:detail];
+//    }
+//    else if (model.type == 4){
+//        SiteInstallDetailViewController *detailVC = [[SiteInstallDetailViewController alloc]init];
+//        detailVC.model = model.installInfo;
+//        detailVC.refreshBlock = ^{
+//            [weakSelf loadData];
+//        };
+//        [self pushVC:detailVC];
+//    }
+//    else if (model.type == 5){
+//        SiteTestDetailViewController* detailVC = [[SiteTestDetailViewController alloc]init];
+//        detailVC.model = model.installInfo;
+//        detailVC.refreshBlock = ^{
+//            [weakSelf loadData];
+//        };
+//        [self pushVC:detailVC];
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

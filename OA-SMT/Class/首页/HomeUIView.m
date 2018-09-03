@@ -12,16 +12,14 @@
 
 @implementation HomeUIView{
     NSArray* _titles;
-    NSArray*_images;
     UIImageView* _anounceImage;
     YFRollingLabel* _contentLabel;
 }
 
-- (instancetype)initWithTitles:(NSArray<NSString *> *)titles AndImages:(NSArray<NSString *> *)images{
+- (instancetype)initWithTitles:(NSArray<NSString *> *)titles{
     self = [super init];
     if (self) {
         _titles = titles;
-        _images = images;
         self.layerCornerRadius = 3;
         self.backgroundColor = RGBColor(245, 245, 245);
         [self setUp];
@@ -34,24 +32,22 @@
     _anounceImage.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:_anounceImage];
     
-    
-    if (_titles.count != _images.count||_titles.count < 1||_images.count < 1) {
-        return;
-    }
     for(NSInteger i = 0; i < _titles.count; i++){
-        HomeBtnView* btnView = [[HomeBtnView alloc]initWithTitle:_titles[i] AndImageName:_images[i]];
-        [self addSubview:btnView];
-        btnView.tag = i + 10;
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDown:)];
-        [btnView addGestureRecognizer:tap];
+        UIButton *btn = [[UIButton alloc]init];
+        btn.tag = i + 10;
+        btn.layerBorderWidth = 1.0;
+        btn.layerBorderColor = RGBColor(75, 151, 252);
+        btn.layerCornerRadius = 5.0;
+        [btn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        [btn setTitle:_titles[i] forState:(UIControlStateNormal)];
+        [btn addTarget:self action:@selector(onClickItem:) forControlEvents:(UIControlEventTouchUpInside)];
+        [self addSubview:btn];
     }
 }
-- (void)tapDown:(UITapGestureRecognizer*)tap{
+- (void)onClickItem:(UIButton *)sender{
     //获取点击tag
-    HomeBtnView* homeView = (HomeBtnView*)tap.view;
-    [homeView ViewToBig];
     if(self.pageViewHandle){
-        self.pageViewHandle(homeView.tag);
+        self.pageViewHandle(sender.tag);
     }
 }
 
@@ -76,11 +72,11 @@
     _anounceImage.frame = CGRM(12, 12, 27, 16);
     _contentLabel.frame = CGRM(CGRectGetMaxX(_anounceImage.frame)+10, 12, 300, 16);
     
-    CGFloat btnWidth = (self.width - 2) / 3;
-    CGFloat btnHeight = (self.height - 4-40) / 4;
+    CGFloat btnWidth = self.width - 60;
+    CGFloat btnHeight = 70;
     for(NSInteger i = 0; i < _titles.count; i++){
-        HomeBtnView* btnView = [self viewWithTag:i + 10];
-        btnView.frame = CGRM(0 + (btnWidth + 1) * (i%3), 40 + (btnHeight + 1) * (i/3), btnWidth, btnHeight);
+        UIButton* btn = [self viewWithTag:i + 10];
+        btn.frame = CGRM(30, CGRectGetMaxY(_contentLabel.frame)+20*(i+1)+btnHeight*i, btnWidth, btnHeight);
     }
 }
 @end

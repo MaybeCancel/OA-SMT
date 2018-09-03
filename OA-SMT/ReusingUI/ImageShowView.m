@@ -33,9 +33,6 @@
 }
 
 -(void)setupUI{
-    UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
-    titleLab.text = @"附件";
-    [self addSubview:titleLab];
     
     self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 30, SCREEN_WIDTH, 0) style:(UITableViewStylePlain)];
     self.tableview.delegate = self;

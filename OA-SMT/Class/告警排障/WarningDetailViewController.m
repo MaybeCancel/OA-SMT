@@ -14,16 +14,13 @@
 #import "ImageShowView.h"
 #import "WarningInfoModel.h"
 #import "ProblemTypeViewController.h"
+#import "SubmitBtnView.h"
 
 @interface WarningDetailViewController ()
-@property (nonatomic,strong)WarningInfoModel* model;
-@property (nonatomic,strong)UIScrollView* scrollView;
-@property (nonatomic,strong)FoldListView* foldListView;
 @property (nonatomic,strong)WarningReportView* boxView;
 @property (nonatomic,strong)AddImageView* addImageView;
 @property (nonatomic,strong)ImageShowView* imageShowView;
-
-@property (nonatomic,strong)NSArray* leftArray;
+@property (nonatomic,strong)SubmitBtnView* submitView;
 @property (nonatomic,strong)NSMutableArray* imageMArr;
 
 @property (nonatomic, assign)int problemType;
@@ -34,26 +31,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"告警处理报告";
-    self.rightItemTitle = @"提交";
-    kWeakSelf(weakSelf);
-    self.rightItemHandle = ^{
-       [weakSelf uploadImage];
-    };
     [self setUp];
-    [self loadData];
 }
 - (void)setUp{
-    [self.view addSubview:self.scrollView];
-    [self.scrollView addSubview:self.foldListView];
-    [self.scrollView addSubview:self.imageShowView];
-    [self.scrollView addSubview:self.boxView];
-    [self.scrollView addSubview:self.addImageView];
+    [self.view addSubview:self.imageShowView];
+    [self.view addSubview:self.boxView];
+    [self.view addSubview:self.addImageView];
+    [self.view addSubview:self.submitView];
     
     kWeakSelf(weakSelf);
     [self.imageShowView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.foldListView.mas_bottom);
-        make.left.mas_equalTo(weakSelf.foldListView.mas_left);
-        make.right.mas_equalTo(weakSelf.foldListView.mas_right);
+        make.top.mas_equalTo(weakSelf.view.mas_top);
+        make.left.mas_equalTo(weakSelf.view.mas_left);
+        make.right.mas_equalTo(weakSelf.view.mas_right);
         make.height.mas_equalTo(0);
     }];
     
@@ -61,7 +51,7 @@
         make.top.mas_equalTo(weakSelf.imageShowView.mas_bottom);
         make.left.mas_equalTo(weakSelf.imageShowView.mas_left);
         make.right.mas_equalTo(weakSelf.imageShowView.mas_right);
-        make.height.mas_equalTo(44*(weakSelf.boxView.leftTitles.count+1)+130);
+        make.height.mas_equalTo(44*(weakSelf.boxView.leftTitles.count+1)+150);
     }];
     
     [self.addImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,104 +62,48 @@
     }];
 }
 
--(void)loadData{
-    kWeakSelf(weakSelf);
-    [LoadingView showProgressHUD:@""];
-    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:AlarmInfo]
-                                                   isPost:YES
-                                                   Params:@{@"alarmId":self.alarmId}];
-    [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
-        NSDictionary* dic = jsonDic[@"result"];
-        weakSelf.model = [WarningInfoModel ModelWithDic:dic];
-        [weakSelf handleCellRightData];
-    }];
-}
-
--(void)handleCellRightData{
-    for (int index = 0; index < self.leftArray.count; index++) {
-        switch (index) {
-            case 0:
-            {
-                NSString *level = @"";
-                if (self.model.alarmLevel == 11) {
-                    level = @"一级";
-                }
-                else if (self.model.alarmLevel == 12){
-                    level = @"二级";
-                }
-                else if (self.model.alarmLevel == 13){
-                    level = @"三级";
-                }
-                else{
-                    level = @"其他";
-                }
-                [self.dataArray addObject:level];
-            }
-                break;
-            case 1:
-                [self.dataArray addObject:self.model.userName];
-                break;
-            case 2:
-                [self.dataArray addObject:self.model.alarmDate];
-                break;
-            case 3:
-                [self.dataArray addObject:self.model.projectName];
-                break;
-            case 4:
-                [self.dataArray addObject:self.model.alarmNote];
-                break;
-        }
-    }
-    self.foldListView.rightArray = self.dataArray;
-    //附件图片
-    NSArray *imageArr = @[];
-    CGFloat attachmentHeight = 0;
-    if (self.model.attachment && self.model.attachment.length) {
-        imageArr = [self.model.attachment componentsSeparatedByString:@","];
-        attachmentHeight+=(30+imageArr.count*230);
-    }
-    self.imageShowView.images = imageArr;
-    [self.imageShowView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(attachmentHeight);
-    }];
-    self.scrollView.contentSize = CGSizeMake(0, self.foldListView.height+20+ 44*(self.boxView.leftTitles.count+1)+130+attachmentHeight+115);
-}
-
 //提交告警处理报告
 -(void)submitReceiveGoodsInfoReport:(NSString *)imgs{
-    kWeakSelf(weakSelf);
-    [LoadingView showProgressHUD:@""];
-    NSMutableDictionary *para = [NSMutableDictionary new];
-    [para setObject:self.alarmId forKey:@"alarmId"];
-    [para setObject:self.boxView.firstText forKey:@"isSolve"];
-    [para setObject:[NSString stringWithFormat:@"%d",self.problemType] forKey:@"questionType"];
-    [para setObject:self.boxView.noteText forKey:@"question"];
-    [para setObject:imgs forKey:@"imgs"];
-    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:UpdateAlarm]
-                                                   isPost:YES
-                                                   Params:para];
-    [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
-        if ([jsonDic[@"resultCode"] isEqualToString:@"100"]) {
-            [LoadingView showAlertHUD:@"提交成功" duration:1.0];
-            if (weakSelf.refreshBlock) {
-                weakSelf.refreshBlock();
-            }
-            [weakSelf performSelector:@selector(pop) withObject:nil afterDelay:1.0];
-        }
-        else{
-            [LoadingView showAlertHUD:@"提交失败" duration:1.0];
-        }
-    }];
+//    kWeakSelf(weakSelf);
+//    [LoadingView showProgressHUD:@""];
+//    NSMutableDictionary *para = [NSMutableDictionary new];
+//    [para setObject:self.alarmId forKey:@"alarmId"];
+//    [para setObject:self.boxView.firstText forKey:@"isSolve"];
+//    [para setObject:[NSString stringWithFormat:@"%d",self.problemType] forKey:@"questionType"];
+//    [para setObject:self.boxView.noteText forKey:@"question"];
+//    [para setObject:imgs forKey:@"imgs"];
+//    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:UpdateAlarm]
+//                                                   isPost:YES
+//                                                   Params:para];
+//    [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
+//        if ([jsonDic[@"resultCode"] isEqualToString:@"100"]) {
+//            [LoadingView showAlertHUD:@"提交成功" duration:1.0];
+//            if (weakSelf.refreshBlock) {
+//                weakSelf.refreshBlock();
+//            }
+//            [weakSelf performSelector:@selector(pop) withObject:nil afterDelay:1.0];
+//        }
+//        else{
+//            [LoadingView showAlertHUD:@"提交失败" duration:1.0];
+//        }
+//    }];
 }
 
 //上传告警处理照片
 -(void)uploadImage{
     if (self.imageMArr.count > 1) {
         kWeakSelf(weakSelf);
+        
         NSMutableArray *imagePath = [NSMutableArray new];
+        
+        NSMutableDictionary *params = [NSMutableDictionary new];
+        [params setObject:[NSString stringWithFormat:@"%d",self.model.workOrderTypeId] forKey:@"workOrderTypeId"];
+        [params setObject:self.model.id forKey:@"workOrderId"];
+        [params setObject:@"" forKey:@"note"];
+        
         for (int i = 0; i < self.imageMArr.count-1; i++) {
             NSString *fileName = [NSString stringWithFormat:@"%@_%d.jpg",[NSDate dateStringWithFormat:@"HHmmss"],i];
-            [BaseRequest UploadImageWithUrl:[CCString getHeaderUrl:UploadFile] image:self.imageMArr[i] fielName:fileName completion:^(NSDictionary *jsonDic) {
+            [BaseRequest UploadImageWithUrl:[CCString getHeaderUrl:UploadWorkFile] params:params image:self.imageMArr[i] fielName:fileName completion:^(NSDictionary *jsonDic) {
                 NSLog(@"jsonDic:%@",jsonDic);
                 [imagePath addObjectsFromArray:jsonDic[@"result"]];
                 if (imagePath.count == weakSelf.imageMArr.count-1) {
@@ -202,33 +136,13 @@
 #pragma mark
 #pragma mark -- LazyLoad
 
-- (UIScrollView*)scrollView{
-    if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc]initWithFrame:CGRM(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
-        _scrollView.bounces = NO;
-        _scrollView.backgroundColor = RGBColor(237, 237, 237);
-    }
-    return _scrollView;
-}
-- (FoldListView*)foldListView{
-    if (_foldListView == nil) {
-        _foldListView = [[FoldListView alloc]init];
-        _foldListView.frame = CGRM(0, 0, SCREEN_WIDTH, 44 + self.leftArray.count* 44);
-        _foldListView.topTitleString = @"告警安排详情";
-        _foldListView.leftArray = self.leftArray;
-    }
-    return _foldListView;
-}
-
 -(WarningReportView *)boxView{
     if (!_boxView) {
         _boxView = [[WarningReportView alloc]init];
-        _boxView.leftTitles = [NSMutableArray arrayWithObjects:@"是否解决",@"遗留问题类型", nil];
-        _boxView.headerString = @"告警处理报告";
+        _boxView.leftTitles = [NSMutableArray arrayWithObjects:@"是否解决", nil];
         _boxView.textPlaceHolder = @"无";
         _boxView.topTextViewTitle = @"遗留问题";
         _boxView.firstText = @"0";
-        _boxView.secondText = @"小区接反";
         _boxView.noteText = @"";
         _boxView.isQualityDetail = NO;
         kWeakSelf(weakSelf);
@@ -249,15 +163,6 @@
             [alertVc addAction:noProblem];
             
             [weakSelf presentViewController:alertVc animated:YES completion:nil];
-        };
-        _boxView.secondClickBlock = ^{
-            ProblemTypeViewController *vc = [[ProblemTypeViewController alloc]init];
-            vc.selectedIndex = weakSelf.problemType;
-            vc.problemTypeBlock = ^(NSString *problemType, int type) {
-                weakSelf.problemType = type;
-                weakSelf.boxView.secondText = problemType;
-            };
-            [weakSelf pushVC:vc];
         };
     }
     return _boxView;
@@ -286,11 +191,15 @@
     return _imageShowView;
 }
 
--(NSArray *)leftArray{
-    if (!_leftArray) {
-        _leftArray = @[@"施工优先级",@"创建人",@"问题日期",@"项目",@"问题描述"];
+-(SubmitBtnView *)submitView{
+    if (!_submitView) {
+        _submitView = [[SubmitBtnView alloc]initWithFrame:CGRM(0, SCREEN_HEIGHT-80, SCREEN_WIDTH, 80)];
+        kWeakSelf(weakSelf);
+        _submitView.SubmitBlock = ^(){
+            [weakSelf uploadImage];
+        };
     }
-    return _leftArray;
+    return _submitView;
 }
 
 -(NSMutableArray *)imageMArr{

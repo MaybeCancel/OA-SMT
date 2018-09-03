@@ -150,7 +150,7 @@
         NSMutableArray *imagePath = [NSMutableArray new];
         for (int i = 0; i < self.imageMArr.count-1; i++) {
             NSString *fileName = [NSString stringWithFormat:@"%@_%d.jpg",[NSDate dateStringWithFormat:@"HHmmss"],i];
-            [BaseRequest UploadImageWithUrl:[CCString getHeaderUrl:UploadFile] image:self.imageMArr[i] fielName:fileName completion:^(NSDictionary *jsonDic) {
+            [BaseRequest UploadImageWithUrl:[CCString getHeaderUrl:UploadFile] params:nil image:self.imageMArr[i] fielName:fileName completion:^(NSDictionary *jsonDic) {
                 NSLog(@"jsonDic:%@",jsonDic);
                 [imagePath addObjectsFromArray:jsonDic[@"result"]];
                 if (imagePath.count == weakSelf.imageMArr.count-1) {
@@ -205,7 +205,6 @@
     if (!_boxView) {
         _boxView = [[WarningReportView alloc]init];
         _boxView.leftTitles = [NSMutableArray arrayWithObjects:@"整改结果", nil];
-        _boxView.headerString = @"整改闭环报告";
         _boxView.textPlaceHolder = @"无";
         _boxView.topTextViewTitle = @"遗留问题";
         _boxView.firstText = @"1";
