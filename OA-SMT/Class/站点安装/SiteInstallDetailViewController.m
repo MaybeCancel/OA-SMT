@@ -32,7 +32,7 @@
     _isSelected = YES;
     
     kWeakSelf(weakSelf);
-    if (self.status == 0) {   //未开始
+    if ([self.model.status isEqual:@0]) {   //未开始
         self.rightItemTitle = @"保存";
         self.rightItemHandle = ^{
             [weakSelf uploadReport];
@@ -40,7 +40,7 @@
         [self setupUI];
         [self makeData];
     }
-    else if (self.status == 1){   //进行中
+    else if ([self.model.status isEqual:@1]){   //进行中
         self.rightItemTitle = @"保存";
         self.rightItemHandle = ^{
             [weakSelf uploadReport];
@@ -49,9 +49,17 @@
         [self loadData];
     }
     else{   //已完成
+        self.rightItemTitle = @"保存";
+        self.rightItemHandle = ^{
+            [weakSelf uploadReport];
+        };
         [self setupUI];
         [self loadData];
     }
+}
+
+-(void)setModel:(WorkOrderModel *)model{
+    _model = model;
 }
 
 -(void)setupUI{
@@ -95,7 +103,7 @@
             CellStateModel *model = [[CellStateModel alloc]init];
             NSString *installKey = [NSString stringWithFormat:@"isInstall%d_%d",(int)idx+1,i+1];
             NSString *noteKey = [NSString stringWithFormat:@"note%d_%d",(int)idx+1,i+1];
-            if (weakSelf.status == 0 ||
+            if ([weakSelf.model.status isEqual:@0] ||
                 weakSelf.installInfoDic[installKey] == nil ||
                 [weakSelf.installInfoDic[installKey] isKindOfClass:[NSNull class]] ||
                 [weakSelf.installInfoDic[installKey] isEqual:@0]) {
@@ -104,7 +112,7 @@
             else{
                 model.state = YES;
             }
-            if (weakSelf.status != 0 && weakSelf.installInfoDic[noteKey]) {
+            if (![weakSelf.model.status isEqual:@0] && weakSelf.installInfoDic[noteKey]) {
                 model.problem = weakSelf.installInfoDic[noteKey];
             }
             else{
@@ -219,7 +227,7 @@
         };
         
         //如果是已完成，则报告静态展示即可
-        if (weakSelf.status == 2) {
+        if ([weakSelf.model.status isEqual:@2]) {
             cell.userInteractionEnabled = NO;
         }
         return cell;
@@ -244,6 +252,9 @@
             model.state = !model.state;
             _isSelected = NO;
             _timer.fireDate = [NSDate dateWithTimeInterval:IntervalTime sinceDate:[NSDate date]];
+        }
+        else{
+            [self.view makeToast:@"检测不可连续，需间隔30秒"];
         }
     }
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];

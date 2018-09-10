@@ -7,7 +7,9 @@
 //
 
 #import "BaseViewController.h"
+#import "WorkOrderModel.h"
 
 @interface InstallTestViewController : BaseViewController
 
+@property (nonatomic, strong) WorkOrderModel *model;
 @end

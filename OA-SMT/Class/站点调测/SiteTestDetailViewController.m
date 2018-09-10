@@ -244,6 +244,9 @@
             _isSelected = NO;
             _timer.fireDate = [NSDate dateWithTimeInterval:IntervalTime sinceDate:[NSDate date]];
         }
+        else{
+            [self.view makeToast:@"检测目录需间隔30秒"];
+        }
     }
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
 }

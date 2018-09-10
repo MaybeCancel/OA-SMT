@@ -1,14 +1,14 @@
 //
-//  WorkOrderCell.m
+//  InstallTestView.m
 //  OA-SMT
 //
-//  Created by Maybe_文仔 on 2018/8/23.
+//  Created by Maybe_文仔 on 2018/9/4.
 //  Copyright © 2018年 Slark. All rights reserved.
 //
 
-#import "WorkOrderCell.h"
+#import "InstallTestView.h"
 
-@interface WorkOrderCell()
+@interface InstallTestView()
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) UILabel *workNumberLab;
 @property (nonatomic, strong) UILabel *workStateLab;
@@ -25,17 +25,18 @@
 @property (nonatomic, strong) UILabel *attachmentLab;
 @end
 
-@implementation WorkOrderCell
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+@implementation InstallTestView
+
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self == [super initWithFrame:frame]) {
         [self setupUI];
     }
     return self;
 }
 
 -(void)setupUI{
-    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.bgView];
     [self.bgView addSubview:self.workNumberLab];
     [self.bgView addSubview:self.workStateLab];
@@ -142,11 +143,11 @@
     self.workNumberLab.text = [NSString stringWithFormat:@"工单流水号：%@",model.serialNumber];
     if ([model.status isEqual:@0]) {
         self.workStateLab.text = @"未开始";
-        self.workStateLab.backgroundColor = RGBColor(204, 204, 204);
+        self.workStateLab.backgroundColor = RGBColor(74, 142, 233);
     }
     else if ([model.status isEqual:@1]){
         self.workStateLab.text = @"进行中";
-        self.workStateLab.backgroundColor = RGBColor(74, 142, 233);
+        self.workStateLab.backgroundColor = RGBColor(204, 204, 204);
     }
     else if ([model.status isEqual:@2]){
         self.workStateLab.text = @"已完成";
@@ -330,17 +331,6 @@
         _attachmentLab.numberOfLines = 3;
     }
     return _attachmentLab;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:NO];
-
-    // Configure the view for the selected state
 }
 
 @end

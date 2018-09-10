@@ -7,9 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "WorkOrderModel.h"
 
 @interface GoodReportViewController : BaseTableViewController
-@property (nonatomic,copy)NSString* goodsId;
-@property (nonatomic,assign)BOOL isReceive;
-@property (nonatomic,assign)int status;
+
+@property (nonatomic, strong) WorkOrderModel *model;
+
 @end

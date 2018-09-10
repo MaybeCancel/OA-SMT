@@ -61,6 +61,7 @@
 		1DF6B54120EC642D004D6D66 /* YFRollingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6B54020EC642D004D6D66 /* YFRollingLabel.m */; };
 		1DF6C8A120A99CA300A326D0 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6C89F20A99CA300A326D0 /* BaseModel.m */; };
 		1DFE281E213D0D11007718E7 /* SubmitBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE281D213D0D11007718E7 /* SubmitBtnView.m */; };
+		1DFE2822213E34CE007718E7 /* InstallTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE2821213E34CE007718E7 /* InstallTestView.m */; };
 		5B1C68072008426700A64079 /* SiteInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C68062008426700A64079 /* SiteInfoModel.m */; };
 		5B1C680C2008457800A64079 /* CCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C680A2008457800A64079 /* CCLocationManager.m */; };
 		5B1C680D2008457800A64079 /* CCRefreshHeaderFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C680B2008457800A64079 /* CCRefreshHeaderFooter.m */; };
@@ -291,6 +292,8 @@
 		1DF6C8A020A99CA300A326D0 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		1DFE281C213D0D11007718E7 /* SubmitBtnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubmitBtnView.h; sourceTree = "<group>"; };
 		1DFE281D213D0D11007718E7 /* SubmitBtnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubmitBtnView.m; sourceTree = "<group>"; };
+		1DFE2820213E34CE007718E7 /* InstallTestView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstallTestView.h; sourceTree = "<group>"; };
+		1DFE2821213E34CE007718E7 /* InstallTestView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstallTestView.m; sourceTree = "<group>"; };
 		5B1C68052008426700A64079 /* SiteInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SiteInfoModel.h; sourceTree = "<group>"; };
 		5B1C68062008426700A64079 /* SiteInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SiteInfoModel.m; sourceTree = "<group>"; };
 		5B1C68082008457800A64079 /* CCLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLocationManager.h; sourceTree = "<group>"; };
@@ -551,6 +554,7 @@
 		1D0896D92137C8C000533913 /* 安装施工 */ = {
 			isa = PBXGroup;
 			children = (
+				1DFE281F213E3497007718E7 /* View */,
 				1D0896DA2137C97400533913 /* InstallTestViewController.h */,
 				1D0896DB2137C97400533913 /* InstallTestViewController.m */,
 				1D0896DC2137C97400533913 /* InstallTestViewController.xib */,
@@ -749,6 +753,15 @@
 				1DF6C81C20A1AC0D00A326D0 /* UrlDefine.h */,
 			);
 			path = Macro;
+			sourceTree = "<group>";
+		};
+		1DFE281F213E3497007718E7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1DFE2820213E34CE007718E7 /* InstallTestView.h */,
+				1DFE2821213E34CE007718E7 /* InstallTestView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5B1C680E20084BBD00A64079 /* Tools */ = {
@@ -1476,6 +1489,7 @@
 				1D8F57FD212ECAF400072469 /* WorkOrderViewController.m in Sources */,
 				1D91836B20BFEFB6002D7EBD /* ProblemTypeCell.m in Sources */,
 				5BCECAE820074AF300169748 /* LLActionSheetView.m in Sources */,
+				1DFE2822213E34CE007718E7 /* InstallTestView.m in Sources */,
 				5BC8F44F2003471400C58C2E /* BaseTableView.m in Sources */,
 				1D91835920BE98C1002D7EBD /* ImageCell.m in Sources */,
 				5B8F0318200D93F5003D79FD /* ZXYWaveProgress.m in Sources */,

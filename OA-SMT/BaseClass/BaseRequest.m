@@ -26,6 +26,7 @@
 }
 
 +(void)UploadImageWithUrl:(NSString *)url params:(NSDictionary *)params image:(UIImage *)image fielName:(NSString *)fileName completion:(CCAPICompletion)completion{
+    NSLog(@"params:%@",params);
     [MyRequest POSTImageUrl:url withParams:params Images:image imageName:fileName success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (completion) {
             completion(jsonDic);

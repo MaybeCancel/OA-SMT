@@ -11,58 +11,34 @@
 #import "OpenBoxReporyView.h"
 #import "AddImageView.h"
 #import "ImageShowView.h"
+#import "SubmitBtnView.h"
 
 @interface GoodReportViewController ()
 
-@property (nonatomic,strong)ReportModel* model;
 @property (nonatomic,strong)OpenBoxReporyView* boxView;
 @property (nonatomic,strong)AddImageView* addImageView;
 @property (nonatomic,strong)ImageShowView* imageShowView;
+@property (nonatomic,strong)SubmitBtnView* submitView;
 
 @property (nonatomic,strong)NSMutableArray* imageMArr;
+
+@property (nonatomic,strong)NSString* typeOfGoods;  //货物类型
 @end
 
 @implementation GoodReportViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"收货货物";
     [self setUp];
     [self loadData];
-}
-
--(void)setIsReceive:(BOOL)isReceive{
-    _isReceive = isReceive;
-    if (isReceive) {
-        self.title = @"收货报告";
-        self.boxView.leftTitles = [NSMutableArray arrayWithObjects:@"货物类型",@"实际到达日期",@"是否缺货", nil];
+    
+    if ([self.model.status isEqual:@0]) {
+        [self.view addSubview:self.submitView];
     }
     else{
-        self.title = @"开箱报告";
-        self.boxView.leftTitles = [NSMutableArray arrayWithObjects:@"货物类型",@"开箱日期",@"是否缺换货", nil];
+        
     }
-}
-
--(void)setStatus:(int)status{
-    _status = status;
-    kWeakSelf(weakSelf);
-    switch (status) {
-        case 0:{
-            self.rightItemTitle = @"提交";
-            self.rightItemHandle = ^{
-                [weakSelf uploadImage];
-            };
-        }break;
-        case 1:{
-            self.boxView.userInteractionEnabled = NO;
-        }break;
-        case 2:{
-            self.rightItemTitle = @"关闭问题";
-            self.rightItemHandle = ^{
-                [weakSelf closeTransportProblem];
-            };
-        }break;
-    }
-    
 }
 
 - (void)setUp{
@@ -95,24 +71,17 @@
 }
 
 //提交收货报告
--(void)submitReceiveGoodsInfoReport:(NSString *)imgs{
+-(void)submitReceiveGoodsInfoReport{
     kWeakSelf(weakSelf);
     [LoadingView showProgressHUD:@""];
     NSMutableDictionary *para = [NSMutableDictionary new];
-    [para setObject:self.goodsId forKey:@"goodsId"];
-    [para setObject:self.boxView.firstText forKey:@"optDate"];
-    [para setObject:self.boxView.secondText forKey:@"hasProblem"];
-    [para setObject:self.boxView.noteText forKey:@"optNote"];
-    [para setObject:imgs forKey:@"imgs"];
-    [para setObject:[UserDef objectForKey:@"userName"] forKey:@"userName"];
-    NSString *url;
-    if (self.isReceive) {
-        url = [CCString getHeaderUrl:AddReceiveGoodsInfo];
-    }
-    else{
-        url = [CCString getHeaderUrl:AddCheckoutGoodsInfo];
-    }
-    BaseRequest* request = [BaseRequest cc_requestWithUrl:url
+    [para setObject:self.model.id forKey:@"id"];    //工单id
+    [para setObject:self.typeOfGoods forKey:@"typeOfGoods"];  //货物类型
+    [para setObject:self.boxView.secondText forKey:@"endData"];  //货物日期
+    [para setObject:self.boxView.thirdText forKey:@"isSolve"];   //是否缺货
+    [para setObject:self.boxView.noteText forKey:@"note"];   //货物问题描述
+    
+    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:UpdateWorkOrder]
                                                    isPost:YES
                                                    Params:para];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
@@ -137,21 +106,16 @@
         for (int i = 0; i < self.imageMArr.count-1; i++) {
             NSString *fileName = [NSString stringWithFormat:@"%@_%d.jpg",[NSDate dateStringWithFormat:@"HHmmss"],i];
             [BaseRequest UploadImageWithUrl:[CCString getHeaderUrl:UploadFile] params:nil image:self.imageMArr[i] fielName:fileName completion:^(NSDictionary *jsonDic) {
-                NSLog(@"jsonDic:%@",jsonDic);
+                
                 [imagePath addObjectsFromArray:jsonDic[@"result"]];
                 if (imagePath.count == weakSelf.imageMArr.count-1) {
-                    NSMutableString *imgs = [[NSMutableString alloc]init];
-                    for (NSString *imgPath in imagePath) {
-                        [imgs appendFormat:@"%@,",imgPath];
-                    }
-                    [imgs deleteCharactersInRange:NSMakeRange(imgs.length-1, 1)];
-                    [weakSelf submitReceiveGoodsInfoReport:imgs];
+                    [weakSelf submitReceiveGoodsInfoReport];
                 }
             }];
         }
     }
     else{
-        [self submitReceiveGoodsInfoReport:@""];
+        [self submitReceiveGoodsInfoReport];
     }
 }
 
@@ -159,13 +123,13 @@
     kWeakSelf(weakSelf);
     [LoadingView showProgressHUD:@""];
     NSMutableDictionary *para = [NSMutableDictionary new];
-    [para setObject:self.goodsId forKey:@"goodsId"];
-    if (self.isReceive) {
-        [para setObject:@"0" forKey:@"type"];
-    }
-    else{
-        [para setObject:@"1" forKey:@"type"];
-    }
+//    [para setObject:self.goodsId forKey:@"goodsId"];
+//    if (self.isReceive) {
+//        [para setObject:@"0" forKey:@"type"];
+//    }
+//    else{
+//        [para setObject:@"1" forKey:@"type"];
+//    }
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:CloseTransportProblem]
                                                    isPost:YES
                                                    Params:para];
@@ -210,24 +174,33 @@
         _boxView = [[OpenBoxReporyView alloc]init];
         _boxView.textPlaceHolder = @"无";
         _boxView.topTextViewTitle = @"货物问题描述";
+        _boxView.firstText = @"批量收货";
         _boxView.thirdText = @"0";
         _boxView.noteText = @"";
         _boxView.secondText = [NSDate dateStringWithFormat:@"yyyy-MM-dd"];
+        _boxView.leftTitles = [NSMutableArray arrayWithObjects:@"货物类型",@"货物日期",@"是否缺货", nil];
         kWeakSelf(weakSelf);
         _boxView.firstClickBlock = ^{
             UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
             
             UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             }];
-            UIAlertAction *problem = [UIAlertAction actionWithTitle:@"批量收货" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                weakSelf.boxView.firstText = @"0";
+            UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"批量收货" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                weakSelf.boxView.firstText = @"批量收货";
+                weakSelf.typeOfGoods = @"0";
             }];
-            UIAlertAction *noProblem = [UIAlertAction actionWithTitle:@"开箱收货" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                weakSelf.boxView.firstText = @"1";
+            UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"开箱收货" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                weakSelf.boxView.firstText = @"开箱收货";
+                weakSelf.typeOfGoods = @"1";
+            }];
+            UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"问题货物" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                weakSelf.boxView.firstText = @"问题货物";
+                weakSelf.typeOfGoods = @"2";
             }];
             [alertVc addAction:cancle];
-            [alertVc addAction:problem];
-            [alertVc addAction:noProblem];
+            [alertVc addAction:action1];
+            [alertVc addAction:action2];
+            [alertVc addAction:action3];
             
             [weakSelf presentViewController:alertVc animated:YES completion:nil];
         };
@@ -286,6 +259,17 @@
     return _imageShowView;
 }
 
+-(SubmitBtnView *)submitView{
+    if (!_submitView) {
+        _submitView = [[SubmitBtnView alloc]initWithFrame:CGRM(0, SCREEN_HEIGHT-80, SCREEN_WIDTH, 80)];
+        kWeakSelf(weakSelf);
+        _submitView.SubmitBlock = ^(){
+            [weakSelf uploadImage];
+        };
+    }
+    return _submitView;
+}
+
 -(NSMutableArray *)imageMArr{
     if (!_imageMArr) {
         _imageMArr = [[NSMutableArray alloc]init];
@@ -293,4 +277,10 @@
     return _imageMArr;
 }
 
+-(NSString *)typeOfGoods{
+    if (!_typeOfGoods) {
+        _typeOfGoods = @"0";
+    }
+    return _typeOfGoods;
+}
 @end

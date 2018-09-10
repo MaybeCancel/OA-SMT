@@ -12,6 +12,7 @@
 #import "GoodReportViewController.h"
 #import "WarningDetailViewController.h"
 #import "InstallTestViewController.h"
+#import "QualityDetailViewController.h"
 
 @interface WorkOrderViewController ()
 
@@ -63,25 +64,24 @@
     WorkOrderModel *model = self.dataArray[indexPath.row];
     kWeakSelf(weakSelf);
     switch (model.workOrderTypeId) {
-        case 1://收货验货
+        case 1://收货验货（完成）
         {
             GoodReportViewController* report = [[GoodReportViewController alloc]init];
             report.refreshBlock = ^{
                 [weakSelf loadData];
             };
-            report.isReceive = YES;
-            report.status = 0;
-            report.goodsId = model.id;
+            report.model = model;
             [self pushVC:report];
         }
             break;
         case 2://安装施工
         {
             InstallTestViewController *installTestVC = [[InstallTestViewController alloc]init];
+            installTestVC.model = model;
             [self pushVC:installTestVC];
         }
             break;
-        case 3://告警处理
+        case 3://告警处理（完成）
         {
             WarningDetailViewController* detailVC = [[WarningDetailViewController alloc]init];
             detailVC.refreshBlock = ^{
@@ -91,7 +91,16 @@
             [self pushVC:detailVC];
         }
             break;
-            
+        case 4://整改闭环（完成）
+        {
+            QualityDetailViewController* detailVC = [[QualityDetailViewController alloc]init];
+            detailVC.refreshBlock = ^{
+                [weakSelf loadData];
+            };
+            detailVC.model = model;
+            [self pushVC:detailVC];
+        }
+            break;
         default:
             break;
     }

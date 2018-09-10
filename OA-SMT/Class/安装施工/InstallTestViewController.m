@@ -9,6 +9,8 @@
 #import "InstallTestViewController.h"
 #import "CompletePicViewController.h"
 #import "SiteTestDetailViewController.h"
+#import "SiteInstallDetailViewController.h"
+#import "InstallTestView.h"
 
 @interface InstallTestViewController ()
 
@@ -18,7 +20,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupUI];
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)setupUI{
+    InstallTestView *cell = [[InstallTestView alloc]initWithFrame:CGRM(0, 64, SCREEN_WIDTH, 280)];
+    cell.model = self.model;
+    [self.view addSubview:cell];
 }
 
 - (IBAction)toCompletePicVC:(id)sender {
@@ -27,20 +36,20 @@
 }
 
 - (IBAction)toInstallReportVC:(id)sender {
-    SiteTestDetailViewController *detailVC = [[SiteTestDetailViewController alloc]init];
+    SiteInstallDetailViewController *detailVC = [[SiteInstallDetailViewController alloc]init];
+    detailVC.model = self.model;
     detailVC.refreshBlock = ^{
 //        [weakSelf loadData];
     };
-//    detailVC.model = self.dataArray[indexPath.row];
     [self pushVC:detailVC];
 }
 
 - (IBAction)toTestReportVC:(id)sender {
     SiteTestDetailViewController *detailVC = [[SiteTestDetailViewController alloc]init];
+    detailVC.model = self.model;
     detailVC.refreshBlock = ^{
 //        [weakSelf loadData];
     };
-//    detailVC.model = self.dataArray[indexPath.row];
     [self pushVC:detailVC];
 }
 

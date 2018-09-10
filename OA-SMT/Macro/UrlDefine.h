@@ -13,6 +13,8 @@
 //#define BASE_URL @"http://118.31.79.88:8080/EricssonApp"
 #define BASE_URL @"http://119.23.19.199:8016/EricssonApp"
 
+//上传的文件可以通过服务器地址+文件名访问到 ；例如：  http://119.23.19.199:8016/155554_0.jpg
+
 /*-----------------登录---------------*/
 #define Login @"/account/login"
 #define ChangePassword @"/account/changePassword"

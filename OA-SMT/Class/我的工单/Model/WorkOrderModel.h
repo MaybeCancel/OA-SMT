@@ -32,12 +32,11 @@
 @property (nonatomic, copy) NSString *priority;
 @property (nonatomic, copy) NSString *projectId;
 @property (nonatomic, copy) NSString *stationId;
-@property (nonatomic, copy) NSString *schedule;
 @property (nonatomic, copy) NSString *serialNumber;
 @property (nonatomic, copy) NSString *startDate;
 @property (nonatomic, copy) NSString *stationName;
 @property (nonatomic, strong) NSArray *workOrderAttachment;
 @property (nonatomic, copy) NSString *workOrderName;
 @property (nonatomic, assign) int workOrderTypeId;
-@property (nonatomic, assign) int status;
+@property (nonatomic, strong) NSNumber *status;
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "BaseTableViewController.h"
+#import "WorkOrderModel.h"
 
 @interface QualityDetailViewController : BaseTableViewController
-@property (nonatomic, copy) NSString *qualityId;
+@property (nonatomic, strong) WorkOrderModel *model;
 @end

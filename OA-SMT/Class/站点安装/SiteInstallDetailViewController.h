@@ -7,9 +7,8 @@
 //
 
 #import "BaseTableViewController.h"
-#import "InstallSiteModel.h"
+#import "WorkOrderModel.h"
 
 @interface SiteInstallDetailViewController : BaseTableViewController
-@property (nonatomic, strong) InstallSiteModel *model;
-@property (nonatomic,assign)int status;
+@property (nonatomic, strong) WorkOrderModel *model;
 @end

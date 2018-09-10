@@ -22,8 +22,6 @@
 @property (nonatomic,strong)ImageShowView* imageShowView;
 @property (nonatomic,strong)SubmitBtnView* submitView;
 @property (nonatomic,strong)NSMutableArray* imageMArr;
-
-@property (nonatomic, assign)int problemType;
 @end
 
 @implementation WarningDetailViewController
@@ -63,30 +61,28 @@
 }
 
 //提交告警处理报告
--(void)submitReceiveGoodsInfoReport:(NSString *)imgs{
-//    kWeakSelf(weakSelf);
-//    [LoadingView showProgressHUD:@""];
-//    NSMutableDictionary *para = [NSMutableDictionary new];
-//    [para setObject:self.alarmId forKey:@"alarmId"];
-//    [para setObject:self.boxView.firstText forKey:@"isSolve"];
-//    [para setObject:[NSString stringWithFormat:@"%d",self.problemType] forKey:@"questionType"];
-//    [para setObject:self.boxView.noteText forKey:@"question"];
-//    [para setObject:imgs forKey:@"imgs"];
-//    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:UpdateAlarm]
-//                                                   isPost:YES
-//                                                   Params:para];
-//    [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
-//        if ([jsonDic[@"resultCode"] isEqualToString:@"100"]) {
-//            [LoadingView showAlertHUD:@"提交成功" duration:1.0];
-//            if (weakSelf.refreshBlock) {
-//                weakSelf.refreshBlock();
-//            }
-//            [weakSelf performSelector:@selector(pop) withObject:nil afterDelay:1.0];
-//        }
-//        else{
-//            [LoadingView showAlertHUD:@"提交失败" duration:1.0];
-//        }
-//    }];
+-(void)submitReceiveGoodsInfoReport{
+    kWeakSelf(weakSelf);
+    [LoadingView showProgressHUD:@""];
+    NSMutableDictionary *para = [NSMutableDictionary new];
+    [para setObject:self.model.id forKey:@"id"];
+    [para setObject:self.boxView.firstText forKey:@"isSolve"];
+    [para setObject:self.boxView.noteText forKey:@"note"];
+    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:UpdateWorkOrder]
+                                                   isPost:YES
+                                                   Params:para];
+    [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
+        if ([jsonDic[@"resultCode"] isEqualToString:@"100"]) {
+            [LoadingView showAlertHUD:@"提交成功" duration:1.0];
+            if (weakSelf.refreshBlock) {
+                weakSelf.refreshBlock();
+            }
+            [weakSelf performSelector:@selector(pop) withObject:nil afterDelay:1.0];
+        }
+        else{
+            [LoadingView showAlertHUD:@"提交失败" duration:1.0];
+        }
+    }];
 }
 
 //上传告警处理照片
@@ -104,21 +100,16 @@
         for (int i = 0; i < self.imageMArr.count-1; i++) {
             NSString *fileName = [NSString stringWithFormat:@"%@_%d.jpg",[NSDate dateStringWithFormat:@"HHmmss"],i];
             [BaseRequest UploadImageWithUrl:[CCString getHeaderUrl:UploadWorkFile] params:params image:self.imageMArr[i] fielName:fileName completion:^(NSDictionary *jsonDic) {
-                NSLog(@"jsonDic:%@",jsonDic);
+                
                 [imagePath addObjectsFromArray:jsonDic[@"result"]];
                 if (imagePath.count == weakSelf.imageMArr.count-1) {
-                    NSMutableString *imgs = [[NSMutableString alloc]init];
-                    for (NSString *imgPath in imagePath) {
-                        [imgs appendFormat:@"%@,",imgPath];
-                    }
-                    [imgs deleteCharactersInRange:NSMakeRange(imgs.length-1, 1)];
-                    [weakSelf submitReceiveGoodsInfoReport:imgs];
+                    [weakSelf submitReceiveGoodsInfoReport];
                 }
             }];
         }
     }
     else{
-        [self submitReceiveGoodsInfoReport:@""];
+        [self submitReceiveGoodsInfoReport];
     }
 }
 

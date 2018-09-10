@@ -120,7 +120,7 @@
         BaseCell* cell = [BaseCell nibCellWithTableView:tableView];
         cell.leftString.text = self.leftTitles[indexPath.row];
         if (indexPath.row == 0) {
-            cell.rightString.text = [self.firstText isEqualToString:@"0"] ? @"批量收货" : @"开箱收货";
+            cell.rightString.text = self.firstText;
         }
         else if (indexPath.row == 1) {
             cell.rightString.text = self.secondText;

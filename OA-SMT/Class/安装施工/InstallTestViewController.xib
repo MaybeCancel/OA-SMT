@@ -65,10 +65,21 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQe-xt-HDQ">
+                    <rect key="frame" x="0.0" y="565" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="5FI-1f-hwW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="6Zh-8y-rKl" firstAttribute="top" secondItem="fso-t7-gop" secondAttribute="top" id="24G-DV-0A1"/>
+                <constraint firstItem="AQe-xt-HDQ" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="2En-sY-bLi"/>
                 <constraint firstItem="PvJ-zG-E0X" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="8II-pk-RHo"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="YIf-Gp-0OR" secondAttribute="trailing" id="BdM-Rr-8ya"/>
                 <constraint firstItem="fso-t7-gop" firstAttribute="leading" secondItem="PvJ-zG-E0X" secondAttribute="trailing" id="EMZ-Il-gv4"/>
@@ -81,9 +92,11 @@
                 <constraint firstItem="fso-t7-gop" firstAttribute="top" secondItem="PvJ-zG-E0X" secondAttribute="top" id="hzJ-KC-b9B"/>
                 <constraint firstItem="re4-RY-G3P" firstAttribute="top" secondItem="YIf-Gp-0OR" secondAttribute="bottom" id="itd-hl-pNH"/>
                 <constraint firstItem="re4-RY-G3P" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kNV-0V-G0B"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="AQe-xt-HDQ" secondAttribute="trailing" id="p5d-lC-QmI"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="6Zh-8y-rKl" secondAttribute="bottom" id="phY-x6-Azl"/>
                 <constraint firstAttribute="trailing" secondItem="re4-RY-G3P" secondAttribute="trailing" id="rGB-Ph-sa7"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="6Zh-8y-rKl" secondAttribute="trailing" id="uFB-2I-mDH"/>
+                <constraint firstItem="YIf-Gp-0OR" firstAttribute="top" secondItem="AQe-xt-HDQ" secondAttribute="bottom" id="uIl-d4-VrP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>

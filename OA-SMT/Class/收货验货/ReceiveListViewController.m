@@ -69,9 +69,8 @@
     report.refreshBlock = ^{
         [weakSelf loadData];
     };
-    report.isReceive = YES;
-    report.status = model.status;
-    report.goodsId = model.goodsId;
+//    report.status = model.status;
+//    report.goodsId = model.goodsId;
     [self pushVC:report];
 }
 

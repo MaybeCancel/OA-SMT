@@ -111,7 +111,7 @@
         cell.leftString.text = self.leftTitles[indexPath.row];
         if (indexPath.row == 0) {
             if (self.isQualityDetail) {
-                cell.rightString.text = [self.firstText isEqualToString:@"1"] ? @"无问题" : @"有问题";;
+                cell.rightString.text = [self.firstText isEqualToString:@"0"] ? @"无问题" : @"有问题";;
             }
             else{
                 cell.rightString.text = [self.firstText isEqualToString:@"0"] ? @"否" : @"是";;

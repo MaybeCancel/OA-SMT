@@ -139,9 +139,8 @@
         NSData* data = UIImageJPEGRepresentation(image, 0.5);
         [formData appendPartWithFileData:data name:[NSString stringWithFormat:@"%@_SMT",name] fileName:imageName mimeType:@"image/jpeg"];
     } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"上传成功了啊啊啊");
         NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
+        NSLog(@"上传成功了啊啊啊：%@",dict);
         BOOL succe = YES;
          success(responseObject,succe,dict);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -59,7 +59,6 @@
     detailVC.refreshBlock = ^{
         [weakSelf loadData];
     };
-    detailVC.qualityId = model.qualityId;
     [self pushVC:detailVC];
 }
 
