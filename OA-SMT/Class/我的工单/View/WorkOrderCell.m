@@ -166,6 +166,9 @@
         case 4:
             workType = @"整改闭环";
             break;
+        case 5:
+            workType = @"其他";
+            break;
             
         default:
             break;

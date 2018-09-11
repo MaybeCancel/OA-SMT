@@ -1,12 +1,12 @@
 //
-//  WarningDetailViewController.m
+//  OtherDetailViewController.m
 //  OA-SMT
 //
-//  Created by Slark on 2018/3/15.
+//  Created by Maybe_文仔 on 2018/9/11.
 //  Copyright © 2018年 Slark. All rights reserved.
 //
 
-#import "WarningDetailViewController.h"
+#import "OtherDetailViewController.h"
 #import "ReportModel.h"
 #import "WarningReportView.h"
 #import "FoldListView.h"
@@ -16,7 +16,7 @@
 #import "ProblemTypeViewController.h"
 #import "SubmitBtnView.h"
 
-@interface WarningDetailViewController ()
+@interface OtherDetailViewController ()
 @property (nonatomic,strong)UIScrollView* scrollView;
 @property (nonatomic,strong)WarningReportView* boxView;
 @property (nonatomic,strong)AddImageView* addImageView;
@@ -25,15 +25,15 @@
 @property (nonatomic,strong)NSMutableArray* imageMArr;
 @end
 
-@implementation WarningDetailViewController
+@implementation OtherDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"告警处理报告";
+    self.title = @"其他处理报告";
     [self setUp];
     
     if (![self.model.status isEqual:@0]) {
-    
+        
         self.boxView.firstText = [self.model.isSolve isEqual:@0] ? @"0" : @"1";
         self.boxView.noteText = self.model.note;
         

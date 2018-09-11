@@ -35,8 +35,12 @@
 @property (nonatomic, copy) NSString *serialNumber;
 @property (nonatomic, copy) NSString *startDate;
 @property (nonatomic, copy) NSString *stationName;
+@property (nonatomic, copy) NSString *note;
 @property (nonatomic, strong) NSArray *workOrderAttachment;
+@property (nonatomic, strong) NSArray *imageArr;
 @property (nonatomic, copy) NSString *workOrderName;
 @property (nonatomic, assign) int workOrderTypeId;
 @property (nonatomic, strong) NSNumber *status;
+@property (nonatomic, strong) NSNumber *typeOfGoods;
+@property (nonatomic, strong) NSNumber *isSolve;
 @end

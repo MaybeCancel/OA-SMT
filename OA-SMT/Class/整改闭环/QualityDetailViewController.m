@@ -16,6 +16,7 @@
 #import "SubmitBtnView.h"
 
 @interface QualityDetailViewController ()
+@property (nonatomic,strong)UIScrollView* scrollView;
 @property (nonatomic,strong)WarningReportView* boxView;
 @property (nonatomic,strong)AddImageView* addImageView;
 @property (nonatomic,strong)ImageShowView* imageShowView;
@@ -29,26 +30,33 @@
     [super viewDidLoad];
     self.title = @"整改闭环";
     [self setUp];
+    
+    if (![self.model.status isEqual:@0]) {
+        
+        self.boxView.firstText = [self.model.isSolve isEqual:@0] ? @"0" : @"1";
+        self.boxView.noteText = self.model.note;
+        
+//        self.addImageView.hidden = YES;
+////        self.submitView.hidden = YES;
+////        self.boxView.userInteractionEnabled = NO;
+        
+        self.imageShowView.images = self.model.imageArr;
+        self.scrollView.contentSize = CGSizeMake(0,44*self.boxView.leftTitles.count+130+230*self.model.imageArr.count);
+    }
 }
 - (void)setUp{
-    [self.view addSubview:self.imageShowView];
-    [self.view addSubview:self.boxView];
-    [self.view addSubview:self.addImageView];
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addSubview:self.imageShowView];
+    [self.scrollView addSubview:self.boxView];
+    [self.scrollView addSubview:self.addImageView];
     [self.view addSubview:self.submitView];
     
     kWeakSelf(weakSelf);
-    [self.imageShowView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.view.mas_top);
+    [self.boxView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(weakSelf.scrollView.mas_top);
         make.left.mas_equalTo(weakSelf.view.mas_left);
         make.right.mas_equalTo(weakSelf.view.mas_right);
-        make.height.mas_equalTo(0);
-    }];
-    
-    [self.boxView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.imageShowView.mas_bottom);
-        make.left.mas_equalTo(weakSelf.imageShowView.mas_left);
-        make.right.mas_equalTo(weakSelf.imageShowView.mas_right);
-        make.height.mas_equalTo(44*(weakSelf.boxView.leftTitles.count+1)+180);
+        make.height.mas_equalTo(44*weakSelf.boxView.leftTitles.count+130);
     }];
     
     [self.addImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -57,17 +65,25 @@
         make.right.mas_equalTo(weakSelf.boxView.mas_right);
         make.height.mas_equalTo(115);
     }];
+    
+    [self.imageShowView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(weakSelf.boxView.mas_bottom);
+        make.left.mas_equalTo(weakSelf.view.mas_left);
+        make.right.mas_equalTo(weakSelf.view.mas_right);
+    }];
 }
 
-//提交告警处理报告
+//提交整改闭环报告
 -(void)submitReceiveGoodsInfoReport{
     kWeakSelf(weakSelf);
     [LoadingView showProgressHUD:@""];
+    NSString *status = [self.boxView.firstText isEqualToString:@"0"] ? @"2" : @"1";
     NSMutableDictionary *para = [NSMutableDictionary new];
     [para setObject:self.model.id forKey:@"id"];
     [para setObject:self.boxView.firstText forKey:@"isSolve"];
     [para setObject:self.boxView.noteText forKey:@"note"];
-
+    [para setObject:status forKey:@"status"];
+    
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:UpdateWorkOrder]
                                                    isPost:YES
                                                    Params:para];
@@ -112,6 +128,15 @@
 
 #pragma mark
 #pragma mark -- UIImagePickerControllerDelegate
+
+-(UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRM(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _scrollView.bounces = NO;
+        _scrollView.backgroundColor = RGBColor(237, 237, 237);
+    }
+    return _scrollView;
+}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];

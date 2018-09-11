@@ -13,6 +13,7 @@
 #import "WarningDetailViewController.h"
 #import "InstallTestViewController.h"
 #import "QualityDetailViewController.h"
+#import "OtherDetailViewController.h"
 
 @interface WorkOrderViewController ()
 
@@ -94,6 +95,16 @@
         case 4://整改闭环（完成）
         {
             QualityDetailViewController* detailVC = [[QualityDetailViewController alloc]init];
+            detailVC.refreshBlock = ^{
+                [weakSelf loadData];
+            };
+            detailVC.model = model;
+            [self pushVC:detailVC];
+        }
+            break;
+        case 5://其他工单类型（完成）
+        {
+            OtherDetailViewController* detailVC = [[OtherDetailViewController alloc]init];
             detailVC.refreshBlock = ^{
                 [weakSelf loadData];
             };

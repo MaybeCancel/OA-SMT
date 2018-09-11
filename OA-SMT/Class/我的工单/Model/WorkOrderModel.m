@@ -10,4 +10,16 @@
 
 @implementation WorkOrderModel
 
+-(NSArray *)imageArr{
+    if (!_imageArr) {
+        NSMutableArray *imgMArr = [NSMutableArray new];
+        for (NSDictionary *dic in self.workOrderAttachment) {
+            NSString *imgUrl = [NSString stringWithFormat:@"%@/%@",BASE_IMGURL,dic[@"attachmentName"]];
+            [imgMArr addObject:imgUrl];
+        }
+        _imageArr = [NSArray arrayWithArray:imgMArr];
+    }
+    return _imageArr;
+}
+
 @end

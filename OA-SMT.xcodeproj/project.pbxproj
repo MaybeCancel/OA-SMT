@@ -51,6 +51,7 @@
 		1D9183C720C261BA002D7EBD /* QualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9183C620C261BA002D7EBD /* QualityModel.m */; };
 		1D9183CA20C26944002D7EBD /* QualityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9183C920C26944002D7EBD /* QualityDetailViewController.m */; };
 		1D9183CD20C4D45F002D7EBD /* QualityReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9183CC20C4D45F002D7EBD /* QualityReportModel.m */; };
+		1DA46DFE21479E8F00417A35 /* OtherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA46DFD21479E8F00417A35 /* OtherDetailViewController.m */; };
 		1DC8735620D0FCCA004F842C /* ReViewPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC8735420D0FCCA004F842C /* ReViewPhotoView.m */; };
 		1DC8735920D118DA004F842C /* HasUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC8735820D118DA004F842C /* HasUploadViewController.m */; };
 		1DC8735D20DC8F6D004F842C /* StateListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC8735B20DC8F6D004F842C /* StateListCell.m */; };
@@ -272,6 +273,8 @@
 		1D9183C920C26944002D7EBD /* QualityDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QualityDetailViewController.m; sourceTree = "<group>"; };
 		1D9183CB20C4D45F002D7EBD /* QualityReportModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QualityReportModel.h; sourceTree = "<group>"; };
 		1D9183CC20C4D45F002D7EBD /* QualityReportModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QualityReportModel.m; sourceTree = "<group>"; };
+		1DA46DFC21479E8F00417A35 /* OtherDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherDetailViewController.h; sourceTree = "<group>"; };
+		1DA46DFD21479E8F00417A35 /* OtherDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherDetailViewController.m; sourceTree = "<group>"; };
 		1DC8735420D0FCCA004F842C /* ReViewPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReViewPhotoView.m; sourceTree = "<group>"; };
 		1DC8735520D0FCCA004F842C /* ReViewPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReViewPhotoView.h; sourceTree = "<group>"; };
 		1DC8735720D118DA004F842C /* HasUploadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HasUploadViewController.h; sourceTree = "<group>"; };
@@ -667,6 +670,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		1DA46DFB21479E5100417A35 /* 其他类型工单 */ = {
+			isa = PBXGroup;
+			children = (
+				1DA46DFC21479E8F00417A35 /* OtherDetailViewController.h */,
+				1DA46DFD21479E8F00417A35 /* OtherDetailViewController.m */,
+			);
+			path = "其他类型工单";
+			sourceTree = "<group>";
+		};
 		1DC8735220D0FC68004F842C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -902,6 +914,7 @@
 		5B94AFDA1FF3740700E5B026 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				1DA46DFB21479E5100417A35 /* 其他类型工单 */,
 				1D0896D92137C8C000533913 /* 安装施工 */,
 				1D8F57FA212EC7BE00072469 /* 我的工单 */,
 				5B94B0051FF382F000E5B026 /* 首页 */,
@@ -1461,6 +1474,7 @@
 				5B42F063205A1707001D07B3 /* WarningCell.m in Sources */,
 				1D6CBC3B20C513BA002B1513 /* LMJDropdownMenu.m in Sources */,
 				5B94AFFE1FF37AAA00E5B026 /* LoadingView.m in Sources */,
+				1DA46DFE21479E8F00417A35 /* OtherDetailViewController.m in Sources */,
 				5BB0D2DE20564D7D009C2793 /* NHCustomSegmentView.m in Sources */,
 				1D9183CD20C4D45F002D7EBD /* QualityReportModel.m in Sources */,
 				5B8DC7422048F532008D8F04 /* DeleteBtnView.m in Sources */,

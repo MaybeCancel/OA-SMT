@@ -14,7 +14,7 @@
 #import "SubmitBtnView.h"
 
 @interface GoodReportViewController ()
-
+@property (nonatomic,strong)UIScrollView* scrollView;
 @property (nonatomic,strong)OpenBoxReporyView* boxView;
 @property (nonatomic,strong)AddImageView* addImageView;
 @property (nonatomic,strong)ImageShowView* imageShowView;
@@ -33,26 +33,44 @@
     [self setUp];
     [self loadData];
     
-    if ([self.model.status isEqual:@0]) {
-        [self.view addSubview:self.submitView];
-    }
-    else{
+    if (![self.model.status isEqual:@0]) {
+
+        if ([self.model.typeOfGoods isEqual:@0]) {
+            self.boxView.firstText = @"批量收货";
+        }
+        else if ([self.model.typeOfGoods isEqual:@1]){
+            self.boxView.firstText = @"开箱收货";
+        }
+        else{
+            self.boxView.firstText = @"问题货物";
+        }
+        self.boxView.secondText = [self.model.endDate substringToIndex:10];
+        self.boxView.thirdText = [self.model.isSolve isEqual:@0] ? @"0" : @"1";
+        self.boxView.noteText = self.model.note;
+        
+        self.addImageView.hidden = YES;
+        self.submitView.hidden = YES;
+        self.boxView.userInteractionEnabled = NO;
+        
+        self.imageShowView.images = self.model.imageArr;
+        self.scrollView.contentSize = CGSizeMake(0,44*(self.boxView.leftTitles.count+1)+130+230*self.model.imageArr.count);
         
     }
 }
 
 - (void)setUp{
     kWeakSelf(weakSelf);
-    
-    [self.view addSubview:self.boxView];
-    [self.view addSubview:self.addImageView];
-    [self.view addSubview:self.imageShowView];
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addSubview:self.boxView];
+    [self.scrollView addSubview:self.addImageView];
+    [self.scrollView addSubview:self.imageShowView];
+    [self.view addSubview:self.submitView];
 
     [self.boxView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(weakSelf.view.mas_top);
+        make.top.mas_equalTo(weakSelf.scrollView.mas_top);
         make.left.mas_equalTo(weakSelf.view.mas_left);
         make.right.mas_equalTo(weakSelf.view.mas_right);
-        make.height.mas_equalTo(44*(weakSelf.boxView.leftTitles.count+1)+180);
+        make.height.mas_equalTo(44*(weakSelf.boxView.leftTitles.count+1)+130);
     }];
 
     [self.addImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -67,19 +85,21 @@
         make.left.mas_equalTo(weakSelf.boxView.mas_left);
         make.right.mas_equalTo(weakSelf.boxView.mas_right);
     }];
-
+    
 }
 
 //提交收货报告
 -(void)submitReceiveGoodsInfoReport{
     kWeakSelf(weakSelf);
     [LoadingView showProgressHUD:@""];
+    NSString *status = [self.boxView.thirdText isEqualToString:@"0"] ? @"2" : @"1";
     NSMutableDictionary *para = [NSMutableDictionary new];
     [para setObject:self.model.id forKey:@"id"];    //工单id
     [para setObject:self.typeOfGoods forKey:@"typeOfGoods"];  //货物类型
     [para setObject:self.boxView.secondText forKey:@"endData"];  //货物日期
     [para setObject:self.boxView.thirdText forKey:@"isSolve"];   //是否缺货
     [para setObject:self.boxView.noteText forKey:@"note"];   //货物问题描述
+    [para setObject:status forKey:@"status"];   //工单状态
     
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:UpdateWorkOrder]
                                                    isPost:YES
@@ -168,6 +188,16 @@
 
 #pragma mark
 #pragma mark -- LazyLoad
+
+-(UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRM(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _scrollView.bounces = NO;
+        _scrollView.backgroundColor = RGBColor(237, 237, 237);
+    }
+    return _scrollView;
+}
+
 
 -(OpenBoxReporyView *)boxView{
     if (!_boxView) {

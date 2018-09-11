@@ -34,7 +34,7 @@
 
 -(void)setupUI{
     
-    self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 30, SCREEN_WIDTH, 0) style:(UITableViewStylePlain)];
+    self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0) style:(UITableViewStylePlain)];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -47,7 +47,8 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ImageCell *cell = [ImageCell nibCellWithTableView:tableView];
-    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:self.images[indexPath.row]] placeholderImage:nil];
+    NSString *imgUrl = [self.images[indexPath.row]  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"default"]];
     return cell;
 }
 
