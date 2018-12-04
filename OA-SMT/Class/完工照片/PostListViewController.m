@@ -41,6 +41,30 @@
     [self.view addSubview:self.tableView];
 }
 
+-(void)updateStatus{
+    kWeakSelf(weakSelf);
+    NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
+    [para setObject:[UserDef objectForKey:@"userId"] forKey:@"userId"];
+    [para setObject:self.model.id forKey:@"workOrderId"];
+    [para setObject:self.model.projectId forKey:@"projectId"];
+    [para setObject:self.model.stationId forKey:@"stationId"];
+    
+    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:updateWorkOrderStatus] isPost:YES Params:para];
+    [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
+        NSLog(@"%@",jsonDic);
+        if ([jsonDic[@"resultCode"] isEqualToString:@"100"]) {
+            [LoadingView showAlertHUD:@"全部上传完成" duration:1];
+            if (weakSelf.refreshBlock) {
+                weakSelf.refreshBlock();
+            }
+            [weakSelf performSelector:@selector(pop) withObject:nil afterDelay:1.0];
+        }
+        else{
+            [LoadingView showAlertHUD:@"上传失败" duration:1.0];
+        }
+    }];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.shootedArray.count;
 }
@@ -61,14 +85,15 @@
         [weakSelf.shootedArray removeObject:image];
         weakSelf.willUploadcount--;
         if (weakSelf.willUploadcount == 0) {
-            [LoadingView showAlertHUD:@"全部上传完成" duration:1];
             [weakSelf.shootedArray removeAllObjects];
+            [weakSelf updateStatus];
         }
         weakSelf.countLable.text = [NSString stringWithFormat:@"等待上传(%ld)",weakSelf.willUploadcount];
         [weakSelf.tableView reloadData];
     };
     return cell;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
 }

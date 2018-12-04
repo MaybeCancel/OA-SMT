@@ -143,11 +143,11 @@
     self.workNumberLab.text = [NSString stringWithFormat:@"工单流水号：%@",model.serialNumber];
     if ([model.status isEqual:@0]) {
         self.workStateLab.text = @"未开始";
-        self.workStateLab.backgroundColor = RGBColor(74, 142, 233);
+        self.workStateLab.backgroundColor = RGBColor(204, 204, 204);
     }
     else if ([model.status isEqual:@1]){
         self.workStateLab.text = @"进行中";
-        self.workStateLab.backgroundColor = RGBColor(204, 204, 204);
+        self.workStateLab.backgroundColor = RGBColor(74, 142, 233);
     }
     else if ([model.status isEqual:@2]){
         self.workStateLab.text = @"已完成";

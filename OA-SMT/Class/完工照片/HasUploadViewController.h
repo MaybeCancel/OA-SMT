@@ -10,4 +10,7 @@
 
 @interface HasUploadViewController : BaseTableViewController
 @property (nonatomic,strong)NSMutableArray* hasUploadMArr;
+@property (nonatomic,copy)NSString* stationId;
+@property (nonatomic,copy)NSString* projectId;
+
 @end

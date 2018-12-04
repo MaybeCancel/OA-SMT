@@ -15,6 +15,7 @@
 #import "WarningInfoModel.h"
 #import "ProblemTypeViewController.h"
 #import "SubmitBtnView.h"
+#import "ShootPhotoViewController.h"
 
 @interface OtherDetailViewController ()
 @property (nonatomic,strong)UIScrollView* scrollView;
@@ -29,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"其他处理报告";
+    self.title = @"其他任务";
     [self setUp];
     
     if (![self.model.status isEqual:@0]) {
@@ -130,17 +131,6 @@
 }
 
 #pragma mark
-#pragma mark -- UIImagePickerControllerDelegate
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    [self saveImageToPhotoAlbum:image];
-    [self.imageMArr addObject:image];
-    self.addImageView.images = self.imageMArr;
-    [self dismiss];
-}
-
-#pragma mark
 #pragma mark -- LazyLoad
 
 -(UIScrollView *)scrollView{
@@ -190,7 +180,13 @@
         _addImageView.title = @"照片";
         kWeakSelf(weakSelf);
         _addImageView.tapHandle = ^{
-            [weakSelf OpenAlbumAlert];
+            ShootPhotoViewController* shoot = [[ShootPhotoViewController alloc]init];
+            [weakSelf presentToVC:shoot];
+            shoot.shootPicHandle = ^(UIImage *image) {
+                [weakSelf saveImageToPhotoAlbum:image];
+                [weakSelf.imageMArr addObject:image];
+                weakSelf.addImageView.images = weakSelf.imageMArr;
+            };
         };
         _addImageView.deleteImageBlock = ^(int index) {
             [weakSelf.imageMArr removeObjectAtIndex:index];

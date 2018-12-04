@@ -1,16 +1,15 @@
 //
-//  ShootPicViewController.m
+//  ShootPhotoViewController.m
 //  OA-SMT
 //
-//  Created by Slark on 2018/1/12.
+//  Created by Maybe_文仔 on 2018/9/13.
 //  Copyright © 2018年 Slark. All rights reserved.
 //
 
-#import "ShootPicViewController.h"
+#import "ShootPhotoViewController.h"
 #import <AVFoundation/AVFoundation.h>
-#import "PicTips.h"
 
-@interface ShootPicViewController ()<AVCaptureMetadataOutputObjectsDelegate,UIAlertViewDelegate>
+@interface ShootPhotoViewController ()<AVCaptureMetadataOutputObjectsDelegate,UIAlertViewDelegate>
 //捕获设备，通常是前置摄像头，后置摄像头，麦克风（音频输入）
 @property(nonatomic)AVCaptureDevice *device;
 //AVCaptureDeviceInput 代表输入设备，他使用AVCaptureDevice 来初始化
@@ -32,13 +31,12 @@
 
 //第二次拍摄 判断
 @property (nonatomic,assign)BOOL secondShoot;
-@property (nonatomic,strong)PicTips* tips;
 @property (nonatomic,strong)UILabel* littleTip;
 
 
 @end
 
-@implementation ShootPicViewController
+@implementation ShootPhotoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,11 +51,7 @@
 }
 - (void)customUI{
     /*水印视图*/
-    _tips = [PicTips shareShootPic];
-    _tips.frame = CGRM(15, 15, 220, 135);
-    [_tips loadInfoFromModel:self.siteModel];
-    [self.view addSubview:_tips];
-   
+    
     self.littleTip = [[UILabel alloc]initWithFrame:CGRM(0,SCREEN_HEIGHT - 15 - 20, SCREEN_WIDTH-15, 15)];
     self.littleTip.text = @"照片采用ESMT移动APP拍摄";
     self.littleTip.textAlignment = NSTextAlignmentRight;
@@ -139,7 +133,7 @@
         }
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-
+    
 }
 
 - (void)shootimage{
@@ -163,10 +157,8 @@
         //打水印
         self.image = [UIImage addWatemarkImageWithLogoImage:self.image watemarkImage:[UIImage imageWithUIView:self.littleTip] logoImageRect:self.previewLayer.frame watemarkImageRect:(CGRM(0,SCREEN_HEIGHT - 15 - 20, SCREEN_WIDTH, 15))];
         
-        self.image = [UIImage addWatemarkImageWithLogoImage:self.image watemarkImage:[UIImage imageWithUIView:self.tips] logoImageRect:self.previewLayer.frame watemarkImageRect:CGRM(15, 15, 220, 135)];
-        [self.image loadInfoFromModel:self.siteModel];
         self.imageView.image = self.image;
-      
+        
         self.secondShoot = YES;
     }];
 }
@@ -203,5 +195,4 @@
     }
     [LoadingView showAlertHUD:msg duration:1];
 }
-
 @end

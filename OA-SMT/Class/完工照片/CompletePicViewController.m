@@ -46,6 +46,8 @@
     /*站点Model初始化*/
     self.siteModel = [[SiteInfoModel alloc]init];
     self.siteModel.objectType = @"新建";
+    self.siteModel.objectName =  self.model.projectName;
+    self.siteModel.projectId = self.model.projectId;
     self.title = @"完工照片";
     [self setUpUI];
     [self adminData];
@@ -86,10 +88,14 @@
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetStationData] isPost:YES Params:@{@"userId":[UserDef objectForKey:@"userId"]}];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSArray* jsonArray = jsonDic[@"result"];
-        NSDictionary* resultDic = jsonArray.firstObject;
-        self.siteModel.objectName =  resultDic[@"projectName"];
-        self.siteModel.stationInfoArray = resultDic[@"stations"];
-        self.siteModel.projectId = resultDic[@"projectId"];
+        if (jsonArray.count) {
+            for (NSDictionary *dic in jsonArray) {
+                NSString *projectId = [NSString stringWithFormat:@"%@",dic[@"projectId"]];
+                if ([projectId isEqualToString:self.model.projectId]) {
+                    self.siteModel.stationInfoArray = dic[@"stations"];
+                }
+            }
+        }
         self.siteModel.steering = [UserDef objectForKey:@"userName"];
         [self.tableView reloadData];
     }];
@@ -255,6 +261,7 @@
     };
     
     site.infoArray = self.siteModel.stationInfoArray;
+    site.stationId = self.model.stationId;
     self.Hidden_BackTile = YES;
     if (indexPath.row == 2) {
         site.siteInfo = @"siteName";
@@ -345,17 +352,31 @@
             PostListViewController* listView = [[PostListViewController alloc]init];
             listView.shootedArray = weakSelf.uploadMArr;
             listView.hasUploadMArr = weakSelf.hasUploadMArr;
+            listView.model = weakSelf.model;
+            listView.refreshBlock = ^{
+                if (weakSelf.refreshBlock) {
+                    weakSelf.refreshBlock();
+                }
+            };
             [weakSelf pushVC:listView];
         };
         
         //已上传的回调
         _bottomView.rightBottombtnHandle = ^{
-            if (weakSelf.hasUploadMArr.count == 0) {
-                [LoadingView showAlertHUD:@"暂无已上传照片" duration:1];
-                return ;
-            }
+//            if (weakSelf.hasUploadMArr.count == 0) {
+//                [LoadingView showAlertHUD:@"暂无已上传照片" duration:1];
+//                return ;
+//            }
             HasUploadViewController* listView = [[HasUploadViewController alloc]init];
-            listView.hasUploadMArr = weakSelf.hasUploadMArr;
+            listView.projectId = weakSelf.siteModel.projectId;
+            NSString *stationId = @"";
+            for (NSDictionary *dic in weakSelf.siteModel.stationInfoArray) {
+                stationId = [NSString stringWithFormat:@"%@,%@",dic[@"stationId"],stationId];
+            }
+            if (stationId.length > 0) {
+                stationId = [stationId substringToIndex:stationId.length-1];
+            }
+            listView.stationId = stationId;
             [weakSelf pushVC:listView];
         };
     }

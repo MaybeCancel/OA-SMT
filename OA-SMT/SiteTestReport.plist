@@ -47,6 +47,7 @@
 		<array>
 			<string>5.1 BSC侧确认基站状态正常并且没有告警</string>
 			<string>5.2 BSC侧确认基站有用户占用并且得到BSC确认可以离开现场</string>
+			<string>5.3 RNC工程师通知可以离开基站</string>
 		</array>
 	</dict>
 	<dict>

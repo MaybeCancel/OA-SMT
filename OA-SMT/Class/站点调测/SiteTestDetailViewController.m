@@ -30,15 +30,7 @@
     _timer = [NSTimer scheduledTimerWithTimeInterval:IntervalTime target:self selector:@selector(changeSelectedTimer) userInfo:nil repeats:YES];
     _isSelected = YES;
     kWeakSelf(weakSelf);
-    if ([self.model.status isEqual:@0]) {   //未开始
-        self.rightItemTitle = @"保存";
-        self.rightItemHandle = ^{
-            [weakSelf uploadReport];
-        };
-        [self setupUI];
-        [self makeData];
-    }
-    else if ([self.model.status isEqual:@1]){   //进行中
+    if ([self.model.status isEqual:@0] || [self.model.status isEqual:@1]) {   //未开始、进行中
         self.rightItemTitle = @"保存";
         self.rightItemHandle = ^{
             [weakSelf uploadReport];
@@ -79,6 +71,9 @@
         NSLog(@"result:%@",jsonDic);
         if ([jsonDic[@"result"] isKindOfClass:[NSDictionary class]]) {
             weakSelf.testInfoDic = jsonDic[@"result"];
+            [weakSelf makeData];
+        }
+        else{
             [weakSelf makeData];
         }
     }];
@@ -127,10 +122,11 @@
 -(void)makeProblemData{
     kWeakSelf(weakSelf);
     [self.problemMArr removeAllObjects];
-    for (NSArray *arr in self.reportMArr) {
+    for (int i = 0; i < self.reportMArr.count; i++) {
+        NSArray *arr = self.reportMArr[i];
         [arr enumerateObjectsUsingBlock:^(CellStateModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
             if (model.problem.length) {
-                [weakSelf.problemMArr addObject:model.problem];
+                [weakSelf.problemMArr addObject:[NSString stringWithFormat:@"%d.%d %@",i+1,(int)idx+1,model.problem]];
             }
         }];
     }
@@ -157,8 +153,28 @@
             }
         }];
     }
-    [para setObject:status forKey:@"status"];// 1：进行中 2：已完成
+//    [para setObject:status forKey:@"status"];// 1：进行中 2：已完成
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:AddTestInfo] isPost:YES Params:para];
+    [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
+        NSLog(@"%@",jsonDic);
+        if ([jsonDic[@"resultCode"] isEqualToString:@"100"]) {
+            [weakSelf updateStatus];
+        }
+        else{
+            [LoadingView showAlertHUD:@"提交失败" duration:1.0];
+        }
+    }];
+}
+
+-(void)updateStatus{
+    kWeakSelf(weakSelf);
+    NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
+    [para setObject:[UserDef objectForKey:@"userId"] forKey:@"userId"];
+    [para setObject:self.model.id forKey:@"workOrderId"];
+    [para setObject:self.model.projectId forKey:@"projectId"];
+    [para setObject:self.model.stationId forKey:@"stationId"];
+    
+    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:updateWorkOrderStatus] isPost:YES Params:para];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSLog(@"%@",jsonDic);
         if ([jsonDic[@"resultCode"] isEqualToString:@"100"]) {

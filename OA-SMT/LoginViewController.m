@@ -11,9 +11,11 @@
 #import "SMAlert.h"
 
 @interface LoginViewController ()<UIAlertViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *userNameText;
 @property (weak, nonatomic) IBOutlet UITextField *passwordText;
-
+@property (weak, nonatomic) IBOutlet UIButton *rememberPwdBtn;
+@property (assign, nonatomic) BOOL isRememberPWD;
 @end
 
 @implementation LoginViewController
@@ -24,7 +26,32 @@
     if ([UserDef objectForKey:@"phone"]) {
         self.userNameText.text = [UserDef objectForKey:@"phone"];
     }
+    
+    NSNumber *isRememberPwd = [UserDef objectForKey:@"isRememberPwd"];
+    if ([isRememberPwd isEqual:@(1)]) {
+        self.isRememberPWD = YES;
+        self.passwordText.text = [UserDef objectForKey:@"password"];
+    }
+    else{
+        self.isRememberPWD = NO;
+    }
+    [self selectRememberPwdAction];
 }
+
+- (IBAction)rememberPasswordClick:(id)sender {
+    self.isRememberPWD = !self.isRememberPWD;
+    [self selectRememberPwdAction];
+}
+
+-(void)selectRememberPwdAction{
+    if (self.isRememberPWD) {
+        [self.rememberPwdBtn setImage:[UIImage imageNamed:@"selected"] forState:(UIControlStateNormal)];
+    }
+    else{
+        [self.rememberPwdBtn setImage:[UIImage imageNamed:@"unselect"] forState:(UIControlStateNormal)];
+    }
+}
+
 - (IBAction)ForgetClick:(UIButton *)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"需要给超级管理员发送邮箱重置账号,确定重置?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -40,11 +67,10 @@
 
 - (IBAction)LoginClick:(UIButton *)sender {
     [LoadingView showProgressHUD:@""];
-    self.userNameText.text = @"18952030057";
-    self.passwordText.text = @"123456789";
+    kWeakSelf(weakSelf);
     NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
-    if (0) {
-        [para setObject:@"13921923093" forKey:@"phone"];
+    if (1) {
+        [para setObject:@"15996220369" forKey:@"phone"];
         [para setObject:[@"123456789" md5HexDigest] forKey:@"password"];
     }
     else{
@@ -62,8 +88,11 @@
             NSDictionary* dic = jsonDic[@"result"];
             [UserDef setObject:dic[@"phone"] forKey:@"phone"];
             [UserDef setObject:dic[@"userName"] forKey:@"userName"];
+            [UserDef setObject:weakSelf.passwordText.text forKey:@"password"];
             [UserDef setObject:dic[@"userId"] forKey:@"userId"];
             [UserDef setObject:dic[@"email"] forKey:@"email"];
+            [UserDef setObject:@(self.isRememberPWD) forKey:@"isRememberPwd"];
+            
             MainViewController* main = [[MainViewController alloc]init];
             UINavigationController* navi = [[UINavigationController alloc]initWithRootViewController:main];
             kWindow.rootViewController = navi;

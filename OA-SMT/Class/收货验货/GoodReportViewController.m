@@ -12,6 +12,7 @@
 #import "AddImageView.h"
 #import "ImageShowView.h"
 #import "SubmitBtnView.h"
+#import "ShootPhotoViewController.h"
 
 @interface GoodReportViewController ()
 @property (nonatomic,strong)UIScrollView* scrollView;
@@ -123,9 +124,15 @@
     if (self.imageMArr.count > 1) {
         kWeakSelf(weakSelf);
         NSMutableArray *imagePath = [NSMutableArray new];
+        
+        NSMutableDictionary *params = [NSMutableDictionary new];
+        [params setObject:[NSString stringWithFormat:@"%d",self.model.workOrderTypeId] forKey:@"workOrderTypeId"];
+        [params setObject:self.model.id forKey:@"workOrderId"];
+        [params setObject:@"" forKey:@"note"];
+        
         for (int i = 0; i < self.imageMArr.count-1; i++) {
             NSString *fileName = [NSString stringWithFormat:@"%@_%d.jpg",[NSDate dateStringWithFormat:@"HHmmss"],i];
-            [BaseRequest UploadImageWithUrl:[CCString getHeaderUrl:UploadFile] params:nil image:self.imageMArr[i] fielName:fileName completion:^(NSDictionary *jsonDic) {
+            [BaseRequest UploadImageWithUrl:[CCString getHeaderUrl:UploadWorkFile] params:params image:self.imageMArr[i] fielName:fileName completion:^(NSDictionary *jsonDic) {
                 
                 [imagePath addObjectsFromArray:jsonDic[@"result"]];
                 if (imagePath.count == weakSelf.imageMArr.count-1) {
@@ -166,16 +173,6 @@
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
-}
-#pragma mark
-#pragma mark -- UIImagePickerControllerDelegate
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    [self saveImageToPhotoAlbum:image];
-    [self.imageMArr addObject:image];
-    self.addImageView.images = self.imageMArr;
-    [self dismiss];
 }
 
 - (void)updateFrame{
@@ -272,7 +269,13 @@
         _addImageView.title = @"照片";
         kWeakSelf(weakSelf);
         _addImageView.tapHandle = ^{
-            [weakSelf OpenAlbumAlert];
+            ShootPhotoViewController* shoot = [[ShootPhotoViewController alloc]init];
+            [weakSelf presentToVC:shoot];
+            shoot.shootPicHandle = ^(UIImage *image) {
+                [weakSelf saveImageToPhotoAlbum:image];
+                [weakSelf.imageMArr addObject:image];
+                weakSelf.addImageView.images = weakSelf.imageMArr;
+            };
         };
         _addImageView.deleteImageBlock = ^(int index) {
             [weakSelf.imageMArr removeObjectAtIndex:index];

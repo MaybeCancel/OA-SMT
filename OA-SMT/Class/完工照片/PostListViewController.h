@@ -7,8 +7,10 @@
 //
 
 #import "BaseTableViewController.h"
+#import "WorkOrderModel.h"
 
 @interface PostListViewController : BaseTableViewController
 @property (nonatomic,strong)NSMutableArray* shootedArray;
 @property (nonatomic,strong)NSMutableArray* hasUploadMArr;
+@property (nonatomic, strong) WorkOrderModel *model;
 @end

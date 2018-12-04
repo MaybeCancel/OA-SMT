@@ -21,34 +21,43 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIf-Gp-0OR">
-                    <rect key="frame" x="0.0" y="566" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="576" width="375" height="45"/>
+                    <color key="backgroundColor" red="0.2156862745" green="0.44705882349999998" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="xNA-Cd-UC3"/>
+                        <constraint firstAttribute="height" constant="45" id="xNA-Cd-UC3"/>
                     </constraints>
-                    <state key="normal" title="完工照片"/>
+                    <state key="normal" title="完工照片">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
                     <connections>
                         <action selector="toCompletePicVC:" destination="-1" eventType="touchUpInside" id="7mi-ES-4MU"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Zh-8y-rKl">
-                    <rect key="frame" x="188" y="617" width="187" height="50"/>
-                    <state key="normal" title="调测报告"/>
+                    <rect key="frame" x="188" y="622" width="187" height="45"/>
+                    <color key="backgroundColor" red="0.13725490200000001" green="0.70980392160000005" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="调测报告">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
                     <connections>
                         <action selector="toTestReportVC:" destination="-1" eventType="touchUpInside" id="pGH-AW-CLl"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PvJ-zG-E0X">
-                    <rect key="frame" x="0.0" y="617" width="187" height="50"/>
-                    <state key="normal" title="安装报告"/>
+                    <rect key="frame" x="0.0" y="622" width="187" height="45"/>
+                    <color key="backgroundColor" red="0.13725490200000001" green="0.70980392160000005" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="安装报告">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
                     <connections>
                         <action selector="toInstallReportVC:" destination="-1" eventType="touchUpInside" id="0ZL-OY-fOW"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fso-t7-gop">
-                    <rect key="frame" x="187" y="617" width="1" height="50"/>
+                    <rect key="frame" x="187" y="622" width="1" height="45"/>
                     <color key="backgroundColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="G81-rY-ay0"/>
+                        <constraint firstAttribute="height" constant="45" id="G81-rY-ay0"/>
                         <constraint firstAttribute="width" constant="1" id="a7e-jr-NiB"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -56,7 +65,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="re4-RY-G3P">
-                    <rect key="frame" x="0.0" y="616" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="621" width="375" height="1"/>
                     <color key="backgroundColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="NNr-1V-c4e"/>
@@ -66,7 +75,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQe-xt-HDQ">
-                    <rect key="frame" x="0.0" y="565" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="575" width="375" height="1"/>
                     <color key="backgroundColor" red="0.32156862749999998" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="5FI-1f-hwW"/>

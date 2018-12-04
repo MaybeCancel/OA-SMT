@@ -34,17 +34,35 @@
     }
     self.dataArray = [NSMutableArray new];
     self.stationIdArray = [NSMutableArray new];
+    NSArray *stationIdArr = [self.stationId componentsSeparatedByString:@","];
     if ([self.siteInfo isEqualToString:@"siteName"]) {
         self.title = @"选择站名";
         for (NSDictionary* dic in self.infoArray) {
-            [self.dataArray addObject:dic[@"stationName"]];
+            NSString *stationId = [NSString stringWithFormat:@"%@",dic[@"stationId"]];
+            if (stationIdArr) {
+                if ([stationIdArr containsObject:stationId]) {
+                    [self.dataArray addObject:dic[@"stationName"]];
+                }
+            }
+            else{
+                [self.dataArray addObject:dic[@"stationName"]];
+            }
         }
         [self.tableView reloadData];
     }else if ([self.siteInfo isEqualToString:@"siteNumber"]){
         self.title = @"选择站号";
         for (NSDictionary* dic in self.infoArray) {
-            [self.dataArray addObject:dic[@"stationCode"]];
-            [self.stationIdArray addObject:dic[@"stationId"]];
+            NSString *stationId = [NSString stringWithFormat:@"%@",dic[@"stationId"]];
+            if (stationIdArr) {
+                if ([stationIdArr containsObject:stationId]) {
+                    [self.dataArray addObject:dic[@"stationCode"]];
+                    [self.stationIdArray addObject:dic[@"stationId"]];
+                }
+            }
+            else{
+                [self.dataArray addObject:dic[@"stationCode"]];
+                [self.stationIdArray addObject:dic[@"stationId"]];
+            }
         }
         [self.tableView reloadData];
     }

@@ -29,4 +29,5 @@ typedef void(^CCAPICompletion) (NSDictionary * jsonDic);
 + (void)UploadImageWithUrl:(NSString*)url params:(NSDictionary *)params image:(UIImage*)image fielName:(NSString *)fileName completion:(CCAPICompletion)completion;
 
 
+
 @end

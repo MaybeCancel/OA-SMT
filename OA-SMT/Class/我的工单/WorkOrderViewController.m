@@ -16,6 +16,10 @@
 #import "OtherDetailViewController.h"
 
 @interface WorkOrderViewController ()
+{
+    int _currentPage;
+    int _size;
+}
 
 @end
 
@@ -26,26 +30,80 @@
     
     self.title = @"我的工单";
     
-    [self loadData];
-} 
+    [self setupUI];
+    [self refreshHeaderData];
+}
 
-- (void)loadData{
+-(void)setupUI{
+    //上拉加载多次调用的bug
+    self.tableView.estimatedRowHeight =0;
+    self.tableView.estimatedSectionHeaderHeight =0;
+    self.tableView.estimatedSectionFooterHeight =0;
+    
+    MJRefreshNormalHeader * nomalHeader = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshHeaderData)];
+    //设置刷新提示语句
+    [nomalHeader setTitle:@"刷新中" forState:MJRefreshStateRefreshing];
+    //设置字体和文字
+    nomalHeader.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = nomalHeader;
+    
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(refreshFooterData)];
+    [footer setTitle:@"没有更多了" forState:(MJRefreshStateNoMoreData)];
+    // 设置文字
+    [footer setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
+    self.tableView.mj_footer = footer;
+}
+
+-(void)refreshHeaderData{
     kWeakSelf(weakSelf);
+    _currentPage = 0;
+    _size = 0;
     [LoadingView showProgressHUD:@""];
     NSMutableDictionary *param = [NSMutableDictionary new];
     [param setObject:[UserDef objectForKey:@"phone"] forKey:@"accountName"];
-    [param setObject:@"0" forKey:@"currentPage"];
+    [param setObject:[NSString stringWithFormat:@"%d",_currentPage] forKey:@"currentPage"];
     [param setObject:@"10" forKey:@"pageSize"];
     [param setObject:@"" forKey:@"workOrderTypeId"];
     BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetWorkOrderList] isPost:YES Params:param];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
-        NSArray* array = jsonDic[@"result"];
-        [weakSelf.dataArray removeAllObjects];
-        for (NSDictionary* dic in array) {
-            WorkOrderModel* model = [WorkOrderModel ModelWithDic:dic];
-            [weakSelf.dataArray addObject:model];
+        [weakSelf.tableView.mj_header endRefreshing];
+        if ([jsonDic[@"resultCode"] respondsToSelector:@selector(isEqualToString:)] && [jsonDic[@"resultCode"] isEqualToString:@"100"]) {
+            _size = [jsonDic[@"size"] intValue];
+            NSArray* array = jsonDic[@"result"];
+            [weakSelf.dataArray removeAllObjects];
+            for (NSDictionary* dic in array) {
+                WorkOrderModel* model = [WorkOrderModel ModelWithDic:dic];
+                [weakSelf.dataArray addObject:model];
+            }
+            [weakSelf.tableView reloadData];
         }
-        [weakSelf.tableView reloadData];
+    }];
+}
+
+-(void)refreshFooterData{
+    if (self.dataArray.count == _size) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        return;
+    }
+    kWeakSelf(weakSelf);
+    _currentPage++;
+    [LoadingView showProgressHUD:@""];
+    NSMutableDictionary *param = [NSMutableDictionary new];
+    [param setObject:[UserDef objectForKey:@"phone"] forKey:@"accountName"];
+    [param setObject:[NSString stringWithFormat:@"%d",_currentPage] forKey:@"currentPage"];
+    [param setObject:@"10" forKey:@"pageSize"];
+    [param setObject:@"" forKey:@"workOrderTypeId"];
+    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetWorkOrderList] isPost:YES Params:param];
+    [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
+        [weakSelf.tableView.mj_footer endRefreshing];
+        if ([jsonDic[@"resultCode"] respondsToSelector:@selector(isEqualToString:)] && [jsonDic[@"resultCode"] isEqualToString:@"100"]) {
+            NSArray* array = jsonDic[@"result"];
+            for (NSDictionary* dic in array) {
+                WorkOrderModel* model = [WorkOrderModel ModelWithDic:dic];
+                [weakSelf.dataArray addObject:model];
+            }
+            [weakSelf.tableView reloadData];
+        }
     }];
 }
 
@@ -69,7 +127,7 @@
         {
             GoodReportViewController* report = [[GoodReportViewController alloc]init];
             report.refreshBlock = ^{
-                [weakSelf loadData];
+                [weakSelf refreshHeaderData];
             };
             report.model = model;
             [self pushVC:report];
@@ -79,6 +137,9 @@
         {
             InstallTestViewController *installTestVC = [[InstallTestViewController alloc]init];
             installTestVC.model = model;
+            installTestVC.refreshBlock = ^{
+                [weakSelf refreshHeaderData];
+            };
             [self pushVC:installTestVC];
         }
             break;
@@ -86,7 +147,7 @@
         {
             WarningDetailViewController* detailVC = [[WarningDetailViewController alloc]init];
             detailVC.refreshBlock = ^{
-                [weakSelf loadData];
+                [weakSelf refreshHeaderData];
             };
             detailVC.model = model;
             [self pushVC:detailVC];
@@ -96,7 +157,7 @@
         {
             QualityDetailViewController* detailVC = [[QualityDetailViewController alloc]init];
             detailVC.refreshBlock = ^{
-                [weakSelf loadData];
+                [weakSelf refreshHeaderData];
             };
             detailVC.model = model;
             [self pushVC:detailVC];
@@ -118,7 +179,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 290;
+    return 310;
 }
 
 

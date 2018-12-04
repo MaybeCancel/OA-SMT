@@ -49,11 +49,19 @@
     self.view.backgroundColor = RGBColor(75, 151, 252);
     self.title = @"爱立信站点辅助管理系统";
     
-    NSArray *itemTitles = @[@"我的工单 ",@"变动申请",@"工具维护",@"退出"];
+    NSArray *itemTitles = @[@"我的工单 ",@"关于ESMT",@"退出"];
     self.homeView = [[HomeUIView alloc] initWithTitles:itemTitles];
-    self.homeView.frame = CGRM(12, 64, self.view.width - 24, self.view.height - 60);
+    
+    if (is_iPhoneXS) {
+        self.homeView.frame = CGRM(12, 88, self.view.width - 24, self.view.height - 60);
+    }
+    else{
+        self.homeView.frame = CGRM(12, 64, self.view.width - 24, self.view.height - 60);
+    }
+    
     self.homeView.acounceTitleArr = @[@"暂无通知"];
     [self.view addSubview:self.homeView];
+
     
     kWeakSelf(weakSelf);
     self.homeView.pageViewHandle = ^(NSInteger tag){
@@ -66,16 +74,16 @@
                 VC = [[WorkOrderViewController alloc]init];
                 [weakSelf pushVC:VC];
                 break;
+//            case 11:
+//                //变动申请
+//                [weakSelf showUndevelopedHint];
+//                break;
             case 11:
-                //变动申请
-                [weakSelf showUndevelopedHint];
-                break;
-            case 12:
                 //工具维护
                 VC = [[AboutViewController alloc]init];
                 [weakSelf pushVC:VC];
                 break;
-            case 13:
+            case 12:
                 //退出
             {
                 VC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];

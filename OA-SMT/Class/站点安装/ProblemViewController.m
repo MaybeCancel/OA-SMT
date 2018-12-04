@@ -12,8 +12,8 @@
 {
     UILabel *_placeholderLab;
 }
-@property (weak, nonatomic) IBOutlet UILabel *titleLab;
-@property (weak, nonatomic) IBOutlet UITextView *problemTextFld;
+@property (strong, nonatomic) UILabel *titleLab;
+@property (strong, nonatomic) UITextView *problemTextFld;
 
 @end
 
@@ -40,6 +40,10 @@
 }
 
 -(void)setupUI{
+    
+    [self.view addSubview:self.titleLab];
+    [self.view addSubview:self.problemTextFld];
+    
     _placeholderLab = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 200, 25)];
     _placeholderLab.enabled = NO;
     _placeholderLab.text = @"请填写遗留问题";
@@ -56,6 +60,22 @@
     }else{
         [_placeholderLab setHidden:YES];
     }
+}
+
+-(UITextView *)problemTextFld{
+    if (!_problemTextFld) {
+        _problemTextFld = [[UITextView alloc]initWithFrame:CGRectMake(0, 40+64, SCREEN_WIDTH, 200)];
+        _problemTextFld.delegate = self;
+    }
+    return _problemTextFld;
+}
+
+-(UILabel *)titleLab{
+    if (!_titleLab) {
+        _titleLab = [[UILabel alloc]initWithFrame:CGRM(15, 10+64, SCREEN_WIDTH-15, 30)];
+        _titleLab.textColor = [UIColor grayColor];
+    }
+    return _titleLab;
 }
 
 - (void)didReceiveMemoryWarning {

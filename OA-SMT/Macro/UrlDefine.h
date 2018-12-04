@@ -23,6 +23,10 @@
 /*-----------------工单列表---------------*/
 #define GetWorkOrderList @"/project/getWorkOrderList"
 
+/*-----------------安装施工内部的更新工单状态接口---------------*/
+#define updateWorkOrderStatus @"/project/isWorkOrderStatusOver"
+#define getPhotoList @"/project/getPhotoList"
+
 /*-----------------更新工单数据---------------*/
 #define UpdateWorkOrder @"/project/updateWorkOrder"
 

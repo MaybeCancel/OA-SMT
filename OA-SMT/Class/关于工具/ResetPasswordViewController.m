@@ -52,6 +52,7 @@
         BaseRequest *request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:ChangePassword] isPost:YES Params:para];
         [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
             if([jsonDic[@"resultCode"] isEqualToString:@"100"]){
+                [UserDef setObject:@(0) forKey:@"isRememberPwd"];
                 [self performSelector:@selector(resetRootViewController) withObject:nil afterDelay:1.0];
                 [LoadingView showAlertHUD:@"密码修改成功" duration:1.0];
             }

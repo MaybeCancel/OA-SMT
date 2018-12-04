@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WorkOrderModel.h"
 
 @interface CompletePicViewController : BaseViewController
-
+@property (nonatomic, strong) WorkOrderModel *model;
 @end

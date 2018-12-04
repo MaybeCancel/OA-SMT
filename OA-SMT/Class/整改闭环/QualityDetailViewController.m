@@ -14,6 +14,7 @@
 #import "QualityReportModel.h"
 #import "ProblemTypeViewController.h"
 #import "SubmitBtnView.h"
+#import "ShootPhotoViewController.h"
 
 @interface QualityDetailViewController ()
 @property (nonatomic,strong)UIScrollView* scrollView;
@@ -36,9 +37,9 @@
         self.boxView.firstText = [self.model.isSolve isEqual:@0] ? @"0" : @"1";
         self.boxView.noteText = self.model.note;
         
-//        self.addImageView.hidden = YES;
-////        self.submitView.hidden = YES;
-////        self.boxView.userInteractionEnabled = NO;
+        self.addImageView.hidden = YES;
+        self.submitView.hidden = YES;
+        self.boxView.userInteractionEnabled = NO;
         
         self.imageShowView.images = self.model.imageArr;
         self.scrollView.contentSize = CGSizeMake(0,44*self.boxView.leftTitles.count+130+230*self.model.imageArr.count);
@@ -126,8 +127,9 @@
     }
 }
 
+
 #pragma mark
-#pragma mark -- UIImagePickerControllerDelegate
+#pragma mark -- LazyLoad
 
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
@@ -137,17 +139,6 @@
     }
     return _scrollView;
 }
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    [self saveImageToPhotoAlbum:image];
-    [self.imageMArr addObject:image];
-    self.addImageView.images = self.imageMArr;
-    [self dismiss];
-}
-
-#pragma mark
-#pragma mark -- LazyLoad
 
 -(WarningReportView *)boxView{
     if (!_boxView) {
@@ -187,7 +178,13 @@
         _addImageView.title = @"照片";
         kWeakSelf(weakSelf);
         _addImageView.tapHandle = ^{
-            [weakSelf OpenAlbumAlert];
+            ShootPhotoViewController* shoot = [[ShootPhotoViewController alloc]init];
+            [weakSelf presentToVC:shoot];
+            shoot.shootPicHandle = ^(UIImage *image) {
+                [weakSelf saveImageToPhotoAlbum:image];
+                [weakSelf.imageMArr addObject:image];
+                weakSelf.addImageView.images = weakSelf.imageMArr;
+            };
         };
         _addImageView.deleteImageBlock = ^(int index) {
             [weakSelf.imageMArr removeObjectAtIndex:index];

@@ -32,30 +32,15 @@
     _isSelected = YES;
     
     kWeakSelf(weakSelf);
-    if ([self.model.status isEqual:@0]) {   //未开始
+    if ([self.model.status isEqual:@0] || [self.model.status isEqual:@1]) {   //未开始、进行中
         self.rightItemTitle = @"保存";
         self.rightItemHandle = ^{
             [weakSelf uploadReport];
         };
-        [self setupUI];
-        [self makeData];
     }
-    else if ([self.model.status isEqual:@1]){   //进行中
-        self.rightItemTitle = @"保存";
-        self.rightItemHandle = ^{
-            [weakSelf uploadReport];
-        };
-        [self setupUI];
-        [self loadData];
-    }
-    else{   //已完成
-        self.rightItemTitle = @"保存";
-        self.rightItemHandle = ^{
-            [weakSelf uploadReport];
-        };
-        [self setupUI];
-        [self loadData];
-    }
+    [self setupUI];
+    [self loadData];
+
 }
 
 -(void)setModel:(WorkOrderModel *)model{
@@ -81,6 +66,9 @@
         NSLog(@"result:%@",jsonDic);
         if ([jsonDic[@"result"] isKindOfClass:[NSDictionary class]]) {
             weakSelf.installInfoDic = jsonDic[@"result"];
+            [weakSelf makeData];
+        }
+        else{
             [weakSelf makeData];
         }
     }];

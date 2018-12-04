@@ -12,8 +12,10 @@
 #import "SiteInstallDetailViewController.h"
 #import "InstallTestView.h"
 
-@interface InstallTestViewController ()
-
+@interface InstallTestViewController (){
+    BOOL _isRefresh;
+}
+@property (nonatomic, strong) InstallTestView *cell;
 @end
 
 @implementation InstallTestViewController
@@ -25,33 +27,55 @@
 }
 
 -(void)setupUI{
-    InstallTestView *cell = [[InstallTestView alloc]initWithFrame:CGRM(0, 64, SCREEN_WIDTH, 280)];
-    cell.model = self.model;
-    [self.view addSubview:cell];
+    self.title = @"我的工单-安装施工";
+    
+    self.cell = [[InstallTestView alloc]initWithFrame:CGRM(0, 64, SCREEN_WIDTH, 280)];
+    self.cell.model = self.model;
+    [self.view addSubview:self.cell];
 }
 
 - (IBAction)toCompletePicVC:(id)sender {
+    kWeakSelf(weakSelf);
     CompletePicViewController *VC = [[CompletePicViewController alloc]init];
+    VC.model = self.model;
+    VC.refreshBlock = ^{
+        _isRefresh = YES;
+        weakSelf.model.status = @1;
+        weakSelf.cell.model = weakSelf.model;
+    };
     [self pushVC:VC];
 }
 
 - (IBAction)toInstallReportVC:(id)sender {
+    kWeakSelf(weakSelf);
     SiteInstallDetailViewController *detailVC = [[SiteInstallDetailViewController alloc]init];
     detailVC.model = self.model;
     detailVC.refreshBlock = ^{
-//        [weakSelf loadData];
+        _isRefresh = YES;
+        weakSelf.model.status = @1;
+        weakSelf.cell.model = weakSelf.model;
     };
     [self pushVC:detailVC];
 }
 
 - (IBAction)toTestReportVC:(id)sender {
+    kWeakSelf(weakSelf);
     SiteTestDetailViewController *detailVC = [[SiteTestDetailViewController alloc]init];
     detailVC.model = self.model;
     detailVC.refreshBlock = ^{
-//        [weakSelf loadData];
+        _isRefresh = YES;
+        weakSelf.model.status = @1;
+        weakSelf.cell.model = weakSelf.model;
     };
     [self pushVC:detailVC];
 }
+
+-(void)pop{
+    if (_isRefresh && self.refreshBlock) {
+        self.refreshBlock();
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

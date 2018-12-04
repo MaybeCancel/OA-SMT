@@ -41,7 +41,7 @@
     
     kWeakSelf(weakSelf);
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(weakSelf.backView.mas_bottom);
+        make.bottom.mas_equalTo(weakSelf.backView.mas_bottom).mas_offset(20);
         make.left.mas_equalTo(weakSelf.backView.mas_left);
         make.right.mas_equalTo(weakSelf.backView.mas_right);
         make.height.mas_equalTo(44*weakSelf.dataSource.count);
@@ -97,7 +97,7 @@
 
 -(NSArray *)dataSource{
     if (!_dataSource) {
-        _dataSource = @[@"修改密码",@"检查新版本"];
+        _dataSource = @[@"修改密码"];
     }
     return _dataSource;
 }

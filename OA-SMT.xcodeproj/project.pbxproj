@@ -31,6 +31,7 @@
 		1D6CBC3B20C513BA002B1513 /* LMJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6CBC3A20C513BA002B1513 /* LMJDropdownMenu.m */; };
 		1D6CBC3F20C53E05002B1513 /* ProjectInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6CBC3E20C53E05002B1513 /* ProjectInfoModel.m */; };
 		1D6CBC4220C5439C002B1513 /* ProjectStationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D6CBC4120C5439C002B1513 /* ProjectStationModel.m */; };
+		1D7B457B215E01FA00A32C9E /* HasUploadPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7B457A215E01FA00A32C9E /* HasUploadPhotoModel.m */; };
 		1D8F57FD212ECAF400072469 /* WorkOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8F57FC212ECAF400072469 /* WorkOrderViewController.m */; };
 		1D8F5806212ECFA900072469 /* WorkOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8F5805212ECFA900072469 /* WorkOrderCell.m */; };
 		1D91835220BD5AC9002D7EBD /* NSDate+DateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D91835120BD5AC9002D7EBD /* NSDate+DateFormat.m */; };
@@ -52,6 +53,7 @@
 		1D9183CA20C26944002D7EBD /* QualityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9183C920C26944002D7EBD /* QualityDetailViewController.m */; };
 		1D9183CD20C4D45F002D7EBD /* QualityReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9183CC20C4D45F002D7EBD /* QualityReportModel.m */; };
 		1DA46DFE21479E8F00417A35 /* OtherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA46DFD21479E8F00417A35 /* OtherDetailViewController.m */; };
+		1DA46E4B214A68F600417A35 /* ShootPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA46E4A214A68F600417A35 /* ShootPhotoViewController.m */; };
 		1DC8735620D0FCCA004F842C /* ReViewPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC8735420D0FCCA004F842C /* ReViewPhotoView.m */; };
 		1DC8735920D118DA004F842C /* HasUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC8735820D118DA004F842C /* HasUploadViewController.m */; };
 		1DC8735D20DC8F6D004F842C /* StateListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC8735B20DC8F6D004F842C /* StateListCell.m */; };
@@ -237,6 +239,8 @@
 		1D6CBC3E20C53E05002B1513 /* ProjectInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectInfoModel.m; sourceTree = "<group>"; };
 		1D6CBC4020C5439C002B1513 /* ProjectStationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectStationModel.h; sourceTree = "<group>"; };
 		1D6CBC4120C5439C002B1513 /* ProjectStationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectStationModel.m; sourceTree = "<group>"; };
+		1D7B4579215E01FA00A32C9E /* HasUploadPhotoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HasUploadPhotoModel.h; sourceTree = "<group>"; };
+		1D7B457A215E01FA00A32C9E /* HasUploadPhotoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HasUploadPhotoModel.m; sourceTree = "<group>"; };
 		1D8F57FB212ECAF400072469 /* WorkOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrderViewController.h; sourceTree = "<group>"; };
 		1D8F57FC212ECAF400072469 /* WorkOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkOrderViewController.m; sourceTree = "<group>"; };
 		1D8F5804212ECFA900072469 /* WorkOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrderCell.h; sourceTree = "<group>"; };
@@ -275,6 +279,8 @@
 		1D9183CC20C4D45F002D7EBD /* QualityReportModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QualityReportModel.m; sourceTree = "<group>"; };
 		1DA46DFC21479E8F00417A35 /* OtherDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherDetailViewController.h; sourceTree = "<group>"; };
 		1DA46DFD21479E8F00417A35 /* OtherDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherDetailViewController.m; sourceTree = "<group>"; };
+		1DA46E49214A68F600417A35 /* ShootPhotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShootPhotoViewController.h; sourceTree = "<group>"; };
+		1DA46E4A214A68F600417A35 /* ShootPhotoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShootPhotoViewController.m; sourceTree = "<group>"; };
 		1DC8735420D0FCCA004F842C /* ReViewPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReViewPhotoView.m; sourceTree = "<group>"; };
 		1DC8735520D0FCCA004F842C /* ReViewPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReViewPhotoView.h; sourceTree = "<group>"; };
 		1DC8735720D118DA004F842C /* HasUploadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HasUploadViewController.h; sourceTree = "<group>"; };
@@ -688,6 +694,8 @@
 				5B67B5D320185D8B00A8CF6E /* DeviceModel.m */,
 				5B1C68052008426700A64079 /* SiteInfoModel.h */,
 				5B1C68062008426700A64079 /* SiteInfoModel.m */,
+				1D7B4579215E01FA00A32C9E /* HasUploadPhotoModel.h */,
+				1D7B457A215E01FA00A32C9E /* HasUploadPhotoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -914,6 +922,8 @@
 		5B94AFDA1FF3740700E5B026 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				1DA46E49214A68F600417A35 /* ShootPhotoViewController.h */,
+				1DA46E4A214A68F600417A35 /* ShootPhotoViewController.m */,
 				1DA46DFB21479E5100417A35 /* 其他类型工单 */,
 				1D0896D92137C8C000533913 /* 安装施工 */,
 				1D8F57FA212EC7BE00072469 /* 我的工单 */,
@@ -1505,6 +1515,7 @@
 				5BCECAE820074AF300169748 /* LLActionSheetView.m in Sources */,
 				1DFE2822213E34CE007718E7 /* InstallTestView.m in Sources */,
 				5BC8F44F2003471400C58C2E /* BaseTableView.m in Sources */,
+				1DA46E4B214A68F600417A35 /* ShootPhotoViewController.m in Sources */,
 				1D91835920BE98C1002D7EBD /* ImageCell.m in Sources */,
 				5B8F0318200D93F5003D79FD /* ZXYWaveProgress.m in Sources */,
 				1D91836720BFEE0F002D7EBD /* ProblemTypeViewController.m in Sources */,
@@ -1582,6 +1593,7 @@
 				5B3A08F71FF1F34A00C1D3D1 /* AppDelegate.m in Sources */,
 				1DCA086220B7B525001C64DB /* AboutViewController.m in Sources */,
 				5BC8F45820034AF500C58C2E /* BaseTableViewController.m in Sources */,
+				1D7B457B215E01FA00A32C9E /* HasUploadPhotoModel.m in Sources */,
 				5BC8F4552003497600C58C2E /* BaseViewController.m in Sources */,
 				5BCECAE22007433000169748 /* BottombtnView.m in Sources */,
 				5B1C6824200C7EBD00A64079 /* AddItemBtnView.m in Sources */,

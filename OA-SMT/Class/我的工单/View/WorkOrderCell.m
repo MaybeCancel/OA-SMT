@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UILabel *workLevelLab;
 @property (nonatomic, strong) UILabel *createDateLab;
 @property (nonatomic, strong) UILabel *endDateLab;
+@property (nonatomic, strong) UILabel *projectNameLab;
 @property (nonatomic, strong) UILabel *siteLab;
 @property (nonatomic, strong) UILabel *siteNameLab;
 @property (nonatomic, strong) UILabel *taskLab;
@@ -50,6 +51,7 @@
     [self.bgView addSubview:self.taskDesLab];
     [self.bgView addSubview:self.attachLab];
     [self.bgView addSubview:self.attachmentLab];
+    [self.bgView addSubview:self.projectNameLab];
 }
 
 -(void)layoutSubviews{
@@ -99,9 +101,14 @@
         make.top.mas_equalTo(self.createDateLab.mas_top);
     }];
     
-    [self.siteLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.projectNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.createDateLab.mas_left);
         make.top.mas_equalTo(self.createDateLab.mas_bottom).offset(10);
+    }];
+    
+    [self.siteLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.createDateLab.mas_left);
+        make.top.mas_equalTo(self.projectNameLab.mas_bottom).offset(10);
         make.width.mas_equalTo(80);
     }];
     
@@ -177,6 +184,7 @@
     self.workLevelLab.text = [NSString stringWithFormat:@"工单优先级：%@",model.priority];
     self.createDateLab.text = [NSString stringWithFormat:@"创建日期：%@",[model.startDate substringToIndex:10]];
     self.endDateLab.text = [NSString stringWithFormat:@"截止日期：%@",[model.endDate substringToIndex:10]];
+    self.projectNameLab.text = [NSString stringWithFormat:@"工程名称：%@",model.projectName];
     self.siteNameLab.text = model.stationName;
     self.taskDesLab.text = model.missionDetails;
     NSMutableString *attachment = [NSMutableString new];
@@ -333,6 +341,16 @@
         _attachmentLab.numberOfLines = 3;
     }
     return _attachmentLab;
+}
+
+-(UILabel *)projectNameLab{
+    if (!_projectNameLab) {
+        _projectNameLab = [[UILabel alloc]init];
+        _projectNameLab.text = @"工程名称：";
+        _projectNameLab.font = [UIFont systemFontOfSize:15];
+        _projectNameLab.textColor = RGBColor(82, 82, 82);
+    }
+    return _projectNameLab;
 }
 
 - (void)awakeFromNib {
