@@ -27,6 +27,11 @@
 #define updateWorkOrderStatus @"/project/isWorkOrderStatusOver"
 #define getPhotoList @"/project/getPhotoList"
 
+/*-----------------安装报告和调测报告二期版本接口---------------*/
+#define GetReportInfoV2 @"/project/getReportInfoV2"
+#define AddReportInfoV2 @"/project/addReportInfoV2"
+#define IsWorkOrderStatusOverV2 @"/project/isWorkOrderStatusOverV2"
+
 /*-----------------更新工单数据---------------*/
 #define UpdateWorkOrder @"/project/updateWorkOrder"
 

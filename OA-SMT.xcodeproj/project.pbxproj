@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1D03781420AEBB1D00C22F60 /* SiteInstallDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D03781320AEBB1D00C22F60 /* SiteInstallDetailViewController.m */; };
-		1D03781620AEC03000C22F60 /* SiteReport.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D03781520AEC02F00C22F60 /* SiteReport.plist */; };
 		1D03781A20AEC81D00C22F60 /* InstallReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D03781820AEC81D00C22F60 /* InstallReportCell.m */; };
 		1D03781B20AEC81D00C22F60 /* InstallReportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D03781920AEC81D00C22F60 /* InstallReportCell.xib */; };
 		1D03781F20AFBABE00C22F60 /* ProblemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D03781D20AFBABE00C22F60 /* ProblemViewController.m */; };
@@ -60,6 +59,8 @@
 		1DC8735E20DC8F6D004F842C /* StateListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DC8735C20DC8F6D004F842C /* StateListCell.xib */; };
 		1DCA086220B7B525001C64DB /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA086020B7B524001C64DB /* AboutViewController.m */; };
 		1DCA086320B7B525001C64DB /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DCA086120B7B524001C64DB /* AboutViewController.xib */; };
+		1DF6416221B7A2C80018C42D /* SiteReportRDS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1DF6416021B7A2C80018C42D /* SiteReportRDS.plist */; };
+		1DF6416321B7A2C80018C42D /* SiteReportENB.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1DF6416121B7A2C80018C42D /* SiteReportENB.plist */; };
 		1DF6B4FD20E5DF2D004D6D66 /* UIImage+ZipSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6B4FC20E5DF2D004D6D66 /* UIImage+ZipSize.m */; };
 		1DF6B54120EC642D004D6D66 /* YFRollingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6B54020EC642D004D6D66 /* YFRollingLabel.m */; };
 		1DF6C8A120A99CA300A326D0 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6C89F20A99CA300A326D0 /* BaseModel.m */; };
@@ -199,7 +200,6 @@
 /* Begin PBXFileReference section */
 		1D03781220AEBB1D00C22F60 /* SiteInstallDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SiteInstallDetailViewController.h; sourceTree = "<group>"; };
 		1D03781320AEBB1D00C22F60 /* SiteInstallDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SiteInstallDetailViewController.m; sourceTree = "<group>"; };
-		1D03781520AEC02F00C22F60 /* SiteReport.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SiteReport.plist; sourceTree = "<group>"; };
 		1D03781720AEC81D00C22F60 /* InstallReportCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstallReportCell.h; sourceTree = "<group>"; };
 		1D03781820AEC81D00C22F60 /* InstallReportCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstallReportCell.m; sourceTree = "<group>"; };
 		1D03781920AEC81D00C22F60 /* InstallReportCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstallReportCell.xib; sourceTree = "<group>"; };
@@ -291,6 +291,8 @@
 		1DCA085F20B7B524001C64DB /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		1DCA086020B7B524001C64DB /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		1DCA086120B7B524001C64DB /* AboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		1DF6416021B7A2C80018C42D /* SiteReportRDS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SiteReportRDS.plist; sourceTree = "<group>"; };
+		1DF6416121B7A2C80018C42D /* SiteReportENB.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SiteReportENB.plist; sourceTree = "<group>"; };
 		1DF6B4FB20E5DF2C004D6D66 /* UIImage+ZipSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ZipSize.h"; sourceTree = "<group>"; };
 		1DF6B4FC20E5DF2D004D6D66 /* UIImage+ZipSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ZipSize.m"; sourceTree = "<group>"; };
 		1DF6B53F20EC642D004D6D66 /* YFRollingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFRollingLabel.h; sourceTree = "<group>"; };
@@ -846,7 +848,8 @@
 		5B3A08F41FF1F34A00C1D3D1 /* OA-SMT */ = {
 			isa = PBXGroup;
 			children = (
-				1D03781520AEC02F00C22F60 /* SiteReport.plist */,
+				1DF6416121B7A2C80018C42D /* SiteReportENB.plist */,
+				1DF6416021B7A2C80018C42D /* SiteReportRDS.plist */,
 				1D03782B20B009C000C22F60 /* SiteTestReport.plist */,
 				1D91836320BFEC15002D7EBD /* Alarm.plist */,
 				5B3A08F51FF1F34A00C1D3D1 /* AppDelegate.h */,
@@ -1369,6 +1372,7 @@
 				1D0896DE2137C97400533913 /* InstallTestViewController.xib in Resources */,
 				5BCECAE42007438200169748 /* BottombtnView.xib in Resources */,
 				1DCA086320B7B525001C64DB /* AboutViewController.xib in Resources */,
+				1DF6416221B7A2C80018C42D /* SiteReportRDS.plist in Resources */,
 				5B1C682B200C837E00A64079 /* ShootDawnCell.xib in Resources */,
 				5B8DC7442048F53F008D8F04 /* DeleteBtnView.xib in Resources */,
 				5B3A09021FF1F34A00C1D3D1 /* LaunchScreen.storyboard in Resources */,
@@ -1379,9 +1383,9 @@
 				5B42F064205A1707001D07B3 /* WarningCell.xib in Resources */,
 				1D91835A20BE98C1002D7EBD /* ImageCell.xib in Resources */,
 				5BB1614D2017070400F96689 /* signCell.xib in Resources */,
-				1D03781620AEC03000C22F60 /* SiteReport.plist in Resources */,
 				5BCECADF20073A3500169748 /* BaseCell.xib in Resources */,
 				5BC8F49F200356BB00C58C2E /* GoodsCell.xib in Resources */,
+				1DF6416321B7A2C80018C42D /* SiteReportENB.plist in Resources */,
 				5B3A08FF1FF1F34A00C1D3D1 /* Assets.xcassets in Resources */,
 				1DC8735E20DC8F6D004F842C /* StateListCell.xib in Resources */,
 				5B8F031A200D93F5003D79FD /* demo.gif in Resources */,

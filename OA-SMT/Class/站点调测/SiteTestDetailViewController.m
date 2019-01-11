@@ -11,15 +11,18 @@
 #import "InstallReportCell.h"
 #import "CellStateModel.h"
 
-@interface SiteTestDetailViewController ()
+@interface SiteTestDetailViewController ()<LMJDropdownMenuDelegate>
 {
-    NSTimer *_timer;
-    BOOL _isSelected;
+//    NSTimer *_timer;
+//    BOOL _isSelected;
+    NSString *_stationId;
 }
-@property (nonatomic,strong)NSMutableArray *flagArray;
-@property (nonatomic,strong)NSMutableArray *reportMArr;
-@property (nonatomic,strong)NSMutableArray *problemMArr;
-@property (nonatomic,strong)NSDictionary *testInfoDic;
+@property (nonatomic,strong) NSMutableArray *reportMArr;
+@property (nonatomic,strong) NSMutableArray *problemMArr;
+@property (nonatomic,strong) NSMutableArray *testInfoArr;
+@property (nonatomic,strong) NSArray *stationNameArr;
+@property (nonatomic,strong) NSArray *stationIdArr;
+@property (nonatomic,strong) LMJDropdownMenu *dropDownView;
 @end
 
 @implementation SiteTestDetailViewController
@@ -27,8 +30,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"GSM调测检查报告";
-    _timer = [NSTimer scheduledTimerWithTimeInterval:IntervalTime target:self selector:@selector(changeSelectedTimer) userInfo:nil repeats:YES];
-    _isSelected = YES;
+//    _timer = [NSTimer scheduledTimerWithTimeInterval:IntervalTime target:self selector:@selector(changeSelectedTimer) userInfo:nil repeats:YES];
+//    _isSelected = YES;
+    
+    self.stationNameArr = [self.model.stationName componentsSeparatedByString:@","];
+    self.stationIdArr = [self.model.stationId componentsSeparatedByString:@","];
+    _stationId = self.stationIdArr[0];
+    
     kWeakSelf(weakSelf);
     if ([self.model.status isEqual:@0] || [self.model.status isEqual:@1]) {   //未开始、进行中
         self.rightItemTitle = @"保存";
@@ -46,14 +54,16 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    if (_timer.isValid) {
-        [_timer invalidate];
-    }
-    _timer = nil;
+//    if (_timer.isValid) {
+//        [_timer invalidate];
+//    }
+//    _timer = nil;
 }
 
 -(void)setupUI{
-    self.tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStyleGrouped)];
+    [self.view addSubview:self.dropDownView];
+    
+    self.tableView = [[BaseTableView alloc]initWithFrame:CGRectMake(0, HEIGHT(self.dropDownView)+64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:(UITableViewStyleGrouped)];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -65,12 +75,13 @@
     NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
     [para setObject:[UserDef objectForKey:@"userId"] forKey:@"userId"];
     [para setObject:self.model.projectId forKey:@"projectId"];
-    [para setObject:self.model.stationId forKey:@"stationId"];
-    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetTestInfo] isPost:YES Params:para];
+    [para setObject:_stationId forKey:@"stationId"];
+    [para setObject:@"3" forKey:@"type"];
+    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:GetReportInfoV2] isPost:YES Params:para];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSLog(@"result:%@",jsonDic);
-        if ([jsonDic[@"result"] isKindOfClass:[NSDictionary class]]) {
-            weakSelf.testInfoDic = jsonDic[@"result"];
+        if ([jsonDic[@"resultCode"] isEqualToString:@"100"]) {
+            weakSelf.testInfoArr = jsonDic[@"result"];
             [weakSelf makeData];
         }
         else{
@@ -83,30 +94,31 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"SiteTestReport" ofType:@"plist"];
     
     self.dataArray = [[NSMutableArray alloc]initWithContentsOfFile:filePath];
-    _flagArray  = [NSMutableArray array];
-    for (int i = 0; i < self.dataArray.count; i ++) {
-        [_flagArray addObject:@"0"];
-    }
+    [self.reportMArr removeAllObjects];
     
     kWeakSelf(weakSelf);
     [self.dataArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSArray *rowArr = obj[@"list"];
         NSMutableArray *mArr = [[NSMutableArray alloc]init];
         for (int i = 0; i < rowArr.count; i++) {
-            CellStateModel *model = [[CellStateModel alloc]init];
-            NSString *installKey = [NSString stringWithFormat:@"isTest%d_%d",(int)idx+1,i+1];
-            NSString *noteKey = [NSString stringWithFormat:@"note%d_%d",(int)idx+1,i+1];
-            if ([weakSelf.model.status isEqual:@0] ||
-                weakSelf.testInfoDic[installKey] == nil ||
-                [weakSelf.testInfoDic[installKey] isKindOfClass:[NSNull class]] ||
-                [weakSelf.testInfoDic[installKey] isEqual:@0]) {
-                model.state = NO;
+            NSString *massgeNumber = [NSString stringWithFormat:@"%lu.%d",idx+1,i+1];
+            NSDictionary *infoDic = @{};
+            for (NSDictionary *dic in weakSelf.testInfoArr) {
+                NSString *numberStr = [NSString stringWithFormat:@"%@",dic[@"massgeNumber"]];
+                if ([numberStr isEqualToString:massgeNumber]) {
+                    infoDic = dic;
+                    break;
+                }
             }
-            else{
+            CellStateModel *model = [[CellStateModel alloc]init];
+            if ([infoDic[@"flag"] isEqual:@1]) {
                 model.state = YES;
             }
-            if (![weakSelf.model.status isEqual:@0] && weakSelf.testInfoDic[noteKey]) {
-                model.problem = weakSelf.testInfoDic[noteKey];
+            else{
+                model.state = NO;
+            }
+            if (![weakSelf.model.status isEqual:@0] && infoDic[@"node"]) {
+                model.problem = infoDic[@"node"];
             }
             else{
                 model.problem = @"";
@@ -139,22 +151,23 @@
     NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
     [para setObject:[UserDef objectForKey:@"userId"] forKey:@"userId"];
     [para setObject:self.model.projectId forKey:@"projectId"];
-    [para setObject:self.model.stationId forKey:@"stationId"];
-    NSString __block *status = @"2";
+    [para setObject:_stationId forKey:@"stationId"];
+    [para setObject:@"3" forKey:@"type"];
+    NSMutableArray *nodeMArr = [NSMutableArray new];
     for (int index = 0; index < self.reportMArr.count; index++) {
         NSArray *arr = self.reportMArr[index];
         [arr enumerateObjectsUsingBlock:^(CellStateModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSString *testKey = [NSString stringWithFormat:@"isTest%d_%d",index+1,(int)idx+1];
-            NSString *noteKey = [NSString stringWithFormat:@"note%d_%d",index+1,(int)idx+1];
-            [para setObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithBool:model.state]] forKey:testKey];
-            [para setObject:model.problem forKey:noteKey];
-            if (!model.state) {
-                status = @"1";
-            }
+            NSMutableDictionary *nodeDic = [NSMutableDictionary new];
+            NSString *massgeNumber = [NSString stringWithFormat:@"%d.%d",index+1,(int)idx+1];
+            [nodeDic setObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithBool:model.state]] forKey:@"flag"];
+            [nodeDic setObject:model.problem forKey:@"node"];
+            [nodeDic setObject:massgeNumber forKey:@"massgeNumber"];
+            [nodeMArr addObject:nodeDic];
         }];
     }
-//    [para setObject:status forKey:@"status"];// 1：进行中 2：已完成
-    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:AddTestInfo] isPost:YES Params:para];
+    [para setObject:nodeMArr forKey:@"nodeArray"];
+    
+    BaseRequest* request = [BaseRequest cc_requestWithUrl:[CCString getHeaderUrl:AddReportInfoV2] isPost:YES Params:para];
     [request cc_sendRequstWith:^(NSDictionary *jsonDic) {
         NSLog(@"%@",jsonDic);
         if ([jsonDic[@"resultCode"] isEqualToString:@"100"]) {
@@ -191,7 +204,7 @@
 }
 
 -(void)changeSelectedTimer{
-    _isSelected = YES;
+//    _isSelected = YES;
 }
 
 #pragma mark -- UITableViewDataSource
@@ -249,20 +262,21 @@
 #pragma mark -- UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.dropDownView hideDropDown];
     if (indexPath.section < self.reportMArr.count) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         CellStateModel *model = self.reportMArr[indexPath.section][indexPath.row];
         if (model.state) {
             model.state = !model.state;
         }
-        else if (_isSelected){
-            model.state = !model.state;
-            _isSelected = NO;
-            _timer.fireDate = [NSDate dateWithTimeInterval:IntervalTime sinceDate:[NSDate date]];
-        }
         else{
-            [self.view makeToast:@"检测目录需间隔30秒"];
+            model.state = !model.state;
+//            _isSelected = NO;
+//            _timer.fireDate = [NSDate dateWithTimeInterval:IntervalTime sinceDate:[NSDate date]];
         }
+//        else{
+//            [self.view makeToast:@"检测目录需间隔30秒"];
+//        }
     }
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
 }
@@ -283,14 +297,9 @@
 //cell的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section < self.reportMArr.count){
-        if ([_flagArray[indexPath.section] isEqualToString:@"0"]){
-            return 0;
-        }
-        else{
-            NSString *rowTitle = self.dataArray[indexPath.section][@"list"][indexPath.row];
-            CGFloat height = [rowTitle realHeightFromWidth:SCREEN_WIDTH-10*4-20-30 Font:17];
-            return height+24;
-        }
+        NSString *rowTitle = self.dataArray[indexPath.section][@"list"][indexPath.row];
+        CGFloat height = [rowTitle realHeightFromWidth:SCREEN_WIDTH-10*4-20-30 Font:17];
+        return height+24;
     }
     else{
         return 44;
@@ -308,8 +317,6 @@
     if (section < self.reportMArr.count) {
         sectionLabel.text = self.dataArray[section][@"name"];
         sectionLabel.backgroundColor = [UIColor whiteColor];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(sectionClick:)];
-        [sectionLabel addGestureRecognizer:tap];
     }
     else{
         sectionLabel.text = @"遗留问题";
@@ -319,37 +326,19 @@
     return sectionLabel;
 }
 
-
-- (void)sectionClick:(UITapGestureRecognizer *)tap{
-    int index = tap.view.tag % 100;
-    
-    NSMutableArray *indexArray = [[NSMutableArray alloc]init];
-    NSArray *arr = self.dataArray[index][@"list"];
-    for (int i = 0; i < arr.count; i ++) {
-        NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:index];
-        [indexArray addObject:path];
-    }
-    //展开
-    if ([self.flagArray[index] isEqualToString:@"0"]) {
-        self.flagArray[index] = @"1";
-        [self.tableView reloadRowsAtIndexPaths:indexArray
-                              withRowAnimation:UITableViewRowAnimationFade];
-    } else { //收起
-        _flagArray[index] = @"0";
-        [self.tableView reloadRowsAtIndexPaths:indexArray
-                              withRowAnimation:UITableViewRowAnimationFade];
-    }
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.dropDownView hideDropDown];
 }
 
+#pragma mark - LMJDropdownMenu Delegate
+
+- (void)dropdownMenu:(LMJDropdownMenu *)menu selectedCellNumber:(NSInteger)number{
+    NSLog(@"你选择了：%ld",number);
+    _stationId = self.stationIdArr[number];
+    [self loadData];
+}
 
 #pragma mark -- LazyLoad
-
--(NSMutableArray *)flagArray{
-    if (!_flagArray) {
-        _flagArray = [[NSMutableArray alloc]init];
-    }
-    return _flagArray;
-}
 
 -(NSMutableArray *)reportMArr{
     if (!_reportMArr) {
@@ -365,11 +354,36 @@
     return _problemMArr;
 }
 
--(NSDictionary *)testInfoDic{
-    if (!_testInfoDic) {
-        _testInfoDic = [NSDictionary new];
+-(NSMutableArray *)testInfoArr{
+    if (!_testInfoArr) {
+        _testInfoArr = [NSMutableArray new];
     }
-    return _testInfoDic;
+    return _testInfoArr;
+}
+
+-(LMJDropdownMenu *)dropDownView{
+    if (!_dropDownView) {
+        _dropDownView = [[LMJDropdownMenu alloc]init];
+        [_dropDownView setFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40)];
+        [_dropDownView setMenuTitles:self.stationNameArr rowHeight:30];
+        [_dropDownView.mainBtn setTitle:self.stationNameArr[0] forState:(UIControlStateNormal)];
+        _dropDownView.delegate = self;
+    }
+    return _dropDownView;
+}
+
+-(NSArray *)stationNameArr{
+    if (!_stationNameArr) {
+        _stationNameArr = [NSArray new];
+    }
+    return _stationNameArr;
+}
+
+-(NSArray *)stationIdArr{
+    if (!_stationIdArr) {
+        _stationIdArr = [NSArray new];
+    }
+    return _stationIdArr;
 }
 
 - (void)didReceiveMemoryWarning {

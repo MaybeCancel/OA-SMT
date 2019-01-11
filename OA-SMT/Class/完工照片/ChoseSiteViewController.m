@@ -41,11 +41,11 @@
             NSString *stationId = [NSString stringWithFormat:@"%@",dic[@"stationId"]];
             if (stationIdArr) {
                 if ([stationIdArr containsObject:stationId]) {
-                    [self.dataArray addObject:dic[@"stationName"]];
+                    [self.dataArray addObject:dic];
                 }
             }
             else{
-                [self.dataArray addObject:dic[@"stationName"]];
+                [self.dataArray addObject:dic];
             }
         }
         [self.tableView reloadData];
@@ -55,13 +55,11 @@
             NSString *stationId = [NSString stringWithFormat:@"%@",dic[@"stationId"]];
             if (stationIdArr) {
                 if ([stationIdArr containsObject:stationId]) {
-                    [self.dataArray addObject:dic[@"stationCode"]];
-                    [self.stationIdArray addObject:dic[@"stationId"]];
+                    [self.dataArray addObject:dic];
                 }
             }
             else{
-                [self.dataArray addObject:dic[@"stationCode"]];
-                [self.stationIdArray addObject:dic[@"stationId"]];
+                [self.dataArray addObject:dic];
             }
         }
         [self.tableView reloadData];
@@ -75,13 +73,20 @@
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell* cell = [[UITableViewCell alloc]init];
-    cell.textLabel.text = self.dataArray[indexPath.row];
+    
+    NSDictionary *dic = self.dataArray[indexPath.row];
+    if ([self.siteInfo isEqualToString:@"siteName"]) {
+        cell.textLabel.text = dic[@"stationName"];
+    }
+    else{
+        cell.textLabel.text = dic[@"stationCode"];
+    }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.siteBack) {
-        self.siteBack(self.infoArray[indexPath.row]);
+        self.siteBack(self.dataArray[indexPath.row]);
     }
     [self pop];
 }

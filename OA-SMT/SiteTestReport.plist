@@ -4,66 +4,56 @@
 <array>
 	<dict>
 		<key>name</key>
-		<string>1、硬件状态检查</string>
+		<string>1、设备运行及LED状态</string>
 		<key>list</key>
 		<array>
-			<string>1.1确认电源的类型，是直流电还是交流电，电压正常</string>
-			<string>1.2站型和设计文件一致，扇区的配置和设计一致</string>
-			<string>1.3确认传输类型和设计文件一致，传输线安装完成，跟客户确认传输已连通</string>
-			<string>1.4完成所有板卡安装后立即进行全面细致的检查，避免螺丝拧断及个别螺丝没有拧紧,调测结束后重新确认所有螺丝均已上紧</string>
+			<string>1.1 DU板LED运行状态 主板运行状态绿色灯稳定不闪为正常/cabx</string>
+			<string>1.2 小区光纤LED运行状态 绿色灯稳定不闪为正常</string>
+			<string>1.3 GPS接收器LED运行状态 GPS接收器运行状态绿色灯稳定不闪为正常</string>
+			<string>1.4 RRU的LED运行状态 RRU运行状态绿色灯稳定不闪为正常/cabx</string>
 		</array>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>2、加电</string>
+		<string>2、告警信息</string>
 		<key>list</key>
 		<array>
-			<string>2.1 检查电源线连接准确无误，推上合适的熔丝，在机柜系统电压测试点测得电压正常后，再依次给电扇及板件加电</string>
+			<string>2.1 基站告警 通过EM或者moshell查看 或者 让后台工程师协助察看</string>
 		</array>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>3、本调</string>
+		<string>3、IP传输状态</string>
 		<key>list</key>
 		<array>
-			<string>3.1 基站软件版本跟RAN TL提供软件一致
+			<string>3.1 TNB口及传输设备指示灯 绿色灯亮为正常
 </string>
-			<string>3.2 OMT的版本必须与基站所使用软件要求的OMT版本相一致，并注意根据设备型号配置相应的IDB（如V1,V2等）</string>
+			<string>3.2 OAM	moshell命令：ping OAM下一跳（可以前台察看或与后台工程师沟通结果）</string>
+			<string>3.3 MME	moshell命令：acc hostet ping MME地址（可以前台察看或与后台工程师沟通结果）</string>
 		</array>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>4、联调</string>
+		<string>4、备份</string>
 		<key>list</key>
 		<array>
-			<string>4.1 基站硬件正常，没有告警</string>
-			<string>4.2 使用锁频手机进行拨打测试，保证每个小区都能占用</string>
+			<string>4.1 系统备份（CV / Backup ）通过EM或者moshell做CV / backup  或让后台工程师做CV / backup</string>
 		</array>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>5、与RNC工程师确认基站状态</string>
+		<string>5、未激活小区情况下告警处理</string>
 		<key>list</key>
 		<array>
-			<string>5.1 BSC侧确认基站状态正常并且没有告警</string>
-			<string>5.2 BSC侧确认基站有用户占用并且得到BSC确认可以离开现场</string>
-			<string>5.3 RNC工程师通知可以离开基站</string>
+			<string>5.1 激活小区前的处理告警	这种情况下，主要是处理和基站侧硬件有关的一些明显告警</string>
 		</array>
 	</dict>
 	<dict>
 		<key>name</key>
-		<string>6、离开前通知客户机房</string>
+		<string>6、激活小区情况下的告警处理</string>
 		<key>list</key>
 		<array>
-			<string>6.1 打扫基站卫生，关灯，通知客户机房离开该站</string>
-		</array>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>7、记录基站信息并保存</string>
-		<key>list</key>
-		<array>
-			<string>7.1 将基站信息汇总在基站报告中，每天交给基站负责人汇总</string>
+			<string>6.1 激活小区后的告警处理	一些告警不激活小区不会出现（如驻波比），所以在条件允许的情况下，处理告警时尽量激活小区</string>
 		</array>
 	</dict>
 </array>

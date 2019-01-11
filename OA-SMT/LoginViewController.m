@@ -69,8 +69,8 @@
     [LoadingView showProgressHUD:@""];
     kWeakSelf(weakSelf);
     NSMutableDictionary *para = [[NSMutableDictionary alloc]init];
-    if (1) {
-        [para setObject:@"15996220369" forKey:@"phone"];
+    if (0) {
+        [para setObject:@"13485535553" forKey:@"phone"];
         [para setObject:[@"123456789" md5HexDigest] forKey:@"password"];
     }
     else{

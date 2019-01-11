@@ -229,7 +229,7 @@
         cell.textLabel.textColor     = [UIColor blackColor];
         cell.selectionStyle          = UITableViewCellSelectionStyleNone;
         
-        UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, _rowHeight -0.5, VIEW_WIDTH(cell), 0.5)];
+        UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, _rowHeight -0.5, VIEW_WIDTH(_tableView), 0.5)];
         line.backgroundColor = [UIColor blackColor];
         [cell addSubview:line];
         //---------------------------------------------------------------------------

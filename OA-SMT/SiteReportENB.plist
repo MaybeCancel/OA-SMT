@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>1、验货</string>
+		<key>list</key>
+		<array>
+			<string>1.1 箱数 基站内货物详细数量</string>
+			<string>1.2 开箱验货 此处填写缺少物件名称/损坏（如：缺少一个10G光模块）</string>
+			<string>1.3 收全箱单 此处填写缺少的箱单名称（如：缺少3个RRU箱单） </string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>2、机柜</string>
+		<key>list</key>
+		<array>
+			<string>2.1  基站类型 设计图上规划安装位置</string>
+			<string>2.2  安装位置 设计图上规划安装位置</string>
+			<string>2.3  接地 必须安装接地线</string>
+			<string>2.4 电源接入位置 设计图上规划安装位置</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>3、AC-DC(MU)</string>
+		<key>list</key>
+		<array>
+			<string>3.1 安装位置 设计图上规划安装位置</string>
+			<string>3.2 电源接入位置 正常接入电源要求为16A-32A空开(2.5mm-4mm)</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>4、MU</string>
+		<key>list</key>
+		<array>
+			<string>4.1 安装位置 MU安装位置符合设计文件的要求，并且平直牢固,必须确定固定螺丝牢固不缺少（此处填写实际安装位置）</string>
+			<string>4.2 MU电源 保证接入SPD/DCDU，如果是空开，空开大小：16A-32A</string>
+			<string>4.3 MU板电源接入	电源线连接牢固，不松脱 </string>
+			<string>4.4 空板 空槽必须插入，不能随意拔出，两块DUS板</string>
+			<string>4.5 接地 MU必须安装接地线，(16mm-35mm)</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>5、DU</string>
+		<key>list</key>
+		<array>
+			<string>5.1 DU安装位置 DU板必须安装在MU或者6201/6202机柜中</string>
+			<string>5.2 DU板固定 DU板必须固定板卡螺丝，保证牢固不松脱</string>
+			<string>5.3 DU板电源接入 电源线连接牢固，不松脱</string>
+			<string>5.4 传输接口 传输口未接传输光纤时候必须密封</string>
+			<string>5.5 传输光模块 传输光模块必须是千兆光模块，不能使用其他非爱立信货物中提供的其他厂家千兆光模块</string>
+			<string>5.6 传输线缆布放 光纤应布放在光纤走线管中，两端不能拉得过紧，DU到PTN光纤必须经过ODF架跳转，要和其它类型线分开布放，走线应保持顺畅</string>
+			<string>5.7 CPRI口光模块 保证RRU与DU板数据口光模块型号厂家一致</string>
+			<string>5.8 CPRI口光纤布放 必须保证光纤线缆单独困扎</string>
+			<string>5.9 GPS信号线缆布放 不能与交直流电源线混放，沿室内走线架固定布放，多处线缆混扎好不散乱</string>
+			<string>5.10 外部告警接入 是否外部告警接入</string>
+			<string>5.11 标签 标签必须固定离对应线缆</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>6、AC SPD/DC SPD/DCDU</string>
+		<key>list</key>
+		<array>
+			<string>6.1 安装 SPD/DCDU禁止安装在馈线窗下方，应平直牢固，是否设计图上规划安装(安装位置符合设计文件的要求)</string>
+			<string>6.2 直流电源空开 正常接入电源要求为63A-100A熔丝或者空开</string>
+			<string>6.3 交流电源空开 正常接入交流电源分配盒32A-63A空开</string>
+			<string>6.4 直流电源线安装 SPD电源线为16mm2，不能使用其他型号线缆</string>
+			<string>6.5 交流电源线安装</string>
+			<string>6.6 电源线布放 连到无线机架的电源线要求布放整齐，不能有交叉现象，更不能和其他信号线捆扎在一起。交直流电源线不能混放</string>
+			<string>6.7 接地 (AC SPD/DC SPD-接地电缆 16mm-35mm) (DCDU-接地电缆 4mm)</string>
+			<string>6.8 标签 SPD内标签必须固定离线缆接头2-3cm处</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>7、DF</string>
+		<key>list</key>
+		<array>
+			<string>7.1 安装 是否设计图上规划安装</string>
+			<string>7.2 接地 16mm-35mm</string>
+			<string>7.3 SAU 是否安装</string>
+			<string>7.4 告警过压保护模块 是否安装</string>
+			<string>7.5 外部告警接入 是否外部告警接入</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>8、GPS</string>
+		<key>list</key>
+		<array>
+			<string>8.1 Antenna位置 GPS 安装位置 应尽可能南向安装,正上方90º范围内无遮挡</string>
+			<string>8.2 Antenna安装 必须安装接地线,并且平直牢固,必须确定固定螺丝牢固不缺少</string>
+			<string>8.3 GPS固定架 固定架牢固，不摇晃</string>
+			<string>8.4 防雷器 GPS防雷模必须安装接地线(16mm-35mm)</string>
+			<string>8.5 GPS接收器 GPS接收器必须安装到DF盒内；安装到盒内/综合柜/挂墙19英寸 4U墙装件，要保证接收器上的指示灯便于观测，不应朝向屋顶方向</string>
+			<string>8.6 射频线 当跳线或馈线需要弯曲时，要求弯曲角保持圆滑，其弯曲曲率半径规定：1/2&quot;一次弯曲的半径≤70mm，二次弯曲的半径≤210mm</string>
+			<string>8.7 馈线 GPS馈线超过125m需添加放大器，安装放大器时应紧靠GPS天线</string>
+			<string>8.8 信号传输线缆 所有的信号线都要和其它类型线分开布放，走线应保持顺畅，不能有交叉和空中飞线的现象</string>
+			<string>8.9 1/2&quot;射频线 必须安装接地线</string>
+			<string>8.10 GPS功分器 1分2,1分4</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>9、RRU</string>
+		<key>list</key>
+		<array>
+			<string>9.1 安装位置 天线下方无遮挡处，塔上为与天线间无阻挡处</string>
+			<string>9.2 固定及防震件 室外安装时抱杆固定牢固不松动，室内安装时挂墙件稳固不松动</string>
+			<string>9.3 电源接入类型 RRU直流电源：-48V</string>
+			<string>9.4 电源获取源 RRU应从SPD取电，RRU禁止从SPD第一路位置取电</string>
+			<string>9.5 电源获取源 交流电源分配盒</string>
+			<string>9.6 电源线接入 电源头牢固不松动，确定卡口锁死不松动</string>
+			<string>9.7 电源线布放 交直流电源分离布放，与信号线分离布放，不能混合困扎</string>
+			<string>9.8 电源接头防水 正确的防水做法是：所有馈线接头按133要求做好防水（1层胶布+3层胶泥+3层胶布），并用扎带扎实两头，防止胶带翘起</string>
+			<string>9.9 DATA口 光纤插入正确，紧实牢固</string>
+			<string>9.10 DATA口光模块 RRU光模块与DU板光模块型号厂家一致</string>
+			<string>9.11 DATA口光纤防水 有防水头或者防水套管必须稳固安装好</string>
+			<string>9.12 RF口 接口无灰尘，无水滴</string>
+			<string>9.13 RF口跳线接入 接口无灰尘，无水滴，线缆无破损</string>
+			<string>9.14 RF口跳线布放 与跳线对接牢固，紧实，不松动</string>
+			<string>9.15 RF口跳线防水 正确的防水做法是：所有馈线接头按133要求做好防水（1层胶布+3层胶泥+3层胶布），并用扎带扎实两头，防止胶带翘起/或冷缩管</string>
+			<string>9.16 接地 RRU在塔上安装时，需要连接到塔上接地点。RRU在室内安装时，接地点为室内地排 (16mm-35mm)</string>
+			<string>9.17 RET 是否安装</string>
+			<string>9.18 CSFU 是否安装</string>
+			<string>9.19 CSFU接地 必须安装接地线(16mm-35mm)</string>
+			<string>9.20 RRU线缆标签 标签必须固定离冷缩管或者防护包扎层下方2-3cm处</string>
+			<string>9.21 ACPSU-02已安装 正常接入电源要求为16A-32A空开(2.5mm-4mm)</string>
+			<string>9.22 ACPSU-02已接地 16mm-35mm</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>10、天线</string>
+		<key>list</key>
+		<array>
+			<string>10.1 位置 天线必须牢固地安装在其支撑杆上，天线必须安装在避雷针的保护范围内，即在45度保护角之内</string>
+			<string>10.2 固定及防震件 要求楼面负荷满足要求。铁塔，铁杆，天线横担结实牢固，铁杆要垂直，横担要水平。所有的铁件材料都应作防氧化处理</string>
+			<string>10.3 机械角调节支架</string>
+			<string>10.4 方位角 设计图上规划安装</string>
+			<string>10.5 机械角 设计图上规划安装</string>
+			<string>10.6 电子倾角 设计图上规划安装</string>
+			<string>10.7 跳线安装 室外跳线的接头要接触良好并作防水处理，跳线要求沿着天线支撑件固定，其弯曲半径应大于70mm，有二次弯曲时大于210mm。并且要求馈线的布放长度正好，以达到没有多余长度的室外跳线</string>
+			<string>10.8 跳线布放 跳线的布放要求整齐，美观，不得有交叉，扭曲，裂损情况，其弯曲半径要求大于120mm，当有二次弯曲时应大于360mm</string>
+			<string>10.9 跳线防水 正确的防水做法是：所有馈线接头按133要求做好防水（1层胶布+3层胶泥+3层胶布），并用扎带扎实两头，防止胶带翘起/或冷缩管</string>
+			<string>10.10 天线跳线标签 标签必须固定离冷缩管或者防护包扎层下方2-3cm处</string>
+		</array>
+	</dict>
+</array>
+</plist>

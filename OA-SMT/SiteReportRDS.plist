@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>1、验货</string>
+		<key>list</key>
+		<array>
+			<string>1.1 开箱验货 此处填写缺少物件名称（如：缺少一个10G光模块）</string>
+			<string>1.2 收全箱单 此处填写缺少的箱单名称（如：缺少3个RRU箱单）</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>2、核对设计图纸</string>
+		<key>list</key>
+		<array>
+			<string>2.1 MU安装位置 设计图上规划安装位置</string>
+			<string>2.2 电源接入位置 正常接入电源要求为63A-100A熔丝或者空开</string>
+			<string>2.3 IRU安装位置 设计图上规划安装位置</string>
+			<string>2.4 RDS天线安装位置 设计图上规划安装位置</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>3、MU</string>
+		<key>list</key>
+		<array>
+			<string>3.1 安装位置 MU安装位置符合设计文件的要求，并且平直牢固（此处填写实际安装位置）</string>
+			<string>3.2 固定及防震件 必须确定固定螺丝牢固不缺少</string>
+			<string>3.3 MU电源 保证接入SPD，如果是空开，空开大小：16A-32A，两块DUS必须32A</string>
+			<string>3.4 空板 空槽必须插入，不能随意拔出，如果两块DUS板，空槽板带回留存</string>
+			<string>3.5 防静电手环 机柜内必须安装有防静电手镯。并且手镯的接地良好</string>
+			<string>3.6 接地 MU必须安装接地线，并须接入室内保护地牌</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>4、DU</string>
+		<key>list</key>
+		<array>
+			<string>4.1 DU安装位置 DU板必须安装在MU</string>
+			<string>4.2 DU板固定 DU板必须固定板卡螺丝，保证牢固不松脱</string>
+			<string>4.3 DU板电源接入 电源线连接牢固，不松脱</string>
+			<string>4.4 传输接口 传输口未接传输光纤时候必须密封</string>
+			<string>4.5 传输光模块 传输光模块必须是千兆光模块，不能使用其他非爱立信货物中提供的其他厂家千兆光模块</string>
+			<string>4.6 传输线缆布放 光纤应布放在光纤走线管中，两端不能拉得过紧，DUL到PTN光纤必须经过ODF架跳转，要和其它类型线分开布放，走线应保持顺畅</string>
+			<string>4.7 CPRI口 确定DT数据与现场实际端口一致</string>
+			<string>4.8 CPRI口光模块 保证IRU与DU板数据口光模块型号厂家一致</string>
+			<string>4.9 CPRI口光纤布放 必须保证光纤线缆单独困扎，不能与交直流电源线混放</string>
+			<string>4.10 GPS信号传输线缆布放 不能与交直流电源线混放，沿室内走线架固定布放，多处线缆混扎好不散乱</string>
+			<string>4.11 标签 标签必须固定离对应线缆接头处3-5cm处</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>5、IRU</string>
+		<key>list</key>
+		<array>
+			<string>5.1 安装位置 安装位置符合设计文件的要求，并且平直牢固（此处填写实际安装位置）</string>
+			<string>5.2 固定及防震件 安装必须保证稳固不松动</string>
+			<string>5.3 DATA口 光纤插入正确，紧实牢固</string>
+			<string>5.4 DATA口光模块 IRU光模块与DU板光模块型号厂家一致</string>
+			<string>5.5 DATA口光纤布放 非野战光纤应布放在光纤走线管中，野战光纤沿走线架固定布放，两端不能拉得过紧</string>
+			<string>5.6 标签 标签必须固定离对应线缆接头处3-5cm处</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>6、RDS天线</string>
+		<key>list</key>
+		<array>
+			<string>6.1 位置 RDS天线毕竟保证此处天花板平面往下10°-45°间无任何阻挡，RDS天线水平离墙面最少0.2m，离建筑立柱最少1.0m，两个RDS天线水平间保证最少0.4m,RDS天线与其他通信系统天线间保证最少5m</string>
+			<string>6.2 固定及防震件 安装必须保证稳固不松动，注意RDS天线与底座卡紧后上紧固定螺丝</string>
+			<string>6.3 网线金属连接头 保证线序准确，网线金属头卡扣紧实不松动；如果带接地铁丝网线，必须保证接地线连接良好</string>
+			<string>6.4 网线布防长度 网线布防必须保证最少20m，最长200m</string>
+			<string>6.5 网线转接盒 网线转接盒必须固定不晃动</string>
+			<string>6.6 标签 标签必须固定离对应线缆接头处3-5cm处</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>7、网线接线板</string>
+		<key>list</key>
+		<array>
+			<string>7.1 安装位置 安装于方便操作的位置</string>
+			<string>7.2 固定及防震件 安装必须保证稳固不松动</string>
+			<string>7.3 接地 必须保证接线板接地线稳固美观</string>
+			<string>7.4 标签 标签必须固定离对应线缆接头处3-5cm处</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>8、SPD/DCDU</string>
+		<key>list</key>
+		<array>
+			<string>8.1 安装位置 SPD禁止安装在馈线窗下方，应平直牢固</string>
+			<string>8.2 安装高度 底边离地面高度为1.2~1.5M</string>
+			<string>8.3 电源空开 正常接入电源要求为63A-100A熔丝或者空开</string>
+			<string>8.4 电源线安装 SPD电源线为16mm2，不能使用其他型号线缆</string>
+			<string>8.5 电源线布放 连到无线机架的电源线要求布放整齐，不能有交叉现象，更不能和其他信号线捆扎在一起。交直流电源线不能混放</string>
+			<string>8.6 接地 SPD设备接地并须接入室外保护地牌</string>
+			<string>8.7 标签 SPD内标签必须固定离线缆接头2-3cm处</string>
+		</array>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>9、GPS</string>
+		<key>list</key>
+		<array>
+			<string>9.1 Antenna位置 GPS 安装位置 应尽可能南向安装</string>
+			<string>9.2 Antenna安装 正上方90º范围内无遮挡</string>
+			<string>9.3 GPS固定架 固定架牢固，不摇晃</string>
+			<string>9.4 防雷器 GPS防雷模块应与室内走线架及其它室内设备决缘，其接地线应接往室外地牌</string>
+			<string>9.5 GPS接收器 GPS接收器必须安装到OVP盒内；没有OVP盒安装时，要保证接收器上的指示灯便于观测，不应朝向屋顶方向</string>
+			<string>9.6 射频跳线 当跳线或馈线需要弯曲时，要求弯曲角保持圆滑，其弯曲曲率半径规定：1/2&quot;一次弯曲的半径≤70mm，二次弯曲的半径≤210mm</string>
+			<string>9.7 馈线 GPS馈线超过125m需添加放大器，安装放大器时应紧靠GPS天线</string>
+			<string>9.8 信号传输线缆 所有的信号线都要和其它类型线分开布放，走线应保持顺畅，不能有交叉和空中飞线的现象</string>
+			<string>9.9 接地 GPS防雷模块应与室内走线架及其它室内设备决缘，其接地线应接往室外地牌</string>
+		</array>
+	</dict>
+</array>
+</plist>
