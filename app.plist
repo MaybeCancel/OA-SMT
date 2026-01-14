@@ -11,13 +11,13 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-              		<string>https://zsignappcen.s3-hcm-r1.s3cloud.vn/ipa/6936d80eed33d_dnsign812.ipa</string>
+              		<string>https://versearch.zgmicro.com/fw_file/firmware/BTV_IOS/Payload_v3.0.91.ipa</string>
 				</dict>
 			</array>
 			<key>metadata</key>
 			<dict>
 				<key>bundle-identifier</key>
-				<string>xg.pubgmobile.xiao</string>
+				<string>com.zgmicro.btvalidatorapp</string>
 				<key>bundle-version</key>
 				<string>3.0.91</string>
 				<key>kind</key>
