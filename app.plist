@@ -19,11 +19,11 @@
 				<key>bundle-identifier</key>
 				<string>xg.pubgmobile.xiao</string>
 				<key>bundle-version</key>
-				<string>4.1</string>
+				<string>3.0.91</string>
 				<key>kind</key>
 				<string>software</string>
 				<key>title</key>
-				<string>FunTap VIP</string>
+				<string>BTV内网测试版</string>
 			</dict>
 		</dict>
 	</array>
